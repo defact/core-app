@@ -1,10 +1,13 @@
 import React, { memo } from 'react';
+import { Link } from '@reach/router';
 import { withStyles } from '@material-ui/core';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import List from '@material-ui/core/List';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Divider from '@material-ui/core/Divider';
+import InputBase from '@material-ui/core/InputBase';
+import Grid from '@material-ui/core/Grid';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -14,7 +17,8 @@ import {
   AccountCircle, 
   Drafts, 
   Security, 
-  HelpOutline } from '@material-ui/icons';
+  HelpOutline, 
+  Search } from '@material-ui/icons';
 
 const styles = theme => ({
   list: {
@@ -23,30 +27,42 @@ const styles = theme => ({
   toolbar: {
     paddingLeft: theme.spacing.unit,
   },
+  margin: {
+    margin: theme.spacing.unit * 2,
+  },
   icon: {
-    paddingLeft: 4,
+    marginLeft: 4,
+    color: 'rgba(0, 0, 0, .5)',
+  },
+  link: {
+    outline: 0,
+    textDecoration: 'none',
   },
   manage: {
     visibility: 'hidden',
   },
+  search: {
+    marginLeft: theme.spacing.unit,
+  }
 });
 
 const manage = [
-  { text: 'Groups', link: '/manage/groups', Icon: SupervisedUserCircle },
-  { text: 'Roles', link: '/manage/roles', Icon: Security },
-  { text: 'Users', link: '/manage/users', Icon: AccountCircle },
+  { text: 'Groups', to: '/manage/groups', Icon: SupervisedUserCircle },
+  { text: 'Roles', to: '/manage/roles', Icon: Security },
+  { text: 'Users', to: '/manage/users', Icon: AccountCircle },
 ];
 
 const other = [
-  { text: 'Contact', link: '/contact', Icon: Drafts },
-  { text: 'About', link: '/about', Icon: HelpOutline },
+  { text: 'Contact', to: '/contact', Icon: Drafts },
+  { text: 'About', to: '/about', Icon: HelpOutline },
 ];
 
 const Sidebar = memo(({ classes, isOpen, handleClose }) => {
+
   const Menu = ({ menu }) => (
     <List>
-      {menu.map(({ text, link, Icon }) => (
-        <ListItem button key={text}>
+      {menu.map(({ text, to, Icon }) => (
+        <ListItem to={to} key={text} button component={Link}>
           <ListItemIcon className={classes.icon}>
             <Icon className={classes[text.toLowerCase()]} />
           </ListItemIcon>
@@ -56,6 +72,8 @@ const Sidebar = memo(({ classes, isOpen, handleClose }) => {
     </List>
   );
   
+  const sp = e => e.stopPropagation();
+
   return (
     <SwipeableDrawer open={isOpen} onClose={handleClose} onOpen={() => {}}>
       <div
@@ -68,10 +86,23 @@ const Sidebar = memo(({ classes, isOpen, handleClose }) => {
           <IconButton>
             <ArrowBack />
           </IconButton>
-          </Toolbar>
+        </Toolbar>
+
         <Divider />
+
         <div className={classes.list}>
-          <Menu menu={[{ text: 'Manage', Icon: Drafts }]} />
+
+          <div className={classes.margin} onClick={sp} onKeyDown={sp}>
+            <Grid container spacing={24} alignItems='flex-end'>
+              <Grid item>
+                <Search className={classes.icon} />
+              </Grid>
+              <Grid item>
+                <InputBase id='search' placeholder='Search' className={classes.search} />
+              </Grid>
+            </Grid>
+          </div>
+
           <Divider />
           <Menu menu={manage} />
           <Divider />

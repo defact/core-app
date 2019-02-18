@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { Face, Extension, Menu as MenuIcon } from '@material-ui/icons';
+import { AccountCircle, Extension, Menu as MenuIcon } from '@material-ui/icons';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { usePopupState, bindTrigger, bindMenu } from 'material-ui-popup-state/hooks'
 import { Sidebar } from './';
@@ -68,7 +68,7 @@ const UserMenu = memo(({ classes, me, handleSignOut }) => {
       </Button>
 
       <IconButton variant='contained' color='inherit' {...bindTrigger(popupState)}>
-        <Face />
+        <AccountCircle />
       </IconButton>
 
       <Menu {...bindMenu(popupState)}>
@@ -110,9 +110,9 @@ const Header = memo(props => {
             Defacto
           </Typography>
 
-          <MenuIcon className={classnames(classes.icon, classes.link)} onClick={() => setSidebar(true)} />
+          {me.name && <MenuIcon className={classnames(classes.icon, classes.link)} onClick={() => setSidebar(true)} />}
 
-          {me.isFetching && <CircularProgress className={classes.progress} size={30} thickness={5} />}
+          {me.isFetching && <CircularProgress className={classes.progress} size={20} thickness={3} />}
           {!me.isFetching && me.name && <UserMenu  {...props} />}
           {!me.isFetching && !me.name && <NoUserMenu />}
         </Toolbar>
