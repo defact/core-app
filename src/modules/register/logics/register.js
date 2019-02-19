@@ -12,7 +12,7 @@ const onRegister = createLogic({
   },
 
   process({ api, _, action }) {
-    return api().post('users', action.payload);
+    return api().post('memberships', action.payload);
   }
 });
 

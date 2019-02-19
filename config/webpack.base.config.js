@@ -21,7 +21,9 @@ module.exports = (env = {}) => {
               target: 'http://localhost:4200',
               pathRewrite: {'^/api' : ''}
             }
-          }
+          },
+          hot: true,
+          contentBase: './dist',
         },
 
         entry: ['@babel/polyfill', APP_DIR],
@@ -68,6 +70,8 @@ module.exports = (env = {}) => {
             'process.env.PLATFORM': JSON.stringify(PLATFORM)
           }),
           new CopyWebpackPlugin([ { from: 'src/static' } ]),
+
+          new webpack.HotModuleReplacementPlugin(),
         ],
         output: {
           filename: '[name].bundle.js',

@@ -11,3 +11,5 @@ ReactDOM.render(
     <App />
   </>, 
 element);
+
+module.hot.accept();

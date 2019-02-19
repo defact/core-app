@@ -32,7 +32,7 @@ const onFetchMe = createLogic({
   },
 
   process({ api }) {
-    return api().get('user');
+    return api().get('membership');
   }
 });
 

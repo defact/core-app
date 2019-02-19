@@ -13,7 +13,7 @@ const ICONS = {
 
 const styles = theme => ({
   message: {
-    marginTop: theme.spacing.unit,
+    marginTop: theme.spacing.unit * 2,
     lineHeight: 1.5,
   },
   error: {
