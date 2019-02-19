@@ -1,7 +1,7 @@
 import React, { memo, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { verify } from '../actions/signin';
+import { verify } from '../state/actions/signin';
 
 const Verify = memo(({ handleVerify, code }) => {
   useEffect(() => { 

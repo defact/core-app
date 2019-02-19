@@ -18,7 +18,8 @@ import {
   Drafts, 
   Security, 
   HelpOutline, 
-  Search } from '@material-ui/icons';
+  Search,
+  Face } from '@material-ui/icons';
 
 const styles = theme => ({
   list: {
@@ -47,6 +48,7 @@ const styles = theme => ({
 });
 
 const manage = [
+  { text: 'Members', to: '/manage/members', Icon: Face },
   { text: 'Groups', to: '/manage/groups', Icon: SupervisedUserCircle },
   { text: 'Roles', to: '/manage/roles', Icon: Security },
   { text: 'Users', to: '/manage/users', Icon: AccountCircle },

@@ -1,13 +1,10 @@
 import React from 'react';
 import { Router } from '@reach/router';
 
-import { Manage, Edit, Add } from './containers';
+import { } from './containers';
 
 const Routes = () => (
   <Router>
-    <Manage default />
-    <Edit path=':id' />
-    <Add path='add' />
   </Router>
 );
 

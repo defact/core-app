@@ -7,18 +7,14 @@ import { Form } from 'react-final-form';
 import { Input, Password, Header, Message, Submit } from '../../app/components/form';
 import { Form as Layout } from '../../app/layouts';
 
+import validate from '../state/validate/member';
+
 const styles = theme => ({
   form: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing.unit * 2,
     marginBottom: theme.spacing.unit,
   },
-});
-
-const validate = values => ({
-  email: values.email ? undefined : 'Required',
-  name: values.name ? undefined : 'Required',
-  password: values.password ? undefined : 'Required',
 });
 
 const Register = memo(({ classes, handleRegister, error, isRegistering }) => (

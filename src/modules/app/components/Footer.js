@@ -6,9 +6,13 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
   footer: {
+    display: 'none',
     backgroundColor: theme.palette.background.paper,
     marginTop: theme.spacing.unit * 8,
     padding: `${theme.spacing.unit * 6}px 0`,
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
+    },
   },
 });
 

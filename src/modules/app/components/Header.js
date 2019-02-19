@@ -14,10 +14,9 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { usePopupState, bindTrigger, bindMenu } from 'material-ui-popup-state/hooks'
 import { Sidebar } from './';
 
+import { Switch } from '../../me/containers';
+
 const styles = theme => ({
-  root: {
-    flexGrow: 1,
-  },
   grow: {
     flexGrow: 1,
   },
@@ -30,8 +29,8 @@ const styles = theme => ({
   icon: {
     marginRight: theme.spacing.unit,
   },
-  email: {
-    display: 'none',
+  profile: {
+    // display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'inline',
     }
@@ -42,7 +41,7 @@ const styles = theme => ({
   },
 });
 
-const MenuLink = ({ children, onClick, ...props }) => (
+const MenuLink = memo(({ children, onClick, ...props }) => (
   <Match path={props.to}>
     {({ match }) => (
       <Link {...props} getProps={() => 
@@ -56,16 +55,21 @@ const MenuLink = ({ children, onClick, ...props }) => (
       </Link>
     )}
   </Match>  
-);
+));
 
 const UserMenu = memo(({ classes, me, handleSignOut }) => {
+  const [ showSwitchDialog, setShowSwitchDialog ] = useState(false);
   const popupState = usePopupState({variant: 'popover', popupId: 'me'});
+
+  const handleOpenSwitch = value => setShowSwitchDialog(true);
+  const handleCloseSwitch = value => setShowSwitchDialog(false);
 
   return (
     <div>
-      <Button color='inherit' className={classes.email} onClick={() => navigate('/me')}>
+      <Button color='inherit' className={classes.profile} onClick={handleOpenSwitch}>
         {me.name}
       </Button>
+      <Switch open={showSwitchDialog} onClose={handleCloseSwitch} />
 
       <IconButton variant='contained' color='inherit' {...bindTrigger(popupState)}>
         <AccountCircle />
@@ -100,7 +104,7 @@ const Header = memo(props => {
   const [ sidebar, setSidebar ] = useState(false);
 
   return (
-    <header className={classes.root}>
+    <div>
       <Sidebar isOpen={sidebar} handleClose={() => setSidebar(false)} />
       <AppBar position='static' className={classes.grow}> 
         <Toolbar className={classes.toolbar}>
@@ -117,7 +121,7 @@ const Header = memo(props => {
           {!me.isFetching && !me.name && <NoUserMenu />}
         </Toolbar>
       </AppBar>
-    </header>
+    </div>
   )
 });
 

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import { SignIn } from '../components';
-import { signIn } from '../actions/signin';
+import { signIn } from '../state/actions/signin';
 
 const mapStateToProps = state => {
   const email = localStorage.getItem('email');

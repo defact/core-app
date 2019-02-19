@@ -6,7 +6,7 @@ import Routes from './Routes';
 import createStore from './store';
 
 import { Main } from './modules/app/layouts';
-import { fetchMe } from './modules/user/actions/me';
+import { fetchMe } from './modules/me/state/actions/me';
 
 const store = createStore();
 

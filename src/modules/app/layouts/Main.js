@@ -1,16 +1,31 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withStyles } from '@material-ui/core';
 
 import { Header, Footer } from '../components';
-import { signOut } from '../../sessions/actions/signout';
+import { signOut } from '../../sessions/state/actions/signout';
+import { meSelector } from '../../me/state/reducers/me';
 
-const Main = ({ children, ...props }) => (
-  <>
+const styles = theme => ({
+  container: {
+    display: 'flex',
+    minHeight: '100vh',
+    flexDirection: 'column',
+  },
+  main: {
+    flex: 1,
+  }
+});
+
+const Main = withStyles(styles)(({ classes, children, ...props }) => (
+  <div className={classes.container}>
     <Header {...props} />
-    {children}
+    <main className={classes.main}>{children}</main>
     <Footer />
-  </>
-);
+  </div>
+));
 
-export default connect(state => ({ me: state.user.me }), { handleSignOut: signOut })(Main);
+const mapStateToProps = state => ({ me: meSelector(state) });
+
+export default connect(mapStateToProps, { handleSignOut: signOut })(Main);
 
