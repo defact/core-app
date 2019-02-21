@@ -8,5 +8,4 @@ export const signIn = createAction(SIGN_IN);
 export const signInSuccess = createAction(SIGN_IN_SUCCESS);
 export const signInFailed = createAction(SIGN_IN_FAILED);
 
-export const verify = createAction(SIGN_IN, code => ({ code, strategy: 'code' })
-);
+export const verify = createAction(SIGN_IN, code => ({ code, strategy: 'code' }));

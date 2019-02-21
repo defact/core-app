@@ -5,7 +5,7 @@ axiosRetry(axios, { retries: 3 });
 
 const enhancedError = (err) => {
   console.error(err);
-  const error = new Error(err.message || err);
+  const error = new Error(err.message || err.error);
   error.message = err.message;
   error.statusCode = err.statusCode;
   return error;

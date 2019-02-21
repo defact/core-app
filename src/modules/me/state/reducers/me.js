@@ -36,6 +36,8 @@ export const meSelector = createSelector(
 
     if (user === undefined) return state;
 
-    return { ...state, ...user, profiles: member.profiles.map(p => profiles[p]) };
+    const profile = profiles[member.primaryProfile];
+
+    return { ...state, ...user, ...profile, profiles: member.profiles.map(p => profiles[p]) };
   }
 );
