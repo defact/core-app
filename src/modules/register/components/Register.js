@@ -14,8 +14,8 @@ import { isEmail } from '../../app/state/validator';
 
 const emailAvailable = async email => {  
   if (email === undefined || isEmail()(email)) return;
-  return api().get('users', { email }).then(data => {
-    if (data.users && data.users.length > 0) return 'Already registered';
+  return api().get(`users/email/${email}`).then(data => {
+    if (data.user) return 'Already registered';
   });
 };
 
