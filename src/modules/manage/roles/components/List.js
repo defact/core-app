@@ -1,14 +1,22 @@
 import React, { useEffect } from 'react';
 import Role from './Role';
 
-const List = ({ roles, isFetched, isFetching, handleFetch }) => {
+const List = ({ roles, permissions, entities, fetchRoles, fetchPermissions, fetchEntities }) => {
   useEffect(() => {
-    handleFetch();
-  }, [ isFetched ]);
+    fetchRoles();
+  }, []);
+
+  useEffect(() => {
+    fetchPermissions();
+  }, []);
+
+  useEffect(() => {
+    fetchEntities();
+  }, []);
 
   return (
     <>
-      {roles.ids.map(role => <Role role={role} />)}
+      {roles.roles.map(role => <Role {...role} permissions={permissions} entities={entities} />)}
     </>
   );
 }

@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions';
 import { createSelector } from 'reselect';
-import { fetchRoles, fetchSuccess, fetchFailed } from '../actions/roles';
+import { fetchPermissions, fetchSuccess, fetchFailed } from '../actions/permissions';
 
 const initialState = {
   isFetching: false,
@@ -10,18 +10,16 @@ const initialState = {
 };
 
 export default handleActions({
-  [fetchRoles]: (state) => ({ ...state, isFetching: true, isFetched: false, error: false }),
+  [fetchPermissions]: (state) => ({ ...state, isFetching: true, isFetched: false, error: false }),
   [fetchSuccess]: (state, action) =>
     ({ ...state, ids: action.payload.result, isFetching: false, isFetched: true, error: false }),
   [fetchFailed]: (state, action) => 
     ({ ...state, isFetching: false, isFetched: true, error: { message: action.payload.message }}),
   }, initialState);
 
-const dataSelector = state => state.entities.roles
-const stateSelector = state => state.manage.roles.roles;
-
-export const rolesSelector = createSelector(
-  dataSelector, stateSelector, (roles = [], state) => ({
-    ...state, roles: state.ids.map(id => roles[id])
-  })
+const dataSelector = state => state.entities.permissions
+const idsSelector = state => state.manage.roles.permissions.ids;
+  
+export const permissionsSelector = createSelector(
+  dataSelector, idsSelector, (permissions = [], ids) => ids.map(id => permissions[id])
 );

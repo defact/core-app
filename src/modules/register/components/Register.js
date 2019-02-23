@@ -8,6 +8,16 @@ import { Input, Password, Header, Message, Submit } from '../../app/components/f
 import { Form as Layout } from '../../app/layouts';
 
 import validate from '../state/validate/member';
+import api from '../../../api';
+
+import { isEmail } from '../../app/state/validator';
+
+const emailAvailable = async email => {  
+  if (email === undefined || isEmail()(email)) return;
+  return api().get('users', { email }).then(data => {
+    if (data.users && data.users.length > 0) return 'Already registered';
+  });
+};
 
 const styles = theme => ({
   form: {
@@ -25,7 +35,7 @@ const Register = memo(({ classes, handleRegister, error, isRegistering }) => (
       render={({ handleSubmit, pristine }) => (
         <form className={classes.form} onSubmit={handleSubmit}>
           <Input name='name' label='Name' autoFocus/>
-          <Input name='email' label='Email Address' />
+          <Input name='email' label='Email Address' validate={emailAvailable} />
           <Password />
 
           <Submit disabled={pristine || isRegistering}>Register</Submit>

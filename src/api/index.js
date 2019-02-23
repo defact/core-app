@@ -29,7 +29,7 @@ const api = () => {
   const extract = data => data.data;
 
   return {
-    get: async (url, query) => request.get(url, query).then(extract),
+    get: async (url, query) => request.get(url, { params: query }).then(extract),
     post: async (url, data) => request.post(url, data).then(extract),
     put: async (url, data) => request.put(url, data).then(extract),
     delete: async (url, data) => request.delete(url, data).then(extract),

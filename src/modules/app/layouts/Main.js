@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core';
 
 import { Header, Footer } from '../components';
 import { signOut } from '../../sessions/state/actions/signout';
+import { fetchMe } from '../../me/state/actions/me';
 import { meSelector } from '../../me/state/reducers/me';
 
 const styles = theme => ({
@@ -27,5 +28,5 @@ const Main = withStyles(styles)(({ classes, children, ...props }) => (
 
 const mapStateToProps = state => ({ me: meSelector(state) });
 
-export default connect(mapStateToProps, { handleSignOut: signOut })(Main);
+export default connect(mapStateToProps, { handleSignOut: signOut, fetchMe })(Main);
 

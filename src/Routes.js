@@ -1,25 +1,34 @@
-import React, { useEffect } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Router, LocationProvider, Location } from '@reach/router';
 
-import Sessions from './modules/sessions/Routes';
-import Me from './modules/me/Routes';
-import Register from './modules/register/Routes';
-import Manage from './modules/manage/Routes';
-// import Contact from './modules/contact/Routes';
-
+import { Home, Broken, NotFound } from './modules/app/containers';
+import { Loader } from './modules/app/components';
 import { Redirect } from './modules/me/containers';
 
+const Sessions = lazy(() => import('./modules/sessions/Routes'));
+const Me = lazy(() => import('./modules/me/Routes'));
+const Register = lazy(() => import('./modules/register/Routes'));
+const Manage = lazy(() => import('./modules/manage/Routes'));
+// const Contact = lazy(() => import('./modules/contact/Routes'));
+
 const Routes = () => (
-  <LocationProvider>
-    <Router>
-      <Sessions default />
-      <Register path='register' />
-      <Me path='me/*' />
-      <Manage path='manage/*' />
-      {/* <Contact path='contact' /> */}
-    </Router>
-    <Location children={context => <Redirect pathname={context.location.pathname} />}/>
-  </LocationProvider>
+  <Broken>
+    <Suspense fallback={<Loader />}>
+      <LocationProvider>
+        <Router>
+          <Home path='/' />
+          <Sessions path='signin/*' />
+          <Register path='register' />
+          <Me path='me/*' />
+          <Manage path='manage/*' />
+          {/* <Contact path='contact' /> */}
+
+          <NotFound default />
+        </Router>
+        <Location children={context => <Redirect pathname={context.location.pathname} />}/>
+      </LocationProvider>
+    </Suspense>
+  </Broken>
 );
 
 export default Routes;

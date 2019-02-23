@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { AccountCircle, Extension, Menu as MenuIcon } from '@material-ui/icons';
+import { AccountCircle, Extension, Menu as MenuIcon, Refresh } from '@material-ui/icons';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { usePopupState, bindTrigger, bindMenu } from 'material-ui-popup-state/hooks'
 import { Sidebar } from './';
@@ -22,6 +22,12 @@ const styles = theme => ({
   },
   toolbar: {
     marginLeft: theme.spacing.unit * 2,
+  },
+  message: {
+    padding: theme.spacing.unit,
+  },
+  hide: {
+    display: 'none',
   },
   link: {
     cursor: 'pointer',
@@ -37,7 +43,7 @@ const styles = theme => ({
   },
   progress: {
     margin: theme.spacing.unit * 2,
-    color: '#fff',
+    color: '#000',
   },
 });
 
@@ -57,7 +63,7 @@ const MenuLink = memo(({ children, onClick, ...props }) => (
   </Match>  
 ));
 
-const UserMenu = memo(({ classes, me, handleSignOut }) => {
+const UserMenu = memo(({ classes, me, fetchMe, handleSignOut }) => {
   const [ showSwitchDialog, setShowSwitchDialog ] = useState(false);
   const popupState = usePopupState({variant: 'popover', popupId: 'me'});
 
@@ -70,6 +76,10 @@ const UserMenu = memo(({ classes, me, handleSignOut }) => {
         {me.name}
       </Button>
       <Switch open={showSwitchDialog} onClose={handleCloseSwitch} />
+
+      <IconButton variant='contained' color='inherit' onClick={fetchMe}>
+        <Refresh />
+      </IconButton>
 
       <IconButton variant='contained' color='inherit' {...bindTrigger(popupState)}>
         <AccountCircle />
@@ -93,7 +103,7 @@ const NoUserMenu = memo(() => (
     <Button color='inherit' onClick={() => navigate('/register')}>
       Register
     </Button>
-    <Button color='inherit' onClick={() => navigate('/signin')}>
+    <Button color='secondary' onClick={() => navigate('/signin')}>
       Sign In
     </Button>
   </div>
@@ -106,15 +116,21 @@ const Header = memo(props => {
   return (
     <div>
       <Sidebar isOpen={sidebar} handleClose={() => setSidebar(false)} />
+      <AppBar position='static' color='secondary' 
+        className={classnames(classes.message, me.isVerified && classes.hide)}> 
+        <Typography variant='body1' color='primary' align='center'>
+          Please verify your email address
+        </Typography>
+      </AppBar>
       <AppBar position='static' className={classes.grow}> 
         <Toolbar className={classes.toolbar}>
-          <Extension className={classes.icon} />
+          <Extension className={classes.icon} color='secondary' />
           <Typography variant='h6' color='inherit' 
             className={classnames(classes.grow, classes.link)} onClick={() => navigate('/')}>
             Defacto
           </Typography>
 
-          {me.name && <MenuIcon className={classnames(classes.icon, classes.link)} onClick={() => setSidebar(true)} />}
+          {!me.isFetching && me.name && <MenuIcon className={classnames(classes.icon, classes.link)} onClick={() => setSidebar(true)} />}
 
           {me.isFetching && <CircularProgress className={classes.progress} size={20} thickness={3} />}
           {!me.isFetching && me.name && <UserMenu  {...props} />}

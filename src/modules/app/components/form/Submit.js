@@ -13,7 +13,7 @@ const Submit = memo(({ classes, children, disabled }) => (
     type='submit'
     fullWidth
     variant='contained'
-    color='primary'
+    color='secondary'
     className={classes.submit}
     disabled={disabled}
     >

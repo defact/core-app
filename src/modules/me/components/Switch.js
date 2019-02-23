@@ -37,10 +37,10 @@ const Switch = memo(({ classes, me, profile = 7, ...props }) => {
           </RadioGroup>    
         </DialogContent>
       <DialogActions>
-        <Button onClick={handleCancel} color='primary'>
+        <Button onClick={handleCancel} color='inherit'>
           Cancel
         </Button>
-        <Button onClick={handleOk} color='primary' autoFocus>
+        <Button onClick={handleOk} color='secondary' autoFocus>
           Switch Profile
         </Button>
       </DialogActions>

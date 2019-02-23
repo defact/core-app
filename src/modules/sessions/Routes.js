@@ -5,8 +5,8 @@ import { SignIn, Verify } from './containers';
 
 const Routes = () => (
   <Router>
-    <SignIn path='signin' />
-    <Verify path='verify/:code' />
+    <Verify path=':code' />
+    <SignIn default />
   </Router>
 );
 

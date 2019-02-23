@@ -7,7 +7,7 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
     overflow: 'hidden',
-    paddingBottom: 200,
+    // paddingBottom: 200,
   },
   grid: {
     width: 1200,

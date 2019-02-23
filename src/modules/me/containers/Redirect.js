@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { redirectTo } from '@reach/router';
+import { meSelector } from '../state/reducers/me';
 
 const PASSWORD_URL = '/me/password';
 
@@ -16,4 +17,4 @@ const Redirect = ({ pathname, forceChangePassword, children }) => {
   return children || null;
 };
 
-export default connect(state => ({ ...state.me.me }))(Redirect);
+export default connect(state => ({ me: meSelector(state) }))(Redirect);
