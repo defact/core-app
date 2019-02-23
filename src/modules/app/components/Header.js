@@ -47,6 +47,25 @@ const styles = theme => ({
   },
 });
 
+const Verify = memo(({ me, classes }) => (
+  <AppBar position='static' color='secondary' 
+    className={classnames(classes.message, me.isVerified && classes.hide)}> 
+    <Typography variant='body1' color='primary' align='center'>
+      Please verify your email address
+    </Typography>
+  </AppBar>
+));
+
+const Logo = memo(({ children, classes }) => (
+  <>
+    <Extension className={classes.icon} color='secondary' />
+    <Typography variant='h6' color='inherit' 
+      className={classnames(classes.grow, classes.link)} onClick={() => navigate('/')}>
+      {children}
+    </Typography>
+  </>
+));
+
 const MenuLink = memo(({ children, onClick, ...props }) => (
   <Match path={props.to}>
     {({ match }) => (
@@ -116,19 +135,12 @@ const Header = memo(props => {
   return (
     <div>
       <Sidebar isOpen={sidebar} handleClose={() => setSidebar(false)} />
-      <AppBar position='static' color='secondary' 
-        className={classnames(classes.message, me.isVerified && classes.hide)}> 
-        <Typography variant='body1' color='primary' align='center'>
-          Please verify your email address
-        </Typography>
-      </AppBar>
+
+      <Verify me={me} classes={classes} />
+
       <AppBar position='static' className={classes.grow}> 
         <Toolbar className={classes.toolbar}>
-          <Extension className={classes.icon} color='secondary' />
-          <Typography variant='h6' color='inherit' 
-            className={classnames(classes.grow, classes.link)} onClick={() => navigate('/')}>
-            Defacto
-          </Typography>
+          <Logo classes={classes}>Defacto</Logo>
 
           {!me.isFetching && me.name && <MenuIcon className={classnames(classes.icon, classes.link)} onClick={() => setSidebar(true)} />}
 
