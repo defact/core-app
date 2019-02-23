@@ -11,7 +11,9 @@ const app = express();
 app.use('/', express.static(path.join(__dirname, '..', 'dist')));
 app.use('/dist', express.static(path.join(__dirname, '..', 'dist')));
 
-app.use('/api', proxy('http://localhost:4200'));
+const apiHost = process.env.API_HOST || 'http://localhost:4200';
+
+app.use('/api', proxy(apiHost));
 app.use('/', routes);
 
 const port = process.env.PORT || 3000;
