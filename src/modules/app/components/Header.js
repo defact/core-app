@@ -49,7 +49,7 @@ const styles = theme => ({
 
 const Verify = memo(({ me, classes }) => (
   <AppBar position='static' color='secondary' 
-    className={classnames(classes.message, me.isVerified && classes.hide)}> 
+    className={classnames(classes.message, (!me.id || me.isVerified) && classes.hide)}> 
     <Typography variant='body1' color='primary' align='center'>
       Please verify your email address
     </Typography>

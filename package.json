@@ -4,7 +4,7 @@
   "description": "Core app",
   "main": "src/index.js",
   "engines": {
-    "node": "8.9.4"
+    "node": "8.15.0"
   },
   "scripts": {
     "start:dev": "webpack-dev-server --mode development --config config/webpack.base.config.js --open --hot",
