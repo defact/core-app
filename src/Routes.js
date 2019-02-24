@@ -15,16 +15,20 @@ const Routes = () => (
   <Broken>
     <Suspense fallback={<Loader />}>
       <LocationProvider>
-        <Router>
-          <Home path='/' />
-          <Sessions path='signin/*' />
-          <Register path='register' />
-          <Me path='me/*' />
-          <Manage path='manage/*' />
-          {/* <Contact path='contact' /> */}
+        <Location>
+          {({ location }) => (
+            <Router location={location}>
+              <Home path='/' />
+              <Sessions path='signin/*' />
+              <Register path='register' />
+              <Me path='me/*' />
+              <Manage path='manage/*' />
+              {/* <Contact path='contact' /> */}
 
-          <NotFound default />
-        </Router>
+              <NotFound default />
+            </Router>
+          )}
+        </Location>
         <Location children={context => <Redirect pathname={context.location.pathname} />}/>
       </LocationProvider>
     </Suspense>

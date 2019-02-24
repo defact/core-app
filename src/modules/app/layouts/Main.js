@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core';
 
@@ -20,6 +21,7 @@ const styles = theme => ({
 
 const Main = withStyles(styles)(({ classes, children, ...props }) => (
   <div className={classes.container}>
+    <Helmet titleTemplate={'Defacto | %s'} title={'Home'} />
     <Header {...props} />
     <main className={classes.main}>{children}</main>
     <Footer />

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import Role from './Role';
 
 const List = ({ roles, permissions, entities, fetchRoles, fetchPermissions, fetchEntities }) => {
@@ -16,6 +17,7 @@ const List = ({ roles, permissions, entities, fetchRoles, fetchPermissions, fetc
 
   return (
     <>
+      <Helmet title={'Manage Roles'} />
       {roles.roles.map(role => <Role {...role} permissions={permissions} entities={entities} />)}
     </>
   );

@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
 import { Fingerprint } from '@material-ui/icons';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Form } from 'react-final-form';
@@ -19,10 +20,10 @@ const styles = theme => ({
 
 const SignIn = memo(({ classes, handleSignIn, error, email, remember, isSigningIn }) => (
   <Layout>
-    <Header Icon={Fingerprint}>Sign In</Header>
+    <Header Icon={Fingerprint} isSubmitting={isSigningIn}>Sign In</Header>
     
     <Form onSubmit={handleSignIn} validate={validate} initialValues={{email, remember}}
-      render={({ handleSubmit, pristine, values }) => (
+      render={({ handleSubmit, pristine }) => (
         <form className={classes.form} onSubmit={handleSubmit}>
           <Input name='email' label='Email Address' autoFocus={!remember}/>
           <Password autoFocus={remember} />

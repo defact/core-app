@@ -1,40 +1,47 @@
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
 import PropTypes from 'prop-types';
+import { Form } from 'react-final-form';
+import { Helmet } from 'react-helmet';
 import { Security } from '@material-ui/icons';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { Form } from 'react-final-form';
 
-import { Password, Header, Message, Submit } from '../../app/components/form';
+import { Password, Header, Submit, Message } from '../../app/components/form';
+import { useSubmit } from '../../app/hooks';
 import { Form as Layout } from '../../app/layouts';
 
 import validate from '../state/validate/password';
 
 const styles = theme => ({
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%',
     marginTop: theme.spacing.unit * 2,
     marginBottom: theme.spacing.unit,
   },
 });
 
-const Change = memo(({ classes, me, handleChangePassword, error, isChanging }) => (
-  <Layout>
-    <Header Icon={Security}>Change Password</Header>
-    
-    {me.forceChangePassword && <Message message='Please change your password' type='warning' />}
+const Change = memo(({ classes, me, changePassword, isChanging, error }) => {
+  const { handleSubmit, Dialog } = useSubmit(changePassword);
+  
+  return (
+    <Layout>
+      <Helmet title={'Change Password'} />
+      <Header Icon={Security} isSubmitting={isChanging}>Change Password</Header>
+      
+      {me.forceChangePassword && <Message message='Please change your password' type='warning' />}
 
-    <Form onSubmit={handleChangePassword} validate={validate}
-      render={({ handleSubmit, pristine }) => (
-        <form className={classes.form} onSubmit={handleSubmit}>
-          <Password />
+      <Form onSubmit={handleSubmit} validate={validate}
+        render={({ handleSubmit, pristine }) => (
+          <form className={classes.form} onSubmit={handleSubmit}>
+            <Password autoFocus />
 
-          <Submit disabled={pristine || isChanging}>Change Password</Submit>
-        </form>
-      )}
-    />
+            <Submit disabled={pristine || isChanging}>Change Password</Submit>
+          </form>
+        )}
+      />
 
-    {error && <Message {...error} />}
-  </Layout>
-));
+      <Dialog error={error} message='Your password has been successfully changed' />
+    </Layout>
+  );
+});
 
 export default withStyles(styles)(Change);

@@ -12,12 +12,12 @@ const onSignOut = createLogic({
     .then(() => localStorage.removeItem('token'))
     .then(() => dispatch(signOutSuccess()))
     .then(() => navigate('/'))
+    .then(done)
 
     .catch(err => {
       dispatch(signOutFailed(err));
       navigate('/');
-    })
-    .then(done);
+    });
   }
 });
 

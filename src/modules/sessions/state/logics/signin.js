@@ -25,12 +25,12 @@ const onSignOn = createLogic({
 
     .then(data => dispatch(signInSuccess(data)))
     .then(() => navigate('/'))
+    .then(done)
 
     .catch(err => {
       dispatch(signInFailed(err));
       if (action.payload.strategy === 'code') navigate('/');
-    })
-    .then(done);
+    });
   }
 });
 

@@ -6,4 +6,4 @@ import { meSelector } from '../state/reducers/me';
 
 const mapStateToProps = state => ({ ...state.me.password, me: meSelector(state) });
 
-export default connect(mapStateToProps, { handleChangePassword: changePassword })(Password);
+export default connect(mapStateToProps, { changePassword })(Password);

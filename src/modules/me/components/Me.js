@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -24,6 +25,8 @@ const styles = theme => ({
 
 const Me = memo(({ classes, me }) => (
   <Layout>
+    <Helmet title={'Profile'} />
+
     <Grid item xs={12}>
       <div className={classes.topBar}>
         <div className={classes.block}>

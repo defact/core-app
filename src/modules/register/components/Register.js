@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
 import { Face } from '@material-ui/icons';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Form } from 'react-final-form';
@@ -29,13 +30,14 @@ const styles = theme => ({
 
 const Register = memo(({ classes, handleRegister, error, isRegistering }) => (
   <Layout>
-    <Header Icon={Face}>Register</Header>
+    <Helmet title={'Register'} />
+    <Header Icon={Face} isSubmitting={false}>Register</Header>
     
     <Form onSubmit={handleRegister} validate={validate}
       render={({ handleSubmit, pristine }) => (
         <form className={classes.form} onSubmit={handleSubmit}>
           <Input name='name' label='Name' autoFocus/>
-          <Input name='email' label='Email Address' validate={emailAvailable} />
+          <Input name='email' label='Email Address' />
           <Password />
 
           <Submit disabled={pristine || isRegistering}>Register</Submit>

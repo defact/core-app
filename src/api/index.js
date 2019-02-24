@@ -4,10 +4,11 @@ import axiosRetry from 'axios-retry';
 axiosRetry(axios, { retries: 3 });
 
 const enhancedError = (err) => {
-  console.error(err);
-  const error = new Error(err.message || err.error);
-  error.message = err.message;
+  const message = err.message || err.error;
+  const error = new Error(message);
+  error.message = message;
   error.statusCode = err.statusCode;
+  console.log(error);
   return error;
 };
 
