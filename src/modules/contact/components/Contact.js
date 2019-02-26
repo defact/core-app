@@ -32,7 +32,7 @@ const Contact = memo(({ classes, me, send, isSending, error }) => {
         render={({ handleSubmit, pristine }) => (
           <form className={classes.form} onSubmit={handleSubmit}>
             <Input name='from' label='Email address' autoFocus={from === undefined} />
-            <Input name='message' label='Your message' multiline autoFocus={from !== undefined} />
+            <Input name='message' label='Write your message' multiline autoFocus={from !== undefined} />
 
             <Submit disabled={pristine || isSending}>Send</Submit>
           </form>

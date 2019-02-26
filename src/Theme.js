@@ -16,7 +16,7 @@ const theme = createMuiTheme({
       '"Lato"',
       'sans-serif'
     ].join(',')
-  }
+  },
 });
 
 export default ({ children }) => (

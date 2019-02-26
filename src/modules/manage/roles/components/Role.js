@@ -1,44 +1,71 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import { Form } from 'react-final-form';
+import arrayMutators from 'final-form-arrays'
+import { FieldArray } from 'react-final-form-arrays'
 import withStyles from '@material-ui/core/styles/withStyles';
 
+import { Input, Select, Submit } from '../../../app/components/form';
+
 const styles = theme => ({
-  topBar: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center'
+  root: {
+    width: 'auto',
+    margin: theme.spacing.unit * 6,
   },
-  outlinedButton: {
-    textTransform: 'uppercase',
-    margin: theme.spacing.unit
+  paper: {
+    padding: theme.spacing.unit * 3,
   },
-  block: {
-    padding: theme.spacing.unit * 2,
+  formControl: {
+    width: '100%',
+  },
+  select: {
+    '&:focus': {
+      background: '#fff',
+      borderBottom: '1px solid black'
+    }
   },
 });
 
-const Role = memo(({ id, name, claims, permissions, entities, classes }) => (
-  <Grid item xs={12}>
-    <Paper>
-    <div className={classes.topBar}>
-      <div className={classes.block}>
-        <Typography variant='h6' gutterBottom>
-          {name}
-        </Typography>
-      </div>
-      <div>
-        <Button variant='outlined' className={classes.outlinedButton}>
-          Get help
-        </Button>
-      </div>
+const Role = memo(({ id, name, claims, permissions, entities, classes }) => {
+  const handleSubmit = props => console.log(props);
+
+  return (
+    <div className={classes.root}>
+      <Paper className={classes.paper}>
+        <Form onSubmit={handleSubmit} initialValues={{ name, claims }}
+          mutators={{ ...arrayMutators }}
+          render={({ handleSubmit }) => (
+            <form className={classes.form} onSubmit={handleSubmit} autoComplete='off'>
+
+              <Grid container spacing={24}>
+                <Grid item xs={12} sm={6}>
+                  <Input name='name' label='Role' />
+                </Grid>
+
+                <Grid item xs={12} sm={6}>
+                  <FieldArray name='claims'>
+                    {({ fields }) => (
+                      fields.map((name, index) => (
+                        <Select 
+                          name={`${name}.right`}
+                          label={claims[index].entity}
+                          data={permissions} />
+                      )))}
+                  </FieldArray>
+                </Grid>
+              </Grid>
+
+              <Submit>Save</Submit>
+            </form>
+          )}
+        />    
+      </Paper>
     </div>
-    </Paper>
-  </Grid>
-));
+  );
+
+});
 
 export default withStyles(styles)(Role);
 

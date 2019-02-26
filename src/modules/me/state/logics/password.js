@@ -1,6 +1,5 @@
 import { createLogic } from 'redux-logic';
 import { CHANGE_PASSWORD, changePasswordSuccess, changePasswordFailed } from '../actions/password';
-import { fetchMeSuccess } from '../actions/me';
 
 const onChangePassword = createLogic({
   type: CHANGE_PASSWORD,
