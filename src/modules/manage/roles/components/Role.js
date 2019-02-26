@@ -1,37 +1,44 @@
-import React from 'react';
+import React, { memo } from 'react';
+import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
-  root: {
-    flexGrow: 1,
+  topBar: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
-  paper: {
-    height: 140,
-    width: '100%',
+  outlinedButton: {
+    textTransform: 'uppercase',
+    margin: theme.spacing.unit
   },
-  control: {
+  block: {
     padding: theme.spacing.unit * 2,
   },
 });
 
-const Role = ({ id, name, claims, permissions, entities, classes }) => (
-  <Paper className={classes.paper}>
-    <Grid container spacing={24}>
-      <Grid container item xs={12} alignItems='right'>
-        <Grid item>
-          <Button>Cancel</Button>
-        </Grid>
-        <Grid item>
-          <Button>
-            Save
-          </Button>
-        </Grid>
-      </Grid>
-    </Grid>
-  </Paper>
-);
+const Role = memo(({ id, name, claims, permissions, entities, classes }) => (
+  <Grid item xs={12}>
+    <Paper>
+    <div className={classes.topBar}>
+      <div className={classes.block}>
+        <Typography variant='h6' gutterBottom>
+          {name}
+        </Typography>
+      </div>
+      <div>
+        <Button variant='outlined' className={classes.outlinedButton}>
+          Get help
+        </Button>
+      </div>
+    </div>
+    </Paper>
+  </Grid>
+));
 
 export default withStyles(styles)(Role);
+

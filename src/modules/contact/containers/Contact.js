@@ -2,5 +2,8 @@ import { connect } from 'react-redux';
 
 import { Contact } from '../components';
 import { send } from '../state/actions/contact';
+import { meSelector } from '../../me/state/reducers/me';
 
-export default connect(state => ({ contact: state.contact.contact }), { send })(Contact);
+const mapStateToProps = state => ({ contact: state.contact.contact, me: meSelector(state) });
+
+export default connect(mapStateToProps, { send })(Contact);

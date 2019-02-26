@@ -6,7 +6,7 @@ import sessions from '../modules/sessions/reducers';
 import register from '../modules/register/reducers';
 import me from '../modules/me/reducers';
 import manage from '../modules/manage/reducers';
-// import contact from '../modules/contact/reducers';
+import contact from '../modules/contact/reducers';
 
 export default combineReducers({
   entities: entities(),
@@ -14,5 +14,5 @@ export default combineReducers({
   register,
   me,
   manage,
-  // contact,
+  contact,
 });

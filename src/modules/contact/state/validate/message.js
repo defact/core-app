@@ -1,11 +1,11 @@
 import { createValidator, isRequired, isEmail } from '../../../app/state/validator';
 
 export default createValidator({
-  email: [ 
+  from: [ 
     isRequired(), 
     isEmail(), 
   ], 
-  text: [ 
+  message: [ 
     isRequired(),
   ], 
 });

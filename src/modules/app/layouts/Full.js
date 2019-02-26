@@ -20,10 +20,8 @@ const styles = theme => ({
 
 const Full = memo(({ classes, children }) => (
   <div className={classes.root}>
-    <Grid container justify='center'> 
-      <Grid spacing={24} alignItems='center' justify='center' container className={classes.grid}>
-        {children}
-      </Grid>
+    <Grid spacing={24} alignItems='center' justify='center' container className={classes.grid}>
+      {children}
     </Grid>
   </div>
 ));

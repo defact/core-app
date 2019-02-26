@@ -9,7 +9,7 @@ const Sessions = lazy(() => import('./modules/sessions/Routes'));
 const Me = lazy(() => import('./modules/me/Routes'));
 const Register = lazy(() => import('./modules/register/Routes'));
 const Manage = lazy(() => import('./modules/manage/Routes'));
-// const Contact = lazy(() => import('./modules/contact/Routes'));
+const Contact = lazy(() => import('./modules/contact/Routes'));
 
 const Routes = () => (
   <Broken>
@@ -23,7 +23,7 @@ const Routes = () => (
               <Register path='register' />
               <Me path='me/*' />
               <Manage path='manage/*' />
-              {/* <Contact path='contact' /> */}
+              <Contact path='contact' />
 
               <NotFound default />
             </Router>

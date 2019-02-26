@@ -1,18 +1,23 @@
 import { createLogic } from 'redux-logic';
-import { SEND, SEND_SUCCESS, SEND_FAILED } from '../actions/contact';
+import { SEND, sendSuccess, sendFailed } from '../actions/contact';
 
 const onSend = createLogic({
   type: SEND,
   latest: true,
 
-  processOptions: {
-    dispatchReturn: true,
-    successType: SEND_SUCCESS,
-    failType: SEND_FAILED
-  },
+  process({ api, action }, dispatch, done) {
+    const { from, message, onSuccess, onFailure } = action.payload;
 
-  process({ api, _, action }) {
-    return api().post('messages', action.payload);
+    return api().post('messages', { from, message, subject: 'Message from defact.io' })
+    
+    .then(data => dispatch(sendSuccess(data)))
+    .then(onSuccess)
+    .then(done)
+
+    .catch(err => {
+      dispatch(sendFailed(err));
+      onFailure(err);
+    });
   }
 });
 
