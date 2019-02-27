@@ -1,3 +1,4 @@
+import merge from 'lodash.merge';
 import { SIGN_OUT_SUCCESS } from '../../../sessions/state/actions/signout';
 
 const pick = (o, ...props) => Object.assign({}, ...props.map(p => ({[p]: o[p]})));
@@ -9,7 +10,7 @@ const entities = retain => {
     }
 
     if (action && action.payload && action.payload.entities) {
-      return { ...state, ...action.payload.entities };
+      return merge({}, state, action.payload.entities);
     }
 
     return state;

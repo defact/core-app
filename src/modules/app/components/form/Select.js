@@ -11,11 +11,12 @@ const styles = theme => ({
   select: {
     '&:focus': {
       backgroundColor: '#fff',
+      borderBottom: '1px solid rgba(0,0,0,0.8)',
     }
   },
 });
 
-export default withStyles(styles)(memo(({ name, label, type='text', data, classes, ...rest }) => (
+export default withStyles(styles)(memo(({ name, label, data, classes, ...rest }) => (
   <Field name={name} type='select' {...rest}>
     {({ input: { name, onChange, value, ...restInput }, meta, ...rest }) => (
 
@@ -24,8 +25,7 @@ export default withStyles(styles)(memo(({ name, label, type='text', data, classe
 
         <Select
           {...rest}
-          className={classes.select}
-          key={name}
+          classes={{ select: classes.select}}
           id={name}
           name={name}
           onChange={onChange}

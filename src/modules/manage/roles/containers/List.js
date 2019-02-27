@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import { List } from '../components';
-import { fetchRoles } from '../state/actions/roles';
+import { fetchRoles, save } from '../state/actions/roles';
 import { fetchEntities } from '../state/actions/entities';
 import { fetchPermissions } from '../state/actions/permissions';
 import { rolesSelector } from '../state/reducers/roles';
@@ -14,4 +14,4 @@ const mapStateToProps = state => ({
   permissions: permissionsSelector(state),
 });
 
-export default connect(mapStateToProps, { fetchRoles, fetchPermissions, fetchEntities })(List);
+export default connect(mapStateToProps, { fetchRoles, fetchPermissions, fetchEntities, save })(List);
