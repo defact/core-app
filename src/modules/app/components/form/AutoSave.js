@@ -1,7 +1,20 @@
 import React, { Component } from 'react';
 import Typography from '@material-ui/core/Typography';
-import { FormSpy } from 'react-final-form';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { FormSpy, Field } from 'react-final-form';
 import diff from 'object-diff';
+
+export const Saving = ({ name }) => (
+  <Field
+    name={name}
+    subscription={{ data: true }}
+    render={({ meta: { data: { isSaving }}}) =>
+      !isSaving 
+        ? <CircularProgress color='secondary' size={15} thickness={3} style={{marginRight:4}} /> 
+        : null
+    }
+  />
+);
 
 class AutoSave extends Component {
   constructor(props) {
@@ -41,14 +54,6 @@ class AutoSave extends Component {
     )
   }
 }
-
-// const AS = (props) => {
-//   const [ saving, setSaving ] = useState(false);
-
-//   return (
-//     <>{saving && <Typography variant='body1'>Saving...</Typography>}</>
-//   );
-// }
 
 export default props => (
   <FormSpy {...props} subscription={{ active: true, values: true }} component={AutoSave} />

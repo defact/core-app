@@ -21,18 +21,32 @@ export default handleActions({
 const dataSelector = state => state.entities.roles
 const stateSelector = state => state.manage.roles.roles;
 
-const constructClaims = (roles, entities) => (
-  roles.map(role => {
+const compare = property => (a, b) => {
+  const propA = a[property].toUpperCase();
+  const propB = b[property].toUpperCase();
+
+  if (propA > propB) {
+    return 1;
+  } else if (propA < propB) {
+    return -1;
+  }
+  return 0;
+};
+
+const construct = (roles, entities) => (
+  roles
+  .map(role => {
     const claims = entities.map(entity => {
       const claim = role.claims.find(c => c.entity === entity.id);
       return claim === undefined ? { entity: entity.id, right: 0 } : claim;
     });
     return { ...role, claims };
   })
+  .sort(compare('name'))
 );
 
 export const rolesSelector = createSelector(
   dataSelector, entitiesSelector, stateSelector, (roles = [], entities = [], state) => ({
-    ...state, roles: constructClaims(state.ids.map(id => roles[id]), entities)
+    ...state, roles: construct(state.ids.map(id => roles[id]), entities)
   })
 );

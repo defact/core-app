@@ -8,7 +8,7 @@ import setFieldData from 'final-form-set-field-data';
 import { FieldArray } from 'react-final-form-arrays';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import { Input, Select, AutoSave, Submit } from '../../../app/components/form';
+import { Input, Select, AutoSave } from '../../../app/components/form';
 
 const styles = theme => ({
   root: {
@@ -17,7 +17,7 @@ const styles = theme => ({
   },
   paper: {
     padding: theme.spacing.unit * 3,
-  },
+  }
 });
 
 const Role = memo(({ id, name, claims, save, permissions, entities, classes }) => {
