@@ -23,6 +23,7 @@ export default memo(({ name='password', label='Password', ...rest }) => {
             inputProps={restInput}
             onChange={onChange}
             value={value}
+            autoCapitalize='off'
 
             endAdornment={
               <InputAdornment position='end'>

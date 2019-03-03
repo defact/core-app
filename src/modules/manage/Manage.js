@@ -3,9 +3,9 @@ import React from 'react';
 import { Full as Layout } from '../app/layouts';
 
 const Manage = ({ children }) => (
-  <div>    
+  <Layout>  
     {children}
-  </div>
+  </Layout>
 );
 
 export default Manage;

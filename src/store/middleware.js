@@ -10,5 +10,5 @@ import api from '../api';
 const logger = createLogger();
 const logic = createLogicMiddleware(logics, { api, normalize, schemas });
 
-export default applyMiddleware(logic) //, logger);
+export default applyMiddleware(logic, logger);
 

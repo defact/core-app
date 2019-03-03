@@ -1,27 +1,17 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet';
 import Role from './Role';
+import Header from './Header';
 
-const List = ({ roles, permissions, entities, save, fetchRoles, fetchPermissions, fetchEntities }) => {
-  useEffect(() => {
-    fetchEntities();
-  }, []);
+const List = ({ roles, permissions, entities, save }) => (
+  <>
+    <Helmet title={'Roles'} />
 
-  useEffect(() => {
-    fetchPermissions();
-  }, []);
+    <Header />
 
-  useEffect(() => {
-    fetchRoles();
-  }, []);
-
-  return (
-    <>
-      <Helmet title={'Manage Roles'} />
-      {roles.roles.map(role => 
-        <Role key={role.id} {...role} save={save} permissions={permissions} entities={entities} />)}
-    </>
-  );
-}
+    {roles.roles.map(role => 
+      <Role key={role.id} {...role} save={save} permissions={permissions} entities={entities} />)}
+  </>
+);
 
 export default List;

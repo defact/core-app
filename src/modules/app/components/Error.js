@@ -11,22 +11,14 @@ const styles = theme => ({
   topBar: {
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'center'
-  },
-  outlinedButton: {
-    textTransform: 'uppercase',
-    margin: theme.spacing.unit
-  },
-  block: {
-    padding: theme.spacing.unit * 2,
+    alignItems: 'center',
   },
 });
 
 const Error = memo(({ classes, title, children }) => (
   <Layout>
-    <Grid item xs={12}>
       <div className={classes.topBar}>
-        <div className={classes.block}>
+        <div>
           <Typography variant='h6' gutterBottom>
             {title}
           </Typography>
@@ -35,12 +27,11 @@ const Error = memo(({ classes, title, children }) => (
           </Typography>
         </div>
         <div>
-          <Button variant='outlined' className={classes.outlinedButton}>
+          <Button variant='contained' color='primary'>
             Get help
           </Button>
         </div>
       </div>
-    </Grid>
   </Layout>
 ));
 

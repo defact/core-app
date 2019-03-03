@@ -8,12 +8,12 @@ const styles = theme => ({
   },
 });
 
-const Submit = memo(({ classes, children, disabled }) => (
+const Submit = memo(({ classes, children, disabled, color='secondary', fullWidth=true }) => (
   <Button
     type='submit'
-    fullWidth
+    fullWidth={fullWidth}
     variant='contained'
-    color='secondary'
+    color={color}
     className={classes.submit}
     disabled={disabled}
     >

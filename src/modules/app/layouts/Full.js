@@ -1,6 +1,5 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
-import Grid from '@material-ui/core/Grid'
 import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
@@ -8,21 +7,15 @@ const styles = theme => ({
     flexGrow: 1,
     overflow: 'hidden',
     // paddingBottom: 200,
-  },
-  grid: {
-    width: 1200,
-    margin: `0 ${theme.spacing.unit * 2}px`,
-    [theme.breakpoints.down('sm')]: {
-      width: 'calc(100% - 20px)'
-    }
+    width: 'auto',
+    margin: theme.spacing.unit * 5,
+    padding: theme.spacing.unit
   },
 });
 
 const Full = memo(({ classes, children }) => (
   <div className={classes.root}>
-    <Grid spacing={24} alignItems='center' justify='center' container className={classes.grid}>
-      {children}
-    </Grid>
+    {children}
   </div>
 ));
 

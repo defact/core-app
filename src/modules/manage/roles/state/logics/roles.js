@@ -1,5 +1,7 @@
 import { createLogic } from 'redux-logic';
-import { FETCH, FETCH_SUCCESS, FETCH_FAILED, SAVE, saveSuccess, saveFailed } from '../actions/roles';
+import { FETCH, FETCH_SUCCESS, FETCH_FAILED } from '../actions/roles';
+import { SAVE, saveSuccess, saveFailed } from '../actions/roles';
+import { ADD, addSuccess, addFailed } from '../actions/roles';
 
 const onFetch = createLogic({
   type: FETCH,
@@ -36,4 +38,22 @@ const onSave = createLogic({
   }
 });
 
-export default [ onFetch, onSave ];
+const onAdd = createLogic({
+  type: ADD,
+  latest: true,
+
+  process({ api, normalize, schemas, action }, dispatch, done) {
+    const { name, claims, onSuccess, onFailure } = action.payload;
+
+    return api().post('roles', { name, claims })
+    .then(data => dispatch(addSuccess(normalize(data.role, schemas.role))))
+    .then(onSuccess)
+    .then(done)
+    .catch(err => {
+      onFailure(err);
+      dispatch(addFailed(err));
+    });
+  }
+});
+
+export default [ onFetch, onSave, onAdd ];

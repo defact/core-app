@@ -17,6 +17,7 @@ export default memo(({ name, label, type='text', ...rest }) => (
           inputProps={restInput}
           onChange={onChange}
           value={value}  
+          autoCapitalize='off'
         />
         <FormHelperText>{meta.touched && meta.error}</FormHelperText>
       </FormControl>

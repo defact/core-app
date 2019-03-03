@@ -10,10 +10,10 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { AccountCircle, Extension, Menu as MenuIcon, Refresh } from '@material-ui/icons';
-import withStyles from '@material-ui/core/styles/withStyles';
 import { usePopupState, bindTrigger, bindMenu } from 'material-ui-popup-state/hooks'
-import { Sidebar } from './';
+import withStyles from '@material-ui/core/styles/withStyles';
 
+import { Sidebar } from './';
 import { Switch } from '../../me/containers';
 
 const styles = theme => ({
@@ -22,6 +22,7 @@ const styles = theme => ({
   },
   toolbar: {
     marginLeft: theme.spacing.unit * 2,
+    marginRight: theme.spacing.unit * 2,
   },
   message: {
     padding: theme.spacing.unit,

@@ -7,11 +7,7 @@ const PASSWORD_URL = '/me/password';
 
 const Redirect = ({ pathname, forceChangePassword, children }) => {
   useEffect(() => {
-    try {
-      if (forceChangePassword && pathname !== PASSWORD_URL) redirectTo(PASSWORD_URL);
-    } catch(e) {
-      // Swallow weird error
-    }
+    if (forceChangePassword && pathname !== PASSWORD_URL) redirectTo(PASSWORD_URL);
   }, [pathname, forceChangePassword]);
 
   return children || null;

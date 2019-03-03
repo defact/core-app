@@ -1,12 +1,14 @@
 import React from 'react';
 import { Router } from '@reach/router';
 
-import { List, Add } from './containers';
+import { Roles, List, Add } from './containers';
 
 const Routes = () => (
   <Router>
-    <List default />
-    {/* <Add path='add' /> */}
+    <Roles default>
+      <List default />
+      <Add path='add' />
+    </Roles>
   </Router>
 );
 
