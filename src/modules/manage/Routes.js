@@ -1,16 +1,18 @@
 import React from 'react';
 import { Router } from '@reach/router';
 
+import { authenticate } from '../me/state/hoc';
+
 import Manage from './Manage';
-// import Users from './users/Routes';
+import Users from './users/Routes';
 import Roles from './roles/Routes';
 // import Groups from './groups/Routes';
 // import Members from './groups/Members';
 
 const Routes = () => (
-  <Router>
-    <Manage default>
-      {/* <Users default path='users/*' /> */}
+  <Router primary={false}>
+    <Manage path='/'>
+      <Users path='users/*' />
       <Roles path='roles/*' />
       {/* <Groups path='groups/*' />
       <Members path='members/*' /> */}
@@ -18,4 +20,4 @@ const Routes = () => (
   </Router>
 );
 
-export default Routes;
+export default authenticate(Routes);

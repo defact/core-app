@@ -1,3 +1,4 @@
+import compact from 'lodash.compact';
 import { handleActions } from 'redux-actions';
 import { createSelector } from 'reselect';
 import { fetchEntities, fetchSuccess, fetchFailed } from '../actions/entities';
@@ -21,5 +22,5 @@ const dataSelector = state => state.entities.entities;
 const idsSelector = state => state.manage.roles.entities.ids;
   
 export const entitiesSelector = createSelector(
-  dataSelector, idsSelector, (entities = [], ids) => ids.map(id => entities[id])
+  dataSelector, idsSelector, (entities = [], ids) => compact(ids.map(id => entities[id]))
 );

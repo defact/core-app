@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchRoles } from '../state/actions/roles';
+import { fetch } from '../state/actions/roles';
 import { fetchEntities } from '../state/actions/entities';
 import { fetchPermissions } from '../state/actions/permissions';
 
-const Roles = ({ fetchRoles, fetchPermissions, fetchEntities, children }) => {
+const Roles = ({ fetch, fetchPermissions, fetchEntities, children }) => {
   useEffect(() => {
     fetchEntities();
   }, []);
@@ -15,10 +15,10 @@ const Roles = ({ fetchRoles, fetchPermissions, fetchEntities, children }) => {
   }, []);
 
   useEffect(() => {
-    fetchRoles();
+    fetch();
   }, []);
 
   return children;
 };
 
-export default connect(null, { fetchRoles, fetchPermissions, fetchEntities })(Roles);
+export default connect(null, { fetch, fetchPermissions, fetchEntities })(Roles);

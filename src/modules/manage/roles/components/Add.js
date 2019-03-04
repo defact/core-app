@@ -29,7 +29,7 @@ const styles = theme => ({
   },
   link: {
     textDecoration: 'none',
-    color: 'inherit'
+    color: 'rgba(0,0,0,0.5)',
   },
   text: {
     display: 'inline-block',
@@ -69,7 +69,7 @@ const Add = withStyles(styles)(memo(({ claims, error, isSaving, entities, permis
         <Form 
           onSubmit={handleSubmit}
           validate={validate}
-          initialValues={{ claims: claims }}
+          initialValues={{ claims }}
           mutators={{ ...arrayMutators }}
           render={({ handleSubmit, pristine }) => (
             <form onSubmit={handleSubmit} autoComplete='off'>

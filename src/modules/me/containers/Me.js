@@ -6,4 +6,4 @@ import { meSelector } from '../state/reducers/me';
 
 const mapStateToProps = state => ({ me: meSelector(state) });
 
-export default connect(mapStateToProps, { handleFetchMe: fetchMe })(Me);
+export default connect(mapStateToProps, { fetchMe })(Me);

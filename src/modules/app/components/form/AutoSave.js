@@ -37,10 +37,12 @@ class AutoSave extends Component {
     if (Object.keys(difference).length) {
       this.setState({ isSaving: true, values });
       setFieldData(field, { isSaving: true });
+      if (this.props.container) this.props.container.current.style.opacity = 0.3;
 
       const onSuccess = () => {
         this.setState({ isSaving: false });
         setFieldData(field, { isSaving: false });
+        if (this.props.container) this.props.container.current.style.opacity = 1;
       };
       const onFailure = onSuccess;
 
@@ -50,7 +52,7 @@ class AutoSave extends Component {
 
   render() {
     return (
-      this.state.isSaving && <Typography variant='body1'>Saving...</Typography>
+      this.state.isSaving && <Typography variant='body1'>{this.props.children}</Typography>
     )
   }
 }

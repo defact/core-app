@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import Checkbox from '@material-ui/core/Checkbox';
+import Checkbox from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { Field } from 'react-final-form';
 

@@ -1,6 +1,7 @@
+import compact from 'lodash.compact';
 import { handleActions } from 'redux-actions';
 import { createSelector } from 'reselect';
-import { fetchRoles, fetchSuccess, fetchFailed } from '../actions/roles';
+import { fetch, fetchSuccess, fetchFailed } from '../actions/roles';
 import { add, addSuccess, addFailed } from '../actions/roles';
 import { entitiesSelector } from './entities';
 import { constructRoles, constructRole } from '../helpers/roles';
@@ -15,7 +16,7 @@ const initialState = {
 };
 
 export default handleActions({
-  [fetchRoles]: (state) => ({ ...state, isFetching: true, isFetched: false, error: false }),
+  [fetch]: (state) => ({ ...state, isFetching: true, isFetched: false, error: false }),
   [fetchSuccess]: (state, action) =>
     ({ ...state, ids: action.payload.result, isFetching: false, isFetched: true, error: false }),
   [fetchFailed]: (state, action) => 
@@ -31,12 +32,17 @@ export default handleActions({
 const dataSelector = state => state.entities.roles
 const stateSelector = state => state.manage.roles.roles;
 
-export const roleSelector = createSelector(
+export const roleWithClaimsSelector = createSelector(
   entitiesSelector, stateSelector, (entities = [], state) => 
     ({ ...state, ...constructRole(entities) })
 );
 
-export const rolesSelector = createSelector(
+export const rolesWithClaimsSelector = createSelector(
   dataSelector, entitiesSelector, stateSelector, (roles = [], entities = [], state) => 
-    ({ ...state, roles: constructRoles(state.ids.map(id => roles[id]), entities) })
+    ({ ...state, roles: constructRoles(compact(state.ids.map(id => roles[id])), entities) })
+);
+
+export const rolesSelector = createSelector(
+  dataSelector, stateSelector, (roles = [], state) => 
+    ({ ...state, roles: compact(state.ids.map(id => roles[id])) })
 );

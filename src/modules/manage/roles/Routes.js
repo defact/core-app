@@ -4,9 +4,9 @@ import { Router } from '@reach/router';
 import { Roles, List, Add } from './containers';
 
 const Routes = () => (
-  <Router>
-    <Roles default>
-      <List default />
+  <Router primary={false}>
+    <Roles path='/'>
+      <List path='/' />
       <Add path='add' />
     </Roles>
   </Router>

@@ -8,7 +8,7 @@ const enhancedError = (err) => {
   const error = new Error(message);
   error.message = message;
   error.statusCode = err.statusCode;
-  console.log(error);
+  console.error(error);
   return error;
 };
 

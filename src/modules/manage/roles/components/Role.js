@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, createRef } from 'react';
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -14,48 +14,54 @@ import validate from '../state/validate/role';
 
 const styles = theme => ({
   paper: {
-    padding: theme.spacing.unit * 3,
     marginBottom: theme.spacing.unit * 3,
-  }
+  },
+  card: {
+    padding: theme.spacing.unit * 3,
+  },
 });
 
 const Role = memo(({ id, name, claims, save, permissions, entities, classes }) => {
   const handleSubmit = (props) => save({ id, ...props });
+  const containerRef = createRef();
 
   return (
     <Paper className={classes.paper}>
-      <Form 
-        onSubmit={handleSubmit}
-        validate={validate}
-        initialValues={{ name, claims }}
-        subscription={{ }}
-        mutators={{ ...arrayMutators, setFieldData }}
-        render={({ form }) => (
-          <form autoComplete='off'>
-            
-            <Grid container spacing={24}>
-              <Grid item xs={12} sm={6}>
-                <Input name='name' label='Role' />
+      <div ref={containerRef} className={classes.card}>
+        <Form 
+          onSubmit={handleSubmit}
+          validate={validate}
+          initialValues={{ name, claims }}
+          subscription={{ }}
+          mutators={{ ...arrayMutators, setFieldData }}
+          render={({ form }) => (
+            <form autoComplete='off'>
+              
+              <Grid container spacing={24}>
+                <Grid item xs={12} sm={6}>
+                  <Input name='name' label='Role Name' />
 
-                <AutoSave setFieldData={form.mutators.setFieldData} save={handleSubmit} />
-              </Grid>
+                  <AutoSave setFieldData={form.mutators.setFieldData} 
+                    save={handleSubmit} container={containerRef} />
+                </Grid>
 
-              <Grid item xs={12} sm={6}>
-                <FieldArray name='claims'>
-                  {({ fields }) => (
-                    fields.map((name, index) => (
-                      <Select 
-                        key={index}
-                        name={`${name}.right`}
-                        label={entities.find(e => e.id === claims[index].entity).name}
-                        data={permissions} />
-                    )))}
-                </FieldArray>
+                <Grid item xs={12} sm={6}>
+                  <FieldArray name='claims'>
+                    {({ fields }) => (
+                      fields.map((name, index) => (
+                        <Select 
+                          key={index}
+                          name={`${name}.right`}
+                          label={entities.find(e => e.id === claims[index].entity).name}
+                          data={permissions} />
+                      )))}
+                  </FieldArray>
+                </Grid>
               </Grid>
-            </Grid>
-          </form>
-        )}
-      />    
+            </form>
+          )}
+        />    
+      </div>
     </Paper>
   );
 

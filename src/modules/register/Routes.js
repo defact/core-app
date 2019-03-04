@@ -4,7 +4,7 @@ import { Router } from '@reach/router';
 import { Register } from './containers';
 
 const Routes = () => (
-  <Router>
+  <Router primary={false}>
     <Register default />
   </Router>
 );

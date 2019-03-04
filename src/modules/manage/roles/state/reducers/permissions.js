@@ -1,3 +1,4 @@
+import compact from 'lodash.compact';
 import { handleActions } from 'redux-actions';
 import { createSelector } from 'reselect';
 import { fetchPermissions, fetchSuccess, fetchFailed } from '../actions/permissions';
@@ -21,5 +22,5 @@ const dataSelector = state => state.entities.permissions
 const idsSelector = state => state.manage.roles.permissions.ids;
   
 export const permissionsSelector = createSelector(
-  dataSelector, idsSelector, (permissions = [], ids) => ids.map(id => permissions[id])
+  dataSelector, idsSelector, (permissions = [], ids) => compact(ids.map(id => permissions[id]))
 );

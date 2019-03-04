@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { Router, LocationProvider, Location } from '@reach/router';
 
-import { Home, Broken, NotFound } from './modules/app/containers';
+import { Home, Broken, Denied, NotFound } from './modules/app/containers';
 import { Loader } from './modules/app/components';
 import { Redirect } from './modules/me/containers';
 
@@ -25,6 +25,7 @@ const Routes = () => (
               <Manage path='manage/*' />
               <Contact path='contact' />
 
+              <Denied path='denied' />
               <NotFound default />
             </Router>
           )}

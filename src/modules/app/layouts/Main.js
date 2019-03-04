@@ -30,5 +30,5 @@ const Main = withStyles(styles)(({ classes, children, ...props }) => (
 
 const mapStateToProps = state => ({ me: meSelector(state) });
 
-export default connect(mapStateToProps, { handleSignOut: signOut, fetchMe })(Main);
+export default connect(mapStateToProps, { signOut, fetchMe })(Main);
 

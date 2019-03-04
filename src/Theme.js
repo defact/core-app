@@ -12,10 +12,18 @@ const theme = createMuiTheme({
     }
   },
   typography: {
+    useNextVariants: true,
     fontFamily: [
       '"Lato"',
       'sans-serif'
     ].join(',')
+  },
+  overrides: {
+    MuiPaper: {
+      rounded: {
+        borderRadius: 0
+      },
+    },
   },
 });
 

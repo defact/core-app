@@ -14,13 +14,6 @@ const styles = theme => ({
     justifyContent: 'space-between',
     alignItems: 'center'
   },
-  outlinedButton: {
-    textTransform: 'uppercase',
-    margin: theme.spacing.unit
-  },
-  block: {
-    padding: theme.spacing.unit * 2,
-  },
 });
 
 const Me = memo(({ classes, me }) => (
@@ -29,7 +22,7 @@ const Me = memo(({ classes, me }) => (
 
     <Grid item xs={12}>
       <div className={classes.topBar}>
-        <div className={classes.block}>
+        <div>
           <Typography variant='h6' gutterBottom>
             {me.name}
           </Typography>
@@ -38,7 +31,7 @@ const Me = memo(({ classes, me }) => (
           </Typography>
         </div>
         <div>
-          <Button variant='outlined' className={classes.outlinedButton}>
+          <Button variant='outlined'>
             Get help
           </Button>
         </div>

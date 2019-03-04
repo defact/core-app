@@ -1,6 +1,6 @@
 import React, { memo, useState } from 'react';
 import classnames from 'classnames';
-import { Link, Match, navigate } from '@reach/router';
+import { navigate } from '@reach/router';
 import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -13,7 +13,7 @@ import { AccountCircle, Extension, Menu as MenuIcon, Refresh } from '@material-u
 import { usePopupState, bindTrigger, bindMenu } from 'material-ui-popup-state/hooks'
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import { Sidebar } from './';
+import { Sidebar, MenuLink } from './';
 import { Switch } from '../../me/containers';
 
 const styles = theme => ({
@@ -67,23 +67,7 @@ const Logo = memo(({ children, classes }) => (
   </>
 ));
 
-const MenuLink = memo(({ children, onClick, ...props }) => (
-  <Match path={props.to}>
-    {({ match }) => (
-      <Link {...props} getProps={() => 
-        ({ style: { 
-          textDecoration: 'none', 
-          outline: 0,
-        }})}>
-        <MenuItem onClick={onClick} selected={match !== null}>
-          {children}
-        </MenuItem>
-      </Link>
-    )}
-  </Match>  
-));
-
-const UserMenu = memo(({ classes, me, fetchMe, handleSignOut }) => {
+const UserMenu = memo(({ classes, me, fetchMe, signOut }) => {
   const [ showSwitchDialog, setShowSwitchDialog ] = useState(false);
   const popupState = usePopupState({variant: 'popover', popupId: 'me'});
 
@@ -109,7 +93,9 @@ const UserMenu = memo(({ classes, me, fetchMe, handleSignOut }) => {
         <MenuLink to='/me' onClick={popupState.close}>Profile</MenuLink>
         <MenuLink to='/me/password' onClick={popupState.close}>Change Password</MenuLink>
         <MenuItem onClick={() => {
-          popupState.close(); handleSignOut();
+          popupState.close(); 
+          signOut();
+          // navigate('/signin');
         }}>
           Sign Out
         </MenuItem>
