@@ -1,3 +1,5 @@
 import { combineReducers } from 'redux';
 
-export default combineReducers({ });
+import groups from './state/reducers/groups';
+
+export default combineReducers({ groups });

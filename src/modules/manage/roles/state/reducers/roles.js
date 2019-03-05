@@ -32,17 +32,23 @@ export default handleActions({
 const dataSelector = state => state.entities.roles
 const stateSelector = state => state.manage.roles.roles;
 
-export const roleWithClaimsSelector = createSelector(
-  entitiesSelector, stateSelector, (entities = [], state) => 
-    ({ ...state, ...constructRole(entities) })
+export const roleSelector = createSelector(
+  dataSelector, stateSelector, (state, props) => props.rid, (roles = [], state, id) => {
+    return ({ ...state, ...roles[id] })
+  }
 );
 
-export const rolesWithClaimsSelector = createSelector(
-  dataSelector, entitiesSelector, stateSelector, (roles = [], entities = [], state) => 
-    ({ ...state, roles: constructRoles(compact(state.ids.map(id => roles[id])), entities) })
+export const roleWithClaimsSelector = createSelector(
+  dataSelector, entitiesSelector, stateSelector, (state, props) => props.rid, (roles = [], entities, state, id) => 
+    ({ ...state, ...constructRole(entities, id && roles[id]) })
 );
 
 export const rolesSelector = createSelector(
   dataSelector, stateSelector, (roles = [], state) => 
     ({ ...state, roles: compact(state.ids.map(id => roles[id])) })
+);
+
+export const rolesWithClaimsSelector = createSelector(
+  dataSelector, entitiesSelector, stateSelector, (roles = [], entities = [], state) => 
+    ({ ...state, roles: constructRoles(compact(state.ids.map(id => roles[id])), entities) })
 );

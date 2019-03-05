@@ -1,10 +1,18 @@
 import React from 'react';
-import { Router } from '@reach/router';
+import { Router, Redirect } from '@reach/router';
 
-import { } from './containers';
+import { Groups, List, Add, Group, Children } from './containers';
 
 const Routes = () => (
-  <Router>
+  <Router primary={false}>
+    <Groups path='/'>
+      <List path='/' />
+      <Add path='add' />
+      <Group path=':gid'>
+        <Children path='groups' />
+      </Group>
+      <Redirect from=':gid' to='/manage/groups/:gid/groups' noThrow />
+    </Groups>
   </Router>
 );
 

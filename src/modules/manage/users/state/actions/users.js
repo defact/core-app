@@ -39,7 +39,3 @@ export const REMOVE_FAILED = 'defacto/manage/users/remove/failed';
 export const remove = createAction(REMOVE);
 export const removeSuccess = createAction(REMOVE_SUCCESS);
 export const removeFailed = createAction(REMOVE_FAILED);
-
-export const SELECT = 'defacto/manage/users/select';
-
-export const select = createAction(SELECT);

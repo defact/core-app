@@ -6,7 +6,7 @@ import { authenticate } from '../me/state/hoc';
 import Manage from './Manage';
 import Users from './users/Routes';
 import Roles from './roles/Routes';
-// import Groups from './groups/Routes';
+import Groups from './groups/Routes';
 // import Members from './groups/Members';
 
 const Routes = () => (
@@ -14,8 +14,8 @@ const Routes = () => (
     <Manage path='/'>
       <Users path='users/*' />
       <Roles path='roles/*' />
-      {/* <Groups path='groups/*' />
-      <Members path='members/*' /> */}
+      <Groups path='groups/*' />
+      {/* <Members path='members/*' /> */}
     </Manage>
   </Router>
 );

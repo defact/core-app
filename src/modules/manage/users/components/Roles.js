@@ -17,7 +17,7 @@ const styles = theme => ({
   }
 });
 
-const Roles = memo(({ user, fetch, save, classes }) => {
+const Roles = memo(({ user, fetch, save, classes, ...props }) => {
   useEffect(() => {
     fetch();
   }, []);

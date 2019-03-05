@@ -6,8 +6,8 @@ import { roleWithClaimsSelector } from '../state/reducers/roles';
 import { entitiesSelector } from '../state/reducers/entities';
 import { permissionsSelector } from '../state/reducers/permissions';
 
-const mapStateToProps = state => ({ 
-  ...roleWithClaimsSelector(state),
+const mapStateToProps = (state, props) => ({ 
+  ...roleWithClaimsSelector(state, props),
   entities: entitiesSelector(state),
   permissions: permissionsSelector(state),
 });

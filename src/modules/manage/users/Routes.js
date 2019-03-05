@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router } from '@reach/router';
+import { Router, Redirect } from '@reach/router';
 
 import { Users, List, Add, User, Roles, Profiles } from './containers';
 
@@ -8,10 +8,11 @@ const Routes = () => (
     <Users path='/'>
       <List path='/' />
       <Add path='register' />
-      <User path=':id'>
-        <Roles default path='roles' />
+      <User path=':uid'>
+        <Roles path='roles' />
         <Profiles path='profiles' />
       </User>
+      <Redirect from=':uid' to='/manage/users/:uid/roles' noThrow />
     </Users>
   </Router>
 );

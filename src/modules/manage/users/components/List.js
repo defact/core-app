@@ -1,14 +1,15 @@
 import React, { memo } from 'react';
-import { Helmet } from 'react-helmet';
+import { Add } from '@material-ui/icons';
 import Grid from '@material-ui/core/Grid';
+
+import { Breadcrumbs } from '../../../app/components';
 import Card from './Card';
-import Header from './Header';
 
 const List = memo(({ users, ...props }) => (
   <>
-    <Helmet title={'Users'} />
-
-    <Header />
+    <Breadcrumbs 
+      parts={[ { label: 'Users' } ]} 
+      actions={[ { label: 'Register', Icon: Add, to: 'register' } ]} />
 
     <Grid container spacing={24}>
       {users.users.map(user => 

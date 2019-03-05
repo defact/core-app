@@ -1,17 +1,24 @@
-import React from 'react';
-import { Helmet } from 'react-helmet';
-import Role from './Role';
-import Header from './Header';
+import React, { memo } from 'react';
+import Grid from '@material-ui/core/Grid';
+import { Add } from '@material-ui/icons';
 
-const List = ({ roles, permissions, entities, save }) => (
+import { Breadcrumbs } from '../../../app/components';
+import Card from './Card';
+
+const List = memo(({ roles, ...props }) => (
   <>
-    <Helmet title={'Roles'} />
+    <Breadcrumbs 
+      parts={[ { label: 'Roles' } ]} 
+      actions={[ { label: 'Add Role', Icon: Add, to: 'add' } ]} />
 
-    <Header />
-
-    {roles.roles.map(role => 
-      <Role key={role.id} {...role} save={save} permissions={permissions} entities={entities} />)}
+    <Grid container spacing={24}>
+      {roles.roles.map(role => 
+        <Grid key={role.id} item xs={12} sm={6} md={4}>
+          <Card {...role} {...props} />
+        </Grid>
+      )}
+    </Grid>
   </>
-);
+));
 
 export default List;
