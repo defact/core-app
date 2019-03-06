@@ -7,8 +7,15 @@ import logics from './logics';
 import schemas from './schemas';
 import api from '../api';
 
-const logger = createLogger();
 const logic = createLogicMiddleware(logics, { api, normalize, schemas });
+const middlewares = [ logic ];
 
-export default applyMiddleware(logic, logger);
+if (process.env.NODE_ENV !== 'production') {
+  const logger = createLogger({
+    collapsed: (getState, action) => !action.error
+  });
+  middlewares.push(logger);
+}
+
+export default applyMiddleware(...middlewares);
 
