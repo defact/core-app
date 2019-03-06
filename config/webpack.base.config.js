@@ -8,9 +8,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const APP_DIR = path.resolve(__dirname, '../src');
 
-module.exports = (env = {}) => {
-  const { PLATFORM, VERSION } = env;
-
+module.exports = () => {
   return merge([
       {
         devServer: {
@@ -64,10 +62,6 @@ module.exports = (env = {}) => {
           new HtmlWebpackPlugin({
             template: './src/static/index.html',
             filename: './index.html'
-          }),
-          new webpack.DefinePlugin({ 
-            'process.env.VERSION': JSON.stringify(VERSION),
-            'process.env.PLATFORM': JSON.stringify(PLATFORM)
           }),
           new CopyWebpackPlugin([ { from: 'src/static' } ]),
 

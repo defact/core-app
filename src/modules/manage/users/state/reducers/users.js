@@ -1,50 +1,45 @@
-import compact from 'lodash.compact';
+import { combineReducers } from 'redux'; 
 import { handleActions } from 'redux-actions';
-import { createSelector } from 'reselect';
 import { fetch, fetchSuccess, fetchFailed } from '../actions/users';
 import { add, addSuccess, addFailed } from '../actions/users';
 
-import { rolesSelector } from '../../../roles/state/reducers/roles';
-import { constructUser } from '../helpers/users';
+const isFetching = handleActions({
+  [fetch]: (state) => true,
+  [fetchSuccess]: (state) => false,
+  [fetchFailed]: (state) => false,    
+}, false);
 
-const initialState = {
-  isFetching: false,
-  isFetched: false,
-  isSaving: false,
-  isSaved: false,
-  error: false,
-  ids: [],
-};
+const isFetched = handleActions({
+  [fetch]: (state) => false,
+  [fetchSuccess]: (state) => false,
+  [fetchFailed]: (state) => true,    
+}, false);
 
-export default handleActions({
-  [fetch]: (state) => ({ ...state, isFetching: true, isFetched: false, error: false }),
-  [fetchSuccess]: (state, action) =>
-    ({ ...state, ids: action.payload.result, isFetching: false, isFetched: true, error: false }),
-  [fetchFailed]: (state, action) => 
-    ({ ...state, isFetching: false, isFetched: true, error: { message: action.payload.message }}),
-  
-  [add]: (state) => ({ ...state, isSaving: true, isSaved: false, error: false }),
-  [addSuccess]: (state, action) =>
-    ({ ...state, ids: [ ...state.ids, action.payload.result ], isSaving: false, isSaved: true, error: false }),
-  [addFailed]: (state, action) => 
-    ({ ...state, isSaving: false, isSaved: true, error: { message: action.payload.message }}),
-    }, initialState);
+const isSaving = handleActions({
+  [add]: (state) => true,
+  [addSuccess]: (state) => false,
+  [addFailed]: (state) => false,    
+}, false);
 
-const dataSelector = state => state.entities.users
-const stateSelector = state => state.manage.users.users;
+const isSaved = handleActions({
+  [add]: (state) => false,
+  [addSuccess]: (state) => false,
+  [addFailed]: (state) => true,    
+}, false);
 
-export const userSelector = createSelector(
-  dataSelector, stateSelector, (state, props) => props.uid, (users = [], state, id) => {
-    return ({ ...state, ...users[id] })
-  }
-);
+const error = handleActions({
+  [add]: (state) => false,
+  [addSuccess]: (state) => false,
+  [addFailed]: (state) => { message: action.payload.message },
 
-export const userWithRolesSelector = createSelector(
-  dataSelector, rolesSelector, stateSelector, (state, props) => props.uid, (users = [], roles, state, id) => 
-    ({ ...state, ...constructUser(roles.roles, users[id]) })
-);
+  [fetch]: (state) => false,
+  [fetchSuccess]: (state) => false,
+  [fetchFailed]: (state) => { message: action.payload.message },    
+}, false);
 
-export const usersSelector = createSelector(
-  dataSelector, stateSelector, (users = [], state) => 
-    ({ ...state, users: compact(state.ids.map(id => users[id])) })
-);
+const ids = handleActions({
+  [addSuccess]: (state, action) => [ ...state.ids, action.payload.result ],
+  [fetchSuccess]: (state, action) => action.payload.result,    
+}, []);
+
+export default combineReducers({ isFetching, isFetched, isSaving, isSaved, error, ids });

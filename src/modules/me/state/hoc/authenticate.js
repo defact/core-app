@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { redirectTo } from '@reach/router';
 
-import { meSelector } from '../reducers/me';
+import { meSelector } from '../selectors/me';
 
 const authenticate = Component => {
   const mapStateToProps = state => ({

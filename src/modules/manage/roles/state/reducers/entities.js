@@ -1,26 +1,27 @@
-import compact from 'lodash.compact';
+import { combineReducers } from 'redux'; 
 import { handleActions } from 'redux-actions';
-import { createSelector } from 'reselect';
 import { fetchEntities, fetchSuccess, fetchFailed } from '../actions/entities';
 
-const initialState = {
-  isFetching: false,
-  isFetched: false,
-  error: false,
-  ids: [],
-};
+const isFetching = handleActions({
+  [fetchEntities]: (state) => true,
+  [fetchSuccess]: (state) => false,
+  [fetchFailed]: (state) => false,    
+}, false);
 
-export default handleActions({
-  [fetchEntities]: (state) => ({ ...state, isFetching: true, isFetched: false, error: false }),
-  [fetchSuccess]: (state, action) =>
-    ({ ...state, ids: action.payload.result, isFetching: false, isFetched: true, error: false }),
-  [fetchFailed]: (state, action) => 
-    ({ ...state, isFetching: false, isFetched: true, error: { message: action.payload.message }}),
-  }, initialState);
+const isFetched = handleActions({
+  [fetchEntities]: (state) => false,
+  [fetchSuccess]: (state) => false,
+  [fetchFailed]: (state) => true,    
+}, false);
 
-const dataSelector = state => state.entities.entities;
-const idsSelector = state => state.manage.roles.entities.ids;
-  
-export const entitiesSelector = createSelector(
-  dataSelector, idsSelector, (entities = [], ids) => compact(ids.map(id => entities[id]))
-);
+const error = handleActions({
+  [fetchEntities]: (state) => false,
+  [fetchSuccess]: (state) => false,
+  [fetchFailed]: (state) => { message: action.payload.message },    
+}, false);
+
+const ids = handleActions({
+  [fetchSuccess]: (state, action) => action.payload.result,    
+}, []);
+
+export default combineReducers({ isFetching, isFetched, error, ids });

@@ -1,13 +1,17 @@
+import { combineReducers } from 'redux'; 
 import { handleActions } from 'redux-actions';
 import { signOut, signOutSuccess, signOutFailed } from '../actions/signout';
 
-const initialState = {
-  isSigningOut: false,
-  error: false,
-};
+const isSigningOut = handleActions({
+  [signOut]: (state) => true,
+  [signOutSuccess]: (state) => false,
+  [signOutFailed]: (state) => false,
+}, false);
 
-export default handleActions({
-  [signOut]: (state) => ({ ...state, isSigningOut: true, error: false }),
-  [signOutFailed]: (state) => ({ ...state, isSigningOut: false, error: true }),
-  [signOutSuccess]: (state) => ({ ...state, isSigningOut: false, error: false }),
-}, initialState);
+const error = handleActions({
+  [signOut]: (state) => false,
+  [signOutSuccess]: (state) => false,
+  [signOutFailed]: (state, action) => { message: action.payload.message },
+}, false);
+
+export default combineReducers({ isSigningOut, error });

@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core';
 import { Header, Footer } from '../components';
 import { signOut } from '../../sessions/state/actions/signout';
 import { fetchMe } from '../../me/state/actions/me';
-import { meSelector } from '../../me/state/reducers/me';
+import { meSelector } from '../../me/state/selectors/me';
 
 const styles = theme => ({
   container: {

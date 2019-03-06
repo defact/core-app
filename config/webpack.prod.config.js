@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 /* eslint-disable */
 const merge = require('webpack-merge');
 // Plugins
@@ -25,6 +26,9 @@ const prodConfiguration = env => {
         minimizer: [new UglifyJsPlugin()],
       },
       plugins: [
+        new webpack.DefinePlugin({ 
+          'process.env.NODE_ENV': JSON.stringify('production')
+        }),
         new MiniCssExtractPlugin(),
         new OptimizeCssAssetsPlugin(),
         new Visualizer({ filename: './statistics.html' })

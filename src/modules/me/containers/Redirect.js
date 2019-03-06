@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { redirectTo } from '@reach/router';
-import { meSelector } from '../state/reducers/me';
+import { meSelector } from '../state/selectors/me';
 
 const PASSWORD_URL = '/me/password';
 
