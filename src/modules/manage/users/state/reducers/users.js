@@ -30,11 +30,11 @@ const isSaved = handleActions({
 const error = handleActions({
   [add]: (state) => false,
   [addSuccess]: (state) => false,
-  [addFailed]: (state) => { message: action.payload.message },
+  [addFailed]: (state) => ({ message: action.payload.message }),
 
   [fetch]: (state) => false,
   [fetchSuccess]: (state) => false,
-  [fetchFailed]: (state) => { message: action.payload.message },    
+  [fetchFailed]: (state) => ({ message: action.payload.message }),    
 }, false);
 
 const ids = handleActions({

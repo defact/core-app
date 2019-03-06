@@ -11,7 +11,7 @@ const isRegistering = handleActions({
 const error = handleActions({
   [register]: (state) => false,
   [registerSuccess]: (state) => false,
-  [registerFailed]: (state, action) => { message: action.payload.message },
+  [registerFailed]: (state, action) => ({ message: action.payload.message }),
 }, false);
 
 export default combineReducers({ isRegistering, error });

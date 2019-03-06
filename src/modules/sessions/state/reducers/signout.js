@@ -11,7 +11,7 @@ const isSigningOut = handleActions({
 const error = handleActions({
   [signOut]: (state) => false,
   [signOutSuccess]: (state) => false,
-  [signOutFailed]: (state, action) => { message: action.payload.message },
+  [signOutFailed]: (state, action) => ({ message: action.payload.message }),
 }, false);
 
 export default combineReducers({ isSigningOut, error });

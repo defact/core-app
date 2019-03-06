@@ -11,7 +11,7 @@ const constructUser = (roles = [], user = { roles: [] }) => {
   };
 };
 
-const dataSelector = state => state.entities.users
+const dataSelector = state => state.app.entities.users
 const stateSelector = state => state.manage.users.users;
 
 export const userSelector = createSelector(

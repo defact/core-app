@@ -17,7 +17,7 @@ const isFetched = handleActions({
 const error = handleActions({
   [fetchEntities]: (state) => false,
   [fetchSuccess]: (state) => false,
-  [fetchFailed]: (state) => { message: action.payload.message },    
+  [fetchFailed]: (state) => ({ message: action.payload.message }),    
 }, false);
 
 const ids = handleActions({

@@ -1,8 +1,8 @@
 import React, { Suspense, lazy } from 'react';
 import { Router, LocationProvider, Location } from '@reach/router';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 import { Home, Broken, Denied, NotFound } from './modules/app/containers';
-import { Loader } from './modules/app/components';
 import { Redirect } from './modules/me/containers';
 
 const Sessions = lazy(() => import('./modules/sessions/Routes'));
@@ -13,7 +13,7 @@ const Contact = lazy(() => import('./modules/contact/Routes'));
 
 const Routes = () => (
   <Broken>
-    <Suspense fallback={<Loader />}>
+    <Suspense fallback={<LinearProgress color='secondary' />}>
       <LocationProvider>
         <Location>
           {({ location }) => (

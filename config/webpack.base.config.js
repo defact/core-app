@@ -64,7 +64,6 @@ module.exports = () => {
             filename: './index.html'
           }),
           new CopyWebpackPlugin([ { from: 'src/static' } ]),
-
           new webpack.HotModuleReplacementPlugin(),
         ],
         output: {

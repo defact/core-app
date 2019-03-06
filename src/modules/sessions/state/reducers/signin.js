@@ -17,7 +17,7 @@ const token = handleActions({
 const error = handleActions({
   [signIn]: (state) => false,
   [signInSuccess]: (state) => false,
-  [signInFailed]: (state, action) => { message: action.payload.message },
+  [signInFailed]: (state, action) => ({ message: action.payload.message }),
 }, false);
 
 export default combineReducers({ isSigningIn, token, error });

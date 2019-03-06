@@ -11,7 +11,7 @@ const isSending = handleActions({
 const error = handleActions({
   [send]: (state) => false,
   [sendSuccess]: (state) => false,
-  [sendFailed]: (state, action) => { message: action.payload.message },
+  [sendFailed]: (state, action) => ({ message: action.payload.message }),
 }, false);
 
 export default combineReducers({ isSending, error });

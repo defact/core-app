@@ -3,7 +3,8 @@ import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core';
 
-import { Header, Footer } from '../components';
+import { Header, Footer, Alert, Flash } from '../components';
+import { close } from '../state/actions/alert';
 import { signOut } from '../../sessions/state/actions/signout';
 import { fetchMe } from '../../me/state/actions/me';
 import { meSelector } from '../../me/state/selectors/me';
@@ -19,16 +20,24 @@ const styles = theme => ({
   }
 });
 
-const Main = withStyles(styles)(({ classes, children, ...props }) => (
+const Main = withStyles(styles)(({ classes, children, alert, flash, close, ...props }) => (
   <div className={classes.container}>
     <Helmet titleTemplate={'Defacto | %s'} title={'Home'} />
+    <Flash {...flash} />
     <Header {...props} />
     <main className={classes.main}>{children}</main>
     <Footer />
+    <Alert open={alert.isOpen} handleClose={close} type={alert.type}>
+      {alert.message}
+    </Alert>
   </div>
 ));
 
-const mapStateToProps = state => ({ me: meSelector(state) });
+const mapStateToProps = state => ({ 
+  me: meSelector(state),
+  alert: state.app.alert,
+  flash: state.app.flash,
+});
 
-export default connect(mapStateToProps, { signOut, fetchMe })(Main);
+export default connect(mapStateToProps, { signOut, fetchMe, close })(Main);
 

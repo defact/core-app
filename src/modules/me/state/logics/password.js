@@ -1,8 +1,8 @@
 import { createLogic } from 'redux-logic';
-import { CHANGE_PASSWORD, changePasswordSuccess, changePasswordFailed } from '../actions/password';
+import { CHANGE, success, failed } from '../actions/password';
 
 const onChangePassword = createLogic({
-  type: CHANGE_PASSWORD,
+  type: CHANGE,
   latest: true,
 
   process({ api, normalize, schemas, action, getState }, dispatch, done) {
@@ -13,12 +13,12 @@ const onChangePassword = createLogic({
     return api().post(`users/${me.id}/password`, { password })
     
     .then(data => normalize(data.user, schemas.user))
-    .then(data => dispatch(changePasswordSuccess(data)))
+    .then(data => dispatch(success(data)))
     .then(onSuccess)
     .then(done)
 
     .catch(err => {
-      dispatch(changePasswordFailed(err));
+      dispatch(failed(err));
       onFailure(err);
     });
   }

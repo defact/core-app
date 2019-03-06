@@ -17,7 +17,7 @@ const id = handleActions({
 const error = handleActions({
   [fetchMe]: (state) => false,
   [fetchMeSuccess]: (state) => false,
-  [fetchMeFailed]: (state, action) => { message: action.payload.message },
+  [fetchMeFailed]: (state, action) => ({ message: action.payload.message }),
   [clearMe]: (state) => false,
 }, false);
 

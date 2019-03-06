@@ -1,6 +1,7 @@
 import { createLogic } from 'redux-logic';
 import { navigate } from '@reach/router';
 import { SIGN_OUT, signOutSuccess, signOutFailed } from '../actions/signout';
+import { info, warning, error } from '../../../app/state/actions/flash';
 
 const onSignOut = createLogic({
   type: SIGN_OUT,
@@ -12,6 +13,7 @@ const onSignOut = createLogic({
     .then(() => localStorage.removeItem('token'))
     .then(() => dispatch(signOutSuccess()))
     .then(() => navigate('/'))
+    .then(() => dispatch(info('You have signed out')))
     .then(done)
 
     .catch(err => {

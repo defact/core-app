@@ -19,8 +19,8 @@ const styles = theme => ({
   },
 });
 
-const Change = memo(({ classes, me, changePassword, isChanging, error }) => {
-  const { handleSubmit, Dialog } = useSubmit(changePassword);
+const Change = memo(({ classes, me, change, isChanging, error }) => {
+  const { handleSubmit, Dialog } = useSubmit(change);
   
   return (
     <Layout>
