@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { Error } from '../components';
-import { clearMe } from '../../me/state/actions/me';
+import { clear } from '../../me/state/actions/me';
 
-const Denied = ({ clearMe }) => { 
+const Denied = ({ clear }) => { 
   useEffect(() => {
-    clearMe();
+    clear();
   }, []);
 
   return (
@@ -14,4 +14,4 @@ const Denied = ({ clearMe }) => {
   );
 };
 
-export default connect(null, { clearMe })(Denied);
+export default connect(null, { clear })(Denied);

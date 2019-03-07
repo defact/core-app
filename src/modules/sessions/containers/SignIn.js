@@ -12,4 +12,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { handleSignIn: signIn })(SignIn);
+export default connect(mapStateToProps, { signIn: signIn.start })(SignIn);

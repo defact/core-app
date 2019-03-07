@@ -6,11 +6,11 @@ import Routes from './Routes';
 import createStore from './store';
 
 import { Main } from './modules/app/layouts';
-import { fetchMe } from './modules/me/state/actions/me';
+import { fetch } from './modules/me/state/actions/me';
 
 const store = createStore();
 
-store.dispatch(fetchMe());
+store.dispatch(fetch.start());
 
 const App = () => (
   <Provider store={store}>

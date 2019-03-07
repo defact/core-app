@@ -23,6 +23,8 @@ const Claims = memo(({ role, save, permissions, entities, classes }) => {
   const handleSubmit = (props) => save({ ...role, ...props });
   const containerRef = createRef();
 
+  if (role.claims.length === 0) return;
+
   return (
     <Paper className={classes.paper}>
       <div ref={containerRef} className={classes.card}>

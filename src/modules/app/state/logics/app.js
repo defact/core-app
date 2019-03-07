@@ -8,7 +8,7 @@ const onResponse = createLogic({
     if (action.payload && 
         action.payload.statusCode && 
         action.payload.statusCode === 401 &&
-        action.type !== 'defacto/me/fetch-me/failed') {
+        action.type !== 'me/fetch/FAILED') {
       navigate('/denied');
     }
 

@@ -1,23 +1,13 @@
 import { combineReducers } from 'redux'; 
 import { handleActions } from 'redux-actions';
-import { signIn, signInSuccess, signInFailed } from '../actions/signin';
-import { signOutSuccess } from '../actions/signout';
+import { signIn } from '../actions/signin';
+import { signOut } from '../actions/signout';
 
-const isSigningIn = handleActions({
-  [signIn]: (state) => true,
-  [signInSuccess]: (state) => false,
-  [signInFailed]: (state) => false,
-}, false);
+import { is, error } from '../../../../state/reducers';
 
 const token = handleActions({
-  [signInSuccess]: (state, action) => action.payload.token,
-  [signOutSuccess]: (state) => null,
+  [signIn.success]: (state, action) => action.payload.token,
+  [signOut.success]: (state) => null,
 }, null);
 
-const error = handleActions({
-  [signIn]: (state) => false,
-  [signInSuccess]: (state) => false,
-  [signInFailed]: (state, action) => ({ message: action.payload.message }),
-}, false);
-
-export default combineReducers({ isSigningIn, token, error });
+export default combineReducers({ isSigningIn: is(signIn), token, error: error(signIn) });

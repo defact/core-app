@@ -1,23 +1,23 @@
 import { createLogic } from 'redux-logic';
 import { navigate } from '@reach/router';
-import { SIGN_OUT, signOutSuccess, signOutFailed } from '../actions/signout';
-import { info, warning, error } from '../../../app/state/actions/flash';
+import { signOut } from '../actions/signout';
+import { info } from '../../../app/state/actions/flash';
 
 const onSignOut = createLogic({
-  type: SIGN_OUT,
+  type: signOut.start,
   latest: true,
 
   process({ api, action }, dispatch, done) {
     return api().delete('session', action.payload)
 
     .then(() => localStorage.removeItem('token'))
-    .then(() => dispatch(signOutSuccess()))
+    .then(() => dispatch(signOut.success()))
     .then(() => navigate('/'))
-    .then(() => dispatch(info('You have signed out')))
+    .then(() => dispatch(info('You have successfully signed out')))
     .then(done)
 
     .catch(err => {
-      dispatch(signOutFailed(err));
+      dispatch(signOut.failed(err));
       navigate('/');
     });
   }

@@ -1,34 +1,34 @@
 import { createLogic } from 'redux-logic';
-import { SIGN_IN_SUCCESS } from '../../../sessions/state/actions/signin';
-import { SIGN_OUT_SUCCESS } from '../../../sessions/state/actions/signout';
-import { fetchMe, clearMe, FETCH_ME, FETCH_ME_SUCCESS, FETCH_ME_FAILED } from '../actions/me';
+import { signIn } from '../../../sessions/state/actions/signin';
+import { signOut } from '../../../sessions/state/actions/signout';
+import { fetch, clear } from '../actions/me';
 
 const onSignedOn = createLogic({
-  type: SIGN_IN_SUCCESS,
+  type: signIn.success,
 
   process(_, dispatch, done) {
-    dispatch(fetchMe());
+    dispatch(fetch.start());
     done();
   }
 });
 
 const onSignedOut = createLogic({
-  type: SIGN_OUT_SUCCESS,
+  type: signOut.success,
 
   process(_, dispatch, done) {
-    dispatch(clearMe());
+    dispatch(clear());
     done();
   }
 });
 
-const onFetchMe = createLogic({
-  type: FETCH_ME,
+const onFetch = createLogic({
+  type: fetch.start,
   latest: true,
 
   processOptions: {
     dispatchReturn: true,
-    successType: FETCH_ME_SUCCESS,
-    failType: FETCH_ME_FAILED
+    successType: fetch.success,
+    failType: fetch.failed
   },
 
   process({ api, normalize, schemas }) {
@@ -38,4 +38,4 @@ const onFetchMe = createLogic({
   }
 });
 
-export default [ onSignedOn, onSignedOut, onFetchMe ];
+export default [ onSignedOn, onSignedOut, onFetch ];

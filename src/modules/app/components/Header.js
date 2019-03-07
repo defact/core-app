@@ -67,7 +67,7 @@ const Logo = memo(({ children, classes }) => (
   </>
 ));
 
-const UserMenu = memo(({ classes, me, fetchMe, signOut }) => {
+const UserMenu = memo(({ classes, me, fetch, signOut }) => {
   const [ showSwitchDialog, setShowSwitchDialog ] = useState(false);
   const popupState = usePopupState({variant: 'popover', popupId: 'me'});
 
@@ -81,7 +81,7 @@ const UserMenu = memo(({ classes, me, fetchMe, signOut }) => {
       </Button>
       <Switch open={showSwitchDialog} onClose={handleCloseSwitch} />
 
-      <IconButton variant='contained' color='inherit' onClick={fetchMe}>
+      <IconButton variant='contained' color='inherit' onClick={fetch}>
         <Refresh />
       </IconButton>
 
@@ -95,7 +95,6 @@ const UserMenu = memo(({ classes, me, fetchMe, signOut }) => {
         <MenuItem onClick={() => {
           popupState.close(); 
           signOut();
-          // navigate('/signin');
         }}>
           Sign Out
         </MenuItem>

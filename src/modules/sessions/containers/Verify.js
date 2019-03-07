@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 
 import { verify } from '../state/actions/signin';
 
-const Verify = memo(({ handleVerify, code }) => {
+const Verify = memo(({ verify, code }) => {
   useEffect(() => { 
-    handleVerify(code); 
+    verify(code); 
   }, [code]);
 });
 
-export default connect(null, { handleVerify: verify })(Verify);
+export default connect(null, { verify })(Verify);

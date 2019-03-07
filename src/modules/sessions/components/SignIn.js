@@ -18,12 +18,12 @@ const styles = theme => ({
   },
 });
 
-const SignIn = memo(({ classes, handleSignIn, error, email, remember, isSigningIn }) => (
+const SignIn = memo(({ classes, signIn, error, email, remember, isSigningIn }) => (
   <Layout>
     <Helmet title={'Sign In'} />
     <Header Icon={Fingerprint} isSubmitting={isSigningIn}>Sign In</Header>
     
-    <Form onSubmit={handleSignIn} validate={validate} initialValues={{email, remember}}
+    <Form onSubmit={signIn} validate={validate} initialValues={{email, remember}}
       render={({ handleSubmit, pristine }) => (
         <form className={classes.form} onSubmit={handleSubmit}>
           <Input name='email' label='Email Address' autoFocus={!remember}/>

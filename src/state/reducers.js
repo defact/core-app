@@ -1,5 +1,6 @@
 import { handleActions } from 'redux-actions';
-import { FormatListBulleted } from '@material-ui/icons';
+
+const noop = () => void(0);
 
 export const is = (action) => handleActions({
   [action.start]: () => true,
@@ -13,16 +14,15 @@ export const has = (action) => handleActions({
   [action.failed]: () => true,
 }, false);
 
-export const ids = (fetch, add) => {
-  return (add === undefined)
-  ? handleActions({
-      [fetch.success]: (state, action) => action.payload.result,
-    }, [])
-  : handleActions({
-      [fetch.success]: (state, action) => action.payload.result,    
-      [add.success]: (state, action) => [ ...state, action.payload.result ],
-    }, []);
-};
+export const id = (set, clear = noop) => handleActions({
+  [set.success]: (state, action) => action.payload.result,
+  [clear]: () => null    
+}, null);
+
+export const ids = (set, append = { success: noop }) => handleActions({
+  [set.success]: (state, action) => action.payload.result,
+  [append.success]: (state, action) => [ ...state, action.payload.result ]
+}, []);
 
 export const error = (...actions) => handleActions(actions.map(action => ({
   [action.start]: () => false,

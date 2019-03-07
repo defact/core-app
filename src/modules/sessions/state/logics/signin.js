@@ -1,6 +1,6 @@
 import { createLogic } from 'redux-logic';
 import { navigate } from '@reach/router';
-import { SIGN_IN, signInSuccess, signInFailed } from '../actions/signin';
+import { signIn } from '../actions/signin';
 
 const store = (data, key, set = true) => {
   if (set) {
@@ -12,7 +12,7 @@ const store = (data, key, set = true) => {
 };
 
 const onSignOn = createLogic({
-  type: SIGN_IN,
+  type: signIn.start,
   latest: true,
 
   process({ api, action }, dispatch, done) {
@@ -23,12 +23,12 @@ const onSignOn = createLogic({
     .then(data => store(data, 'email', action.payload.remember))
     .then(data => store(data, 'token'))
 
-    .then(data => dispatch(signInSuccess(data)))
+    .then(data => dispatch(signIn.success(data)))
     .then(() => navigate('/'))
     .then(done)
 
     .catch(err => {
-      dispatch(signInFailed(err));
+      dispatch(signIn.failed(err));
       if (action.payload.strategy === 'code') navigate('/');
     });
   }

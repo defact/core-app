@@ -5,8 +5,8 @@ import { withStyles } from '@material-ui/core';
 
 import { Header, Footer, Alert, Flash } from '../components';
 import { close } from '../state/actions/alert';
+import { fetch } from '../../me/state/actions/me';
 import { signOut } from '../../sessions/state/actions/signout';
-import { fetchMe } from '../../me/state/actions/me';
 import { meSelector } from '../../me/state/selectors/me';
 
 const styles = theme => ({
@@ -39,5 +39,5 @@ const mapStateToProps = state => ({
   flash: state.app.flash,
 });
 
-export default connect(mapStateToProps, { signOut, fetchMe, close })(Main);
+export default connect(mapStateToProps, { fetch: fetch.start, signOut: signOut.start, close })(Main);
 
