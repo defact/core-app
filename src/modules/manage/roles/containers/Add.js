@@ -12,4 +12,4 @@ const mapStateToProps = (state, props) => ({
   permissions: permissionsSelector(state),
 });
 
-export default connect(mapStateToProps, { add })(Add);
+export default connect(mapStateToProps, { add: add.start })(Add);

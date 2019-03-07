@@ -13,4 +13,4 @@ const mapStateToProps = (state, props) => ({
   permissions: permissionsSelector(state),
 });
 
-export default connect(mapStateToProps, { save })(Claims);
+export default connect(mapStateToProps, { save: save.start })(Claims);

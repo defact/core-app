@@ -6,4 +6,4 @@ import { save } from '../state/actions/roles';
 
 const mapStateToProps = (state, props) => roleSelector(state, props);
 
-export default connect(mapStateToProps, { save })(Role);
+export default connect(mapStateToProps, { save: save.start })(Role);

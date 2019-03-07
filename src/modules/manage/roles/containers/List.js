@@ -8,4 +8,4 @@ const mapStateToProps = state => ({
   roles: rolesSelector(state),
 });
 
-export default connect(mapStateToProps, { save })(List);
+export default connect(mapStateToProps, { save: save.start })(List);

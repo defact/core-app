@@ -1,16 +1,14 @@
 import { createLogic } from 'redux-logic';
-import { FETCH, FETCH_SUCCESS, FETCH_FAILED } from '../actions/groups';
-import { SAVE, saveSuccess, saveFailed } from '../actions/groups';
-import { ADD, addSuccess, addFailed } from '../actions/groups';
+import { fetch, add, save, remove } from '../actions/groups';
 
 const onFetch = createLogic({
-  type: FETCH,
+  type: fetch.start,
   latest: true,
 
   processOptions: {
     dispatchReturn: true,
-    successType: FETCH_SUCCESS,
-    failType: FETCH_FAILED
+    successType: fetch.success,
+    failType: fetch.failed
   },
 
   process({ api, normalize, schemas }) {
@@ -21,37 +19,37 @@ const onFetch = createLogic({
 });
 
 const onSave = createLogic({
-  type: SAVE,
+  type: save.start,
   latest: true,
 
   process({ api, normalize, schemas, action }, dispatch, done) {
     const { id, name, onSuccess, onFailure } = action.payload;
 
     return api().put(`groups/${id}`, { name })
-    .then(data => dispatch(saveSuccess(normalize(data.group, schemas.group))))
+    .then(data => dispatch(save.success(normalize(data.group, schemas.group))))
     .then(onSuccess)
     .then(done)
     .catch(err => {
       onFailure(err);
-      dispatch(saveFailed(err));
+      dispatch(save.failed(err));
     });
   }
 });
 
 const onAdd = createLogic({
-  type: ADD,
+  type: add.start,
   latest: true,
 
   process({ api, normalize, schemas, action }, dispatch, done) {
     const { name, onSuccess, onFailure } = action.payload;
 
     return api().post('groups', { name })
-    .then(data => dispatch(addSuccess(normalize(data.group, schemas.group))))
+    .then(data => dispatch(add.success(normalize(data.group, schemas.group))))
     .then(onSuccess)
     .then(done)
     .catch(err => {
       onFailure(err);
-      dispatch(addFailed(err));
+      dispatch(add.failed(err));
     });
   }
 });

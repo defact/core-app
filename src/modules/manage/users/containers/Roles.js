@@ -12,4 +12,4 @@ const mapStateToProps = (state, props) => ({
   roles: rolesSelector(state),
 });
 
-export default connect(mapStateToProps, { fetch, save })(Roles);
+export default connect(mapStateToProps, { fetch: fetch.start, save: save.start })(Roles);

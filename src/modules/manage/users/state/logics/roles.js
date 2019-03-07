@@ -1,8 +1,8 @@
 import { createLogic } from 'redux-logic';
-import { SAVE } from '../actions/roles';
+import { save } from '../actions/roles';
 
 const onSave = createLogic({
-  type: SAVE,
+  type: save.start,
   latest: true,
 
   process({ api, normalize, schemas, action }, dispatch, done) {

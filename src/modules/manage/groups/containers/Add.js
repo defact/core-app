@@ -8,4 +8,4 @@ const mapStateToProps = (state, props) => ({
   ...groupSelector(state, props),
 });
 
-export default connect(mapStateToProps, { add })(Add);
+export default connect(mapStateToProps, { add: add.start })(Add);

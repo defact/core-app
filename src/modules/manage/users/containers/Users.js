@@ -11,4 +11,4 @@ const Users = ({ fetch, children }) => {
   return children;
 };
 
-export default connect(null, { fetch })(Users);
+export default connect(null, { fetch: fetch.start })(Users);

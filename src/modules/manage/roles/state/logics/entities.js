@@ -1,14 +1,14 @@
 import { createLogic } from 'redux-logic';
-import { FETCH, FETCH_SUCCESS, FETCH_FAILED } from '../actions/entities';
+import { fetch } from '../actions/entities';
 
 const onFetch = createLogic({
-  type: FETCH,
+  type: fetch.start,
   latest: true,
 
   processOptions: {
     dispatchReturn: true,
-    successType: FETCH_SUCCESS,
-    failType: FETCH_FAILED
+    successType: fetch.success,
+    failType: fetch.failed
   },
 
   process({ api, normalize, schemas }) {

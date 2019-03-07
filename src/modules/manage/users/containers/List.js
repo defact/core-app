@@ -8,4 +8,4 @@ const mapStateToProps = state => ({
   users: usersSelector(state),
 });
 
-export default connect(mapStateToProps, { save, lock })(List);
+export default connect(mapStateToProps, { save: save.start, lock: lock.start })(List);

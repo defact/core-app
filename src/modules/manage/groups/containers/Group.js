@@ -6,4 +6,4 @@ import { save } from '../state/actions/groups';
 
 const mapStateToProps = (state, props) => groupSelector(state, props);
 
-export default connect(mapStateToProps, { save })(Group);
+export default connect(mapStateToProps, { save: save.start })(Group);

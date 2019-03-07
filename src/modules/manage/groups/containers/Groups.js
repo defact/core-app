@@ -11,4 +11,4 @@ const Groups = ({ fetch, children }) => {
   return children;
 };
 
-export default connect(null, { fetch })(Groups);
+export default connect(null, { fetch: fetch.start })(Groups);

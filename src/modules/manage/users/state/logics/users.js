@@ -1,17 +1,14 @@
 import { createLogic } from 'redux-logic';
-import { FETCH, FETCH_SUCCESS, FETCH_FAILED } from '../actions/users';
-import { SAVE, saveSuccess, saveFailed } from '../actions/users';
-import { ADD, addSuccess, addFailed } from '../actions/users';
-import { LOCK, LOCK_SUCCESS, LOCK_FAILED } from '../actions/users';
+import { fetch, add, save, lock } from '../actions/users';
 
 const onFetch = createLogic({
-  type: FETCH,
+  type: fetch.start,
   latest: true,
 
   processOptions: {
     dispatchReturn: true,
-    successType: FETCH_SUCCESS,
-    failType: FETCH_FAILED
+    successType: fetch.success,
+    failType: fetch.failed
   },
 
   process({ api, normalize, schemas }) {
@@ -21,50 +18,50 @@ const onFetch = createLogic({
 });
 
 const onSave = createLogic({
-  type: SAVE,
+  type: save.start,
   latest: true,
 
   process({ api, normalize, schemas, action }, dispatch, done) {
     const { id, email, onSuccess, onFailure } = action.payload;
 
     return api().put(`users/${id}`, { email })
-    .then(data => dispatch(saveSuccess(normalize(data.user, schemas.user))))
+    .then(data => dispatch(save.success(normalize(data.user, schemas.user))))
     .then(onSuccess)
     .then(done)
     .catch(err => {
       onFailure(err);
-      dispatch(saveFailed(err));
+      dispatch(save.failed(err));
     });
   }
 });
 
 const onAdd = createLogic({
-  type: ADD,
+  type: add.start,
   latest: true,
 
   process({ api, normalize, schemas, action }, dispatch, done) {
     const { email, onSuccess, onFailure } = action.payload;
 
     return api().post('users', { email })
-    .then(data => dispatch(addSuccess(normalize(data.user, schemas.user))))
+    .then(data => dispatch(add.success(normalize(data.user, schemas.user))))
     .then(onSuccess)
     .then(done)
     .catch(err => {
       onFailure(err);
-      dispatch(addFailed(err));
+      dispatch(add.failed(err));
     });
   }
 });
 
 
 const onLock = createLogic({
-  type: LOCK,
+  type: lock.start,
   latest: true,
 
   processOptions: {
     dispatchReturn: true,
-    successType: LOCK_SUCCESS,
-    failType: LOCK_FAILED
+    successType: lock.success,
+    failType: lock.failed
   },
 
   process({ api, normalize, schemas, action }) {
