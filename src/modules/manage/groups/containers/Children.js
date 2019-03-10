@@ -1,7 +1,11 @@
-import React from 'react';
+import { connect } from 'react-redux';
 
-const Children = props => (
-  <div>Children {props.uri}</div>
-);
+import { Children } from '../components';
 
-export default Children;
+import { groupSelector } from '../state/selectors/groups';
+
+const mapStateToProps = (state, props) => ({
+  group: groupSelector(state, props),
+});
+
+export default connect(mapStateToProps)(Children);

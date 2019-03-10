@@ -1,4 +1,4 @@
-import { async, sync } from '../../../../state/actions';
+import { async } from '../../../../state/actions';
 
 export const signIn = async('sessions/signin');
-export const verify = code => signIn(({ code, strategy: 'code' }))
+export const verify = code => signIn.start(({ code, strategy: 'code' }))

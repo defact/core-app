@@ -9,7 +9,7 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import Menu from '@material-ui/core/Menu';
-import { MoreVert, SupervisedUserCircle, Delete, RestoreFromTrash } from '@material-ui/icons';
+import { Menu as MenuIcon, SupervisedUserCircle, Delete, RestoreFromTrash } from '@material-ui/icons';
 import { usePopupState, bindTrigger, bindMenu } from 'material-ui-popup-state/hooks'
 import withStyles from '@material-ui/core/styles/withStyles';
 
@@ -36,13 +36,13 @@ const Archive = ({ isArchived, handleArchive }) => (
   </IconButton>
 );
 
-const GroupMenu = ({ id }) => {
+const ActionMenu = ({ id }) => {
   const popupState = usePopupState({ variant: 'popover', popupId: id });
 
   return (
     <>
       <IconButton variant='contained' color='inherit' {...bindTrigger(popupState)}>
-        <MoreVert />
+        <MenuIcon />
       </IconButton>
 
       <Menu {...bindMenu(popupState)}>
@@ -71,7 +71,7 @@ const Group = memo(({ id, name, isArchived = false, save, archive, classes }) =>
     <Card className={classnames(isArchived && classes.archived)}>
       <CardHeader
         avatar={<Icon id={id} classes={classes} />}
-        action={<GroupMenu id={id} />}
+        action={<ActionMenu id={id} />}
         title={
           <Link to={`${id}`} className={classes.link}>
             {name}&nbsp;

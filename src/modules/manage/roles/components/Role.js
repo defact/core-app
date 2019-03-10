@@ -1,8 +1,4 @@
 import React, { memo, useState, useEffect, createRef } from 'react';
-import classnames from 'classnames';
-import { Helmet } from 'react-helmet';
-import { Link } from '@reach/router';
-import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { Form } from 'react-final-form';
@@ -23,7 +19,7 @@ const styles = theme => ({
   },
 });
 
-const Role = withStyles(styles)(memo(({ rid, name, save, classes, children }) => {
+const Role = withStyles(styles)(memo(({ rid, name, save, classes, children, ...props }) => {
   const handleSubmit = (props) => save({ id: rid, ...props });
   const containerRef = createRef();
 
@@ -57,7 +53,7 @@ const Role = withStyles(styles)(memo(({ rid, name, save, classes, children }) =>
         </div>  
       </Paper>
 
-      <TabBar tabs={[ { label: 'Claims', to: 'claims' } ]} />
+      <TabBar selected={props['*']} tabs={[ { label: 'Claims', to: 'claims' } ]} />
 
       {children}
     </>

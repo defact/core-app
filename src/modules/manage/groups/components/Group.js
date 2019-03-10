@@ -1,8 +1,4 @@
-import React, { memo, useState, useEffect, createRef } from 'react';
-import classnames from 'classnames';
-import { Helmet } from 'react-helmet';
-import { Link } from '@reach/router';
-import Typography from '@material-ui/core/Typography';
+import React, { memo, createRef } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { Form } from 'react-final-form';
@@ -23,7 +19,7 @@ const styles = theme => ({
   },
 });
 
-const Group = withStyles(styles)(memo(({ gid, name, save, classes, children }) => {
+const Group = withStyles(styles)(memo(({ gid, name, save, classes, children, ...props }) => {
   const handleSubmit = (props) => save({ id: gid, ...props });
   const containerRef = createRef();
 
@@ -45,7 +41,7 @@ const Group = withStyles(styles)(memo(({ gid, name, save, classes, children }) =
             render={({ form }) => (
               <form onSubmit={handleSubmit} autoComplete='off'>
                 <Grid container spacing={24}>
-                  <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={6}>
                     <Input name='name' label='Group Name' autoFocus />
                     <AutoSave setFieldData={form.mutators.setFieldData} 
                       save={handleSubmit} container={containerRef} />
@@ -57,7 +53,7 @@ const Group = withStyles(styles)(memo(({ gid, name, save, classes, children }) =
         </div>  
       </Paper>
 
-      <TabBar tabs={[ { label: 'Children', to: 'groups' } ]} />
+      <TabBar selected={props['*']} tabs={[ { label: 'Children', to: 'groups' } ]} />
 
       {children}
     </>

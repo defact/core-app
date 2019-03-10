@@ -13,6 +13,7 @@ const theme = createMuiTheme({
   },
   typography: {
     useNextVariants: true,
+    fontWeight: 100,
     fontFamily: [
       '"Lato"',
       'sans-serif'

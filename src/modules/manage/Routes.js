@@ -7,7 +7,7 @@ import Manage from './Manage';
 import Users from './users/Routes';
 import Roles from './roles/Routes';
 import Groups from './groups/Routes';
-// import Members from './groups/Members';
+import Profiles from './profiles/Routes';
 
 const Routes = () => (
   <Router primary={false}>
@@ -15,7 +15,7 @@ const Routes = () => (
       <Users path='users/*' />
       <Roles path='roles/*' />
       <Groups path='groups/*' />
-      {/* <Members path='members/*' /> */}
+      <Profiles path='members/*' />
     </Manage>
   </Router>
 );

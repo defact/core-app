@@ -19,7 +19,7 @@ const styles = theme => ({
   },
 });
 
-const User = withStyles(styles)(memo(({ uid, email, save, select, classes, children }) => {
+const User = withStyles(styles)(memo(({ uid, email, save, classes, children, ...props }) => {
   const handleSubmit = (props) => save({ id: uid, ...props });
   const containerRef = createRef();
 
@@ -53,7 +53,7 @@ const User = withStyles(styles)(memo(({ uid, email, save, select, classes, child
         </div>  
       </Paper>
 
-      <TabBar tabs={[
+      <TabBar selected={props['*']} tabs={[
         { label: 'Roles', to: 'roles' },
         { label: 'Profiles', to: 'profiles' },
       ]} />

@@ -9,7 +9,7 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import Menu from '@material-ui/core/Menu';
-import { MoreVert, Email, Lock, LockOpen } from '@material-ui/icons';
+import { Menu as MenuIcon, Email, Lock, LockOpen } from '@material-ui/icons';
 import { usePopupState, bindTrigger, bindMenu } from 'material-ui-popup-state/hooks'
 import withStyles from '@material-ui/core/styles/withStyles';
 
@@ -39,13 +39,13 @@ const LockUser = ({ isLocked, handleLock }) => (
   </IconButton>
 );
 
-const UserMenu = ({ id }) => {
+const ActionMenu = ({ id }) => {
   const popupState = usePopupState({ variant: 'popover', popupId: id });
 
   return (
     <>
       <IconButton variant='contained' color='inherit' {...bindTrigger(popupState)}>
-        <MoreVert />
+        <MenuIcon />
       </IconButton>
 
       <Menu {...bindMenu(popupState)}>
@@ -79,7 +79,7 @@ const User = memo(({ id, email, isLocked, isVerified, save, lock, classes }) => 
     <Card className={classnames(isLocked && classes.locked)}>
       <CardHeader
         avatar={<Icon id={id} classes={classes} />}
-        action={<UserMenu id={id} />}
+        action={<ActionMenu id={id} />}
         title={
           <Link to={`${id}`} className={classes.link}>
             {email}&nbsp;

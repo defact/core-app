@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux'; 
-import { is, has, ids, error } from '../../../../../state/reducers';
+import { start, complete, ids, error } from '../../../../../state/reducers';
 import { fetch, add } from '../actions/roles';
 
 export default combineReducers({ 
-  isFetching: is(fetch), 
-  isFetched: has(fetch), 
-  isAdding: is(add), 
-  isAdded: has(add), 
+  isFetching: start(fetch), 
+  isFetched: complete(fetch), 
+  isAdding: start(add), 
+  isAdded: complete(add), 
   ids: ids(fetch, add),
   error: error(fetch, add), 
 });

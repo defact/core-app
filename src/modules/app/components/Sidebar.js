@@ -59,12 +59,21 @@ const other = [
   { text: 'About', to: '/about', Icon: HelpOutline },
 ];
 
-const Sidebar = memo(({ classes, isOpen, handleClose }) => {
+const NavLink = props => (
+  <Link {...props} getProps={({ isPartiallyCurrent }) => {
+    return { 
+      style: { 
+        opacity: isPartiallyCurrent ? 1 : 0.6,
+      }
+    };
+  }} />
+);
 
+const Sidebar = memo(({ classes, isOpen, handleClose }) => {
   const Menu = ({ menu }) => (
     <List>
       {menu.map(({ text, to, Icon }) => (
-        <ListItem to={to} key={text} button component={Link}>
+        <ListItem to={to} key={text} button component={NavLink}>
           <ListItemIcon className={classes.icon}>
             <Icon className={classes[text.toLowerCase()]} />
           </ListItemIcon>

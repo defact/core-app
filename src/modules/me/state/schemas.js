@@ -8,9 +8,11 @@ const user = new schema.Entity('users', {
 
 const member = new schema.Entity('members', {
   user,
-  profiles: [ profile ],
-  profile,
   users: [ user ],
+  primaryUser: user,
+  profile,
+  profiles: [ profile ],
+  primaryProfile: profile,
 });
 
 export default { profile, member };

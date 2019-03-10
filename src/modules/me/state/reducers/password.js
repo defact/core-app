@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'; 
-import { is, has, error } from '../../../../state/reducers';
+import { start, complete, error } from '../../../../state/reducers';
 import { change } from '../actions/password';
 
 export default combineReducers({ 
-  isChanging: is(change), 
-  hasChanged: has(change), 
+  isChanging: start(change), 
+  hasChanged: complete(change), 
   error: error(change), 
 });

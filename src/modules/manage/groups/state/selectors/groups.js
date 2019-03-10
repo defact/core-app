@@ -6,7 +6,9 @@ const stateSelector = state => state.manage.groups.groups;
 
 export const groupSelector = createSelector(
   dataSelector, stateSelector, (state, props) => props.gid, (groups = [], state, id) => {
-    return ({ ...state, ...groups[id] })
+    const group = groups[id];
+    if (group === undefined) return { ...state };
+    return { ...state, ...group, groups: group.groups.map(id => groups[id]) };
   }
 );
 

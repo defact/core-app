@@ -1,6 +1,6 @@
 import React, { memo, useState } from 'react';
 import classnames from 'classnames';
-import { navigate } from '@reach/router';
+import { Link } from '@reach/router';
 import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -21,7 +21,7 @@ const styles = theme => ({
     flexGrow: 1,
   },
   toolbar: {
-    marginLeft: theme.spacing.unit * 2,
+    marginLeft: (theme.spacing.unit * 2) + 4,
     marginRight: theme.spacing.unit * 2,
   },
   message: {
@@ -32,6 +32,7 @@ const styles = theme => ({
   },
   link: {
     cursor: 'pointer',
+    textDecoration: 'none',
   },
   icon: {
     marginRight: theme.spacing.unit,
@@ -57,15 +58,21 @@ const Verify = memo(({ me, classes }) => (
   </AppBar>
 ));
 
-const Logo = memo(({ children, classes }) => (
-  <>
-    <Extension className={classes.icon} color='secondary' />
-    <Typography variant='h6' color='inherit' 
-      className={classnames(classes.grow, classes.link)} onClick={() => navigate('/')}>
-      {children}
-    </Typography>
-  </>
-));
+const Logo = memo(({ me, children, classes }) => {
+  const [ sidebar, setSidebar ] = useState(false);
+
+  return (
+    <>
+      <Sidebar isOpen={sidebar} handleClose={() => setSidebar(false)} />
+      {me.name && <MenuIcon className={classnames(classes.icon, classes.link)} onClick={() => setSidebar(true)} />}
+      <Extension className={classes.icon} color='secondary' />
+      <Typography variant='h6' color='inherit' component={Link} to='/'
+        className={classnames(classes.grow, classes.link)}>
+        {children}
+      </Typography>
+    </>
+  )
+});
 
 const UserMenu = memo(({ classes, me, fetch, signOut }) => {
   const [ showSwitchDialog, setShowSwitchDialog ] = useState(false);
@@ -105,10 +112,10 @@ const UserMenu = memo(({ classes, me, fetch, signOut }) => {
 
 const NoUserMenu = memo(() => (
   <div>
-    <Button color='inherit' onClick={() => navigate('/register')}>
+    <Button color='inherit' component={Link} to='/register'>
       Register
     </Button>
-    <Button color='secondary' onClick={() => navigate('/signin')}>
+    <Button color='secondary' component={Link} to='/signin'>
       Sign In
     </Button>
   </div>
@@ -116,19 +123,14 @@ const NoUserMenu = memo(() => (
 
 const Header = memo(props => {
   const { me, classes } = props;
-  const [ sidebar, setSidebar ] = useState(false);
 
   return (
     <div>
-      <Sidebar isOpen={sidebar} handleClose={() => setSidebar(false)} />
-
       <Verify me={me} classes={classes} />
 
       <AppBar position='static' className={classes.grow}> 
         <Toolbar className={classes.toolbar}>
-          <Logo classes={classes}>Defacto</Logo>
-
-          {!me.isFetching && me.name && <MenuIcon className={classnames(classes.icon, classes.link)} onClick={() => setSidebar(true)} />}
+          <Logo me={me} classes={classes}>Defacto</Logo>
 
           {me.isFetching && <CircularProgress className={classes.progress} size={20} thickness={3} />}
           {!me.isFetching && me.name && <UserMenu  {...props} />}

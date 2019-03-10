@@ -5,7 +5,7 @@ import { meSelector } from '../state/selectors/me';
 
 const PASSWORD_URL = '/me/password';
 
-const Redirect = ({ pathname, forceChangePassword, children }) => {
+const Redirect = ({ pathname, me: { forceChangePassword }, children }) => {
   useEffect(() => {
     if (forceChangePassword && pathname !== PASSWORD_URL) redirectTo(PASSWORD_URL);
   }, [pathname, forceChangePassword]);

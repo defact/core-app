@@ -54,7 +54,7 @@ const Add = withStyles(styles)(memo(({ error, isSaving, add, classes }) => {
             </form>
           )}
         />    
-        <Dialog error={error} message='The user has been added' />
+        <Dialog error={error} message='The user has been registered' />
       </Paper>
     </>
   );

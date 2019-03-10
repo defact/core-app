@@ -21,7 +21,8 @@ export const userSelector = createSelector(
 );
 
 export const userWithRolesSelector = createSelector(
-  dataSelector, rolesSelector, stateSelector, (state, props) => props.uid, (users = [], roles, state, id) => 
+  dataSelector, rolesSelector, stateSelector, (state, props) => props.uid, 
+  (users = [], roles, state, id) => 
     ({ ...state, ...constructUser(roles.roles, users[id]) })
 );
 
