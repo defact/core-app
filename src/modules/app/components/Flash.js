@@ -41,7 +41,7 @@ const styles = theme => ({
     backgroundColor: yellow[100],
   },
   info: {
-    color: blue[900],
+    color: blue[700],
     borderBottom: `1px solid ${blue[400]}`,
     backgroundColor: blue[100],
   },

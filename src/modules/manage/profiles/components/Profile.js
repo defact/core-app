@@ -19,7 +19,7 @@ const styles = theme => ({
   },
 });
 
-const Profile = withStyles(styles)(memo(({ pid, name, save, classes, children, ...props }) => {
+const Profile = withStyles(styles)(memo(({ pid, name, disabled, save, classes, children, ...props }) => {
   const handleSubmit = (props) => save({ id: pid, ...props });
   const containerRef = createRef();
 
@@ -42,7 +42,7 @@ const Profile = withStyles(styles)(memo(({ pid, name, save, classes, children, .
               <form onSubmit={handleSubmit} autoComplete='off'>
                 <Grid container spacing={24}>
                   <Grid item xs={12} sm={6}>
-                    <Input name='name' label='Name' autoFocus />
+                    <Input name='name' label='Name' autoFocus disabled={disabled} />
                     <AutoSave setFieldData={form.mutators.setFieldData} 
                       save={handleSubmit} container={containerRef} />
                   </Grid>

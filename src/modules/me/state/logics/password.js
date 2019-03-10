@@ -1,5 +1,5 @@
 import { createLogic } from 'redux-logic';
-import { change } from '../actions/password';
+import { change, reset } from '../actions/password';
 
 const onChange = createLogic({
   type: change.start,
@@ -24,4 +24,4 @@ const onChange = createLogic({
   }
 });
 
-export default onChange;
+export default [ onChange ];

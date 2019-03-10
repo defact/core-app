@@ -19,7 +19,7 @@ const styles = theme => ({
   },
 });
 
-const Role = withStyles(styles)(memo(({ rid, name, save, classes, children, ...props }) => {
+const Role = withStyles(styles)(memo(({ rid, name, disabled, save, classes, children, ...props }) => {
   const handleSubmit = (props) => save({ id: rid, ...props });
   const containerRef = createRef();
 
@@ -42,7 +42,7 @@ const Role = withStyles(styles)(memo(({ rid, name, save, classes, children, ...p
               <form onSubmit={handleSubmit} autoComplete='off'>
                 <Grid container spacing={24}>
                   <Grid item xs={12} sm={6}>
-                    <Input name='name' label='Role Name' autoFocus />
+                    <Input name='name' label='Role Name' autoFocus disabled={disabled} />
                     <AutoSave setFieldData={form.mutators.setFieldData} 
                       save={handleSubmit} container={containerRef} />
                   </Grid>

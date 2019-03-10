@@ -32,20 +32,20 @@ const styles = theme => ({
 
 const Transition = (props) => <Slide direction='up' {...props} />;
 
-const Alert = ({ classes, open, title, children, type='info', handleClose, ...props }) => {
+const Alert = ({ classes, isOpen, title, message, type='info', close, ...props }) => {
   const Icon = ICONS[type];
 
   return (
-    <Dialog {...props} open={open} keepMounted TransitionComponent={Transition}>
+    <Dialog {...props} open={isOpen} keepMounted TransitionComponent={Transition}>
       {title && <DialogTitle>{title}</DialogTitle>}
       <DialogContent>
         <DialogContentText className={classes[type]}>
           <Icon />
-          <span className={classes.text}>{children}</span>
+          <span className={classes.text}>{message}</span>
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color='secondary'>
+        <Button onClick={close} color='secondary'>
           Close
         </Button>
       </DialogActions>

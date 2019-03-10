@@ -1,6 +1,11 @@
 import { createLogic } from 'redux-logic';
 import { navigate } from '@reach/router';
 
+const REDIRECTS = {
+  'Token expired': '/signin',
+  'Not authorized': '/denied',
+};
+
 const onResponse = createLogic({
   type: '*',
 
@@ -9,7 +14,7 @@ const onResponse = createLogic({
         action.payload.statusCode && 
         action.payload.statusCode === 401 &&
         action.type !== 'me/fetch/FAILED') {
-      navigate('/denied');
+      navigate(REDIRECTS[action.payload.message]);
     }
 
     allow(action);

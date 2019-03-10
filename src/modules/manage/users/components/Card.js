@@ -31,8 +31,8 @@ const styles = theme => ({
   },
 });
 
-const LockUser = ({ isLocked, handleLock }) => (
-  <IconButton onClick={handleLock}>
+const LockUser = ({ isLocked, handleLock, disabled }) => (
+  <IconButton onClick={handleLock} disabled={disabled}>
     <Tooltip title={isLocked ? 'unlock user' : 'lock user'}>
       {isLocked ? <Lock /> : <LockOpen />}
     </Tooltip>
@@ -72,8 +72,8 @@ const Verified = ({ classes, isVerified }) => (
   </span>
 );
 
-const User = memo(({ id, email, isLocked, isVerified, save, lock, classes }) => {
-  const handleLock = () => lock({ id });
+const User = memo(({ id, email, isLocked, isVerified, disabled, lock, classes }) => {
+  const handleLock = () => !disabled && lock({ id });
 
   return (
     <Card className={classnames(isLocked && classes.locked)}>
@@ -88,7 +88,7 @@ const User = memo(({ id, email, isLocked, isVerified, save, lock, classes }) => 
       />
 
       <CardActions disableActionSpacing>
-        <LockUser handleLock={handleLock} isLocked={isLocked} />
+        <LockUser handleLock={handleLock} isLocked={isLocked} disabled={disabled} />
       </CardActions>
     </Card>
   );

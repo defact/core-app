@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { Alert } from '../components';
 
 const useSubmit = (onSubmit) => {
@@ -16,12 +16,15 @@ const useSubmit = (onSubmit) => {
     onSubmit({ ...props, onSuccess, onFailure });
   };
 
-  const Dialog = ({ error, message, ...props }) => (
-    <Alert open={openAlert} handleClose={handleClose} type={error ? 'error' : 'info'} {...props}>
-      {error && error.message}
-      {!error && message}
-    </Alert>
-  );
+  const Dialog = memo(({ error, message, ...props }) => {
+    const text = error && error.message ? error.message : message;
+    return (
+      <Alert 
+        isOpen={openAlert} 
+        close={handleClose} 
+        type={error ? 'error' : 'info'} message={text} {...props} />
+    );
+  });
 
   return { handleSubmit, Dialog };
 };

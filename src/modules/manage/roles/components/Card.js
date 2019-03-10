@@ -28,8 +28,8 @@ const styles = theme => ({
   },
 });
 
-const Archive = ({ isArchived, handleArchive }) => (
-  <IconButton onClick={handleArchive}>
+const Archive = ({ isArchived, disabled, handleArchive }) => (
+  <IconButton onClick={handleArchive} disabled>
     <Tooltip title={isArchived ? 'restore role' : 'archive role'}>
       {isArchived ? <RestoreFromTrash /> : <Delete />}
     </Tooltip>
@@ -63,7 +63,7 @@ const Icon = ({ id, classes }) => (
   </Link>
 );
 
-const Role = memo(({ id, name, isArchived = false, save, archive, classes }) => {
+const Role = memo(({ id, name, isArchived = false, disabled, save, archive, classes }) => {
   // const handleArchive = () => archive({ id });
   const handleArchive = () => console.log(id);
 

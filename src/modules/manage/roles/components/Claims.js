@@ -20,7 +20,7 @@ const styles = theme => ({
 });
 
 const Claims = memo(({ role, save, permissions, entities, classes }) => {
-  const handleSubmit = (props) => save({ ...role, ...props });
+  const handleSubmit = (props) => !role.disabled && save({ ...role, ...props });
   const containerRef = createRef();
 
   if (role.claims.length === 0) return;
@@ -46,6 +46,7 @@ const Claims = memo(({ role, save, permissions, entities, classes }) => {
                       fields.map((name, index) => (
                         <Select 
                           key={index}
+                          disabled={role.disabled}
                           name={`${name}.right`}
                           label={entities.find(e => e.id === role.claims[index].entity).name}
                           data={permissions} />

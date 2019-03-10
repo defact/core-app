@@ -20,15 +20,16 @@ const Roles = memo(({ user, fetch, save, classes }) => {
     fetch();
   }, []);
 
+  const handleSave = (role) => !user.disabled && save({ role, user });
+
   return (
     <Paper className={classes.paper}>
       <div className={classes.card}>
 
         <List className={classes.root}>
           {user.roles.map(role => (
-            <ListItem key={role.id} role={role.name} button 
-              onClick={() => save({ user, role })}>
-              <Checkbox checked={role.has} disableRipple />
+            <ListItem key={role.id} role={role.name} button={!user.disabled} onClick={() => handleSave(role)}>
+              <Checkbox checked={role.has} disableRipple disabled={user.disabled} />
               <ListItemText primary={role.name} />
             </ListItem>
           ))}

@@ -47,13 +47,20 @@ const styles = theme => ({
     margin: theme.spacing.unit * 2,
     color: '#000',
   },
+  resend: {
+    marginLeft: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit,
+    borderLeft: `1px solid ${theme.palette.primary.main}`,
+    cursor: 'pointer',
+  },
 });
 
-const Verify = memo(({ me, classes }) => (
+const Verify = memo(({ me, resend, classes }) => (
   <AppBar position='static' color='secondary' 
     className={classnames(classes.message, (!me.id || me.isVerified) && classes.hide)}> 
     <Typography variant='body1' color='primary' align='center'>
       Please verify your email address
+      <span className={classes.resend} onClick={resend}>Resend verification email?</span>
     </Typography>
   </AppBar>
 ));
@@ -121,24 +128,20 @@ const NoUserMenu = memo(() => (
   </div>
 ));
 
-const Header = memo(props => {
-  const { me, classes } = props;
+const Header = memo(({ me, resend, classes }) => (
+  <div>
+    <Verify me={me} resend={resend} classes={classes} />
 
-  return (
-    <div>
-      <Verify me={me} classes={classes} />
+    <AppBar position='static' className={classes.grow}> 
+      <Toolbar className={classes.toolbar}>
+        <Logo me={me} classes={classes}>Defacto</Logo>
 
-      <AppBar position='static' className={classes.grow}> 
-        <Toolbar className={classes.toolbar}>
-          <Logo me={me} classes={classes}>Defacto</Logo>
-
-          {me.isFetching && <CircularProgress className={classes.progress} size={20} thickness={3} />}
-          {!me.isFetching && me.name && <UserMenu  {...props} />}
-          {!me.isFetching && !me.name && <NoUserMenu />}
-        </Toolbar>
-      </AppBar>
-    </div>
-  )
-});
+        {me.isFetching && <CircularProgress className={classes.progress} size={20} thickness={3} />}
+        {!me.isFetching && me.name && <UserMenu me={me} classes={classes} />}
+        {!me.isFetching && !me.name && <NoUserMenu />}
+      </Toolbar>
+    </AppBar>
+  </div>
+));
 
 export default withStyles(styles)(Header);

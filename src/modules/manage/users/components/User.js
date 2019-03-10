@@ -19,7 +19,7 @@ const styles = theme => ({
   },
 });
 
-const User = withStyles(styles)(memo(({ uid, email, save, classes, children, ...props }) => {
+const User = withStyles(styles)(memo(({ uid, email, disabled, save, classes, children, ...props }) => {
   const handleSubmit = (props) => save({ id: uid, ...props });
   const containerRef = createRef();
 
@@ -42,7 +42,7 @@ const User = withStyles(styles)(memo(({ uid, email, save, classes, children, ...
               <form onSubmit={handleSubmit} autoComplete='off'>
                 <Grid container spacing={24}>
                   <Grid item xs={12} sm={6}>
-                    <Input name='email' label='Email Address' autoFocus />
+                    <Input name='email' label='Email Address' autoFocus disabled={disabled} />
                     <AutoSave setFieldData={form.mutators.setFieldData} 
                       save={handleSubmit} container={containerRef} />
                   </Grid>

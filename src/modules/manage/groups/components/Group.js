@@ -19,7 +19,7 @@ const styles = theme => ({
   },
 });
 
-const Group = withStyles(styles)(memo(({ gid, name, save, classes, children, ...props }) => {
+const Group = withStyles(styles)(memo(({ gid, name, disabled, save, classes, children, ...props }) => {
   const handleSubmit = (props) => save({ id: gid, ...props });
   const containerRef = createRef();
 
@@ -42,7 +42,7 @@ const Group = withStyles(styles)(memo(({ gid, name, save, classes, children, ...
               <form onSubmit={handleSubmit} autoComplete='off'>
                 <Grid container spacing={24}>
                 <Grid item xs={12} sm={6}>
-                    <Input name='name' label='Group Name' autoFocus />
+                    <Input name='name' label='Group Name' autoFocus disabled={disabled} />
                     <AutoSave setFieldData={form.mutators.setFieldData} 
                       save={handleSubmit} container={containerRef} />
                   </Grid>
