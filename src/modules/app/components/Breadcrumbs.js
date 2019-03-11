@@ -2,7 +2,6 @@ import React, { memo } from 'react';
 import classnames from 'classnames';
 import { Helmet } from 'react-helmet';
 import { Link } from '@reach/router';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
@@ -28,12 +27,6 @@ const styles = theme => ({
     paddingLeft: theme.spacing.unit,
     borderLeft: `1px solid ${theme.palette.divider}`,
   },
-  leftIcon: {
-    marginRight: theme.spacing.unit,
-  },
-  iconSmall: {
-    fontSize: 20,
-  },
 });
 
 const title = parts => {
@@ -42,7 +35,7 @@ const title = parts => {
   }, '');
 };
 
-const Breadcrumbs = withStyles(styles)(memo(({ parts, actions = [], classes }) => (
+const Breadcrumbs = withStyles(styles)(memo(({ parts, action, classes }) => (
   <>
     <Helmet title={title(parts)} />
     <div className={classes.root}>
@@ -65,14 +58,7 @@ const Breadcrumbs = withStyles(styles)(memo(({ parts, actions = [], classes }) =
         </Typography>
       </div>
       <div>
-        {actions.map(({ label, to, Icon }, index) => (
-          <Link to={to} className={classes.link} key={index}>
-            <Button variant='contained' color='secondary' size='small'>
-                <Icon className={classnames(classes.leftIcon, classes.iconSmall)} />
-                {label}
-            </Button>
-          </Link>
-        ))}
+        {action}
       </div>
     </div>
   </>

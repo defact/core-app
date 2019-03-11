@@ -2,14 +2,14 @@ import React, { memo } from 'react';
 import { Add } from '@material-ui/icons';
 import Grid from '@material-ui/core/Grid';
 
-import { Breadcrumbs } from '../../../app/components';
+import { Breadcrumbs, ActionButton } from '../../../app/components';
 import Card from './Card';
 
 const List = memo(({ users, ...props }) => (
   <>
     <Breadcrumbs 
       parts={[ { label: 'Users' } ]} 
-      actions={[ { label: 'Register', Icon: Add, to: 'register' } ]} />
+      action={<ActionButton label='Register' Icon={Add} to='register' /> } />
 
     <Grid container spacing={24}>
       {users.users.map(user => 

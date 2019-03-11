@@ -3,7 +3,7 @@ import { navigate } from '@reach/router';
 
 const REDIRECTS = {
   'Token expired': '/signin',
-  'Not authorized': '/denied',
+  'Unauthorized': '/denied',
 };
 
 const onResponse = createLogic({

@@ -8,12 +8,10 @@ import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import Menu from '@material-ui/core/Menu';
-import { Menu as MenuIcon, Email, Lock, LockOpen } from '@material-ui/icons';
-import { usePopupState, bindTrigger, bindMenu } from 'material-ui-popup-state/hooks'
+import { Email, Lock, LockOpen } from '@material-ui/icons';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import { MenuLink } from '../../../app/components';
+import Actions from './Actions';
 
 const styles = theme => ({
   avatar: {
@@ -21,6 +19,9 @@ const styles = theme => ({
   },
   locked: {
     opacity: 0.5,
+  },
+  verified: {
+    paddingLeft: theme.spacing.unit,
   },
   unverified: {
     color: theme.palette.error.main,
@@ -39,25 +40,6 @@ const LockUser = ({ isLocked, handleLock, disabled }) => (
   </IconButton>
 );
 
-const ActionMenu = ({ id }) => {
-  const popupState = usePopupState({ variant: 'popover', popupId: id });
-
-  return (
-    <>
-      <IconButton variant='contained' color='inherit' {...bindTrigger(popupState)}>
-        <MenuIcon />
-      </IconButton>
-
-      <Menu {...bindMenu(popupState)}>
-        <MenuLink to={`${id}/profile`} onClick={popupState.close}>Profile</MenuLink>
-        <MenuLink to={`${id}/roles`} onClick={popupState.close}>Manage Roles</MenuLink>
-        <MenuLink to={`${id}/roles`} onClick={popupState.close}>Reset Password</MenuLink>
-        <MenuLink to={`${id}/roles`} onClick={popupState.close}>Archive</MenuLink>
-      </Menu>
-    </>
-  );
-};
-
 const Icon = ({ id, classes }) => (
   <Link to={`${id}`}>
     <Avatar aria-label='User' className={classes.avatar} color='secondary'>
@@ -67,7 +49,7 @@ const Icon = ({ id, classes }) => (
 );
 
 const Verified = ({ classes, isVerified }) => (
-  <span className={classnames(!isVerified && classes.unverified)}>
+  <span className={classnames(!isVerified && classes.unverified, classes.verified)}>
     {isVerified ? null : 'unverified'}
   </span>
 );
@@ -79,10 +61,10 @@ const User = memo(({ id, email, isLocked, isVerified, disabled, lock, classes })
     <Card className={classnames(isLocked && classes.locked)}>
       <CardHeader
         avatar={<Icon id={id} classes={classes} />}
-        action={<ActionMenu id={id} />}
+        action={<Actions id={id} />}
         title={
           <Link to={`${id}`} className={classes.link}>
-            {email}&nbsp;
+            {email}
             <Verified classes={classes} isVerified={isVerified} />
           </Link>}
       />

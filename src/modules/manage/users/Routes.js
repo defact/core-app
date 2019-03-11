@@ -10,7 +10,7 @@ const Routes = () => (
       <Add path='register' />
       <User path=':uid'>
         <Roles path='roles' />
-        <Profiles path='profiles' />
+        <Profiles path='members' />
       </User>
       <Redirect from=':uid' to='/manage/users/:uid/roles' noThrow />
     </Users>

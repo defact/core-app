@@ -8,6 +8,8 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { Input, AutoSave } from '../../../app/components/form';
 import { TabBar, Breadcrumbs } from '../../../app/components';
 
+import Actions from './Actions';
+
 import validate from '../state/validate/group';
 
 const styles = theme => ({
@@ -28,7 +30,7 @@ const Group = withStyles(styles)(memo(({ gid, name, disabled, save, classes, chi
       <Breadcrumbs parts={[
         { label: 'Groups', to: '..' },
         { label: name },
-      ]} />
+      ]} action={<Actions id={gid} />} />
 
       <Paper className={classes.paper}>
         <div ref={containerRef} className={classes.card}>

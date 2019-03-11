@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect, createRef } from 'react';
+import React, { memo, createRef } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { Form } from 'react-final-form';
@@ -7,6 +7,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 import { Input, AutoSave } from '../../../app/components/form';
 import { TabBar, Breadcrumbs } from '../../../app/components';
+import Actions from './Actions';
 
 import validate from '../state/validate/profile';
 
@@ -26,9 +27,9 @@ const Profile = withStyles(styles)(memo(({ pid, name, disabled, save, classes, c
   return (
     <>
       <Breadcrumbs parts={[
-        { label: 'Profiles', to: '..' },
+        { label: 'Members', to: '..' },
         { label: name },
-      ]} />
+      ]} action={<Actions id={pid} />} />
 
       <Paper className={classes.paper}>
         <div ref={containerRef} className={classes.card}>

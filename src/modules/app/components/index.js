@@ -6,4 +6,6 @@ export { default as Alert } from './Alert';
 export { default as Flash } from './Flash';
 export { default as Breadcrumbs } from './Breadcrumbs';
 export { default as TabBar } from './TabBar';
+export { default as ActionButton } from './ActionButton';
+export { default as ActionMenu } from './ActionMenu';
 export { default as MenuLink } from './MenuLink';

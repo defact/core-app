@@ -9,7 +9,9 @@ const Routes = () => (
       <List path='/' />
       <Add path='add' />
       <Group path=':gid'>
-        <Children path='groups' />
+        <Children path='groups'>
+          {/* <AddChild path='add' /> */}
+        </Children>
       </Group>
       <Redirect from=':gid' to='/manage/groups/:gid/groups' noThrow />
     </Groups>

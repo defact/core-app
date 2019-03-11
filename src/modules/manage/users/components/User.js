@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect, createRef } from 'react';
+import React, { memo, createRef } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { Form } from 'react-final-form';
@@ -8,6 +8,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { Input, AutoSave } from '../../../app/components/form';
 import { TabBar, Breadcrumbs } from '../../../app/components';
 
+import Actions from './Actions';
 import validate from '../state/validate/user';
 
 const styles = theme => ({
@@ -28,7 +29,7 @@ const User = withStyles(styles)(memo(({ uid, email, disabled, save, classes, chi
       <Breadcrumbs parts={[
         { label: 'Users', to: '..' },
         { label: email },
-      ]} />
+      ]} action={<Actions id={uid} />} />
 
       <Paper className={classes.paper}>
         <div ref={containerRef} className={classes.card}>
@@ -41,7 +42,7 @@ const User = withStyles(styles)(memo(({ uid, email, disabled, save, classes, chi
             render={({ form }) => (
               <form onSubmit={handleSubmit} autoComplete='off'>
                 <Grid container spacing={24}>
-                  <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={6}>
                     <Input name='email' label='Email Address' autoFocus disabled={disabled} />
                     <AutoSave setFieldData={form.mutators.setFieldData} 
                       save={handleSubmit} container={containerRef} />
@@ -55,7 +56,7 @@ const User = withStyles(styles)(memo(({ uid, email, disabled, save, classes, chi
 
       <TabBar selected={props['*']} tabs={[
         { label: 'Roles', to: 'roles' },
-        { label: 'Profiles', to: 'profiles' },
+        { label: 'Members', to: 'members' },
       ]} />
 
       {children}
