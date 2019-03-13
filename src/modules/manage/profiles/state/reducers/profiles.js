@@ -1,12 +1,11 @@
 import { combineReducers } from 'redux'; 
-import { start, complete, ids, error } from '../../../../../state/reducers';
-import { fetch, add } from '../actions/profiles';
+import { started, completed, data, ids, error } from '../../../../../state/reducers';
+import { fetch, add, save, remove } from '../actions/profiles';
 
 export default combineReducers({ 
-  isFetching: start(fetch), 
-  isFetched: complete(fetch), 
-  isAdding: start(add), 
-  isAdded: complete(add), 
-  ids: ids(fetch, add),
-  error: error(fetch, add), 
+  started: started(fetch, add, save, remove), 
+  completed: completed(fetch, add, save, remove), 
+  data: data('profiles'),
+  ids: ids(fetch, add, remove),
+  error: error(fetch, add, save, remove), 
 });

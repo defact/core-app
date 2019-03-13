@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux'; 
-import { start, complete, ids, error } from '../../../../../state/reducers';
+import { started, completed, data, ids, error } from '../../../../../state/reducers';
 import { fetch } from '../actions/permissions';
 
 export default combineReducers({ 
-  isFetching: start(fetch), 
-  isFetched: complete(fetch), 
+  started: started(fetch), 
+  completed: completed(fetch), 
+  data: data('permissions'),
   ids: ids(fetch),
   error: error(fetch), 
 });

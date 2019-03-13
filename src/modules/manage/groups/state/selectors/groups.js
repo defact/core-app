@@ -1,8 +1,8 @@
 import compact from 'lodash.compact';
 import { createSelector } from 'reselect';
 
-const dataSelector = state => state.app.entities.groups
 const stateSelector = state => state.manage.groups.groups;
+const dataSelector = state => state.manage.groups.groups.data;
 
 export const groupSelector = createSelector(
   dataSelector, stateSelector, (state, props) => props.gid, (groups = [], state, id) => {

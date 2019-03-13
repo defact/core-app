@@ -18,10 +18,10 @@ const styles = theme => ({
   },
 });
 
-const SignIn = memo(({ classes, signIn, error, email, remember, isSigningIn }) => (
+const SignIn = memo(({ classes, signIn, error, email, remember, started }) => (
   <Layout>
     <Helmet title={'Sign In'} />
-    <Header Icon={Fingerprint} isSubmitting={isSigningIn}>Sign In</Header>
+    <Header Icon={Fingerprint} isSubmitting={started}>Sign In</Header>
     
     <Form onSubmit={signIn} validate={validate} initialValues={{email, remember}}
       render={({ handleSubmit, pristine }) => (
@@ -30,7 +30,7 @@ const SignIn = memo(({ classes, signIn, error, email, remember, isSigningIn }) =
           <Password autoFocus={remember} />
           <Checkbox name='remember' label='Remember me?' />
 
-          <Submit disabled={pristine || isSigningIn}>Sign In</Submit>
+          <Submit disabled={pristine || started}>Sign In</Submit>
         </form>
       )}
     />

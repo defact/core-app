@@ -8,7 +8,7 @@ import Card from './Card';
 const List = memo(({ profiles, ...props }) => (
   <>
     <Breadcrumbs 
-      parts={[ { label: 'Member' } ]} 
+      parts={[ { label: 'Members' } ]} 
       action={<ActionButton label='Register' Icon={Add} to='register' /> } />
 
     <Grid container spacing={24}>

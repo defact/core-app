@@ -20,7 +20,7 @@ const styles = theme => ({
   },
 });
 
-const User = withStyles(styles)(memo(({ uid, email, disabled, save, classes, children, ...props }) => {
+const User = memo(({ uid, email, save, classes, children, ...props }) => {
   const handleSubmit = (props) => save({ id: uid, ...props });
   const containerRef = createRef();
 
@@ -29,7 +29,7 @@ const User = withStyles(styles)(memo(({ uid, email, disabled, save, classes, chi
       <Breadcrumbs parts={[
         { label: 'Users', to: '..' },
         { label: email },
-      ]} action={<Actions id={uid} />} />
+      ]} action={<Actions id={uid} {...props} />} />
 
       <Paper className={classes.paper}>
         <div ref={containerRef} className={classes.card}>
@@ -43,7 +43,7 @@ const User = withStyles(styles)(memo(({ uid, email, disabled, save, classes, chi
               <form onSubmit={handleSubmit} autoComplete='off'>
                 <Grid container spacing={24}>
                 <Grid item xs={12} sm={6}>
-                    <Input name='email' label='Email Address' autoFocus disabled={disabled} />
+                    <Input name='email' label='Email Address' autoFocus disabled={props.disabled} />
                     <AutoSave setFieldData={form.mutators.setFieldData} 
                       save={handleSubmit} container={containerRef} />
                   </Grid>
@@ -62,6 +62,6 @@ const User = withStyles(styles)(memo(({ uid, email, disabled, save, classes, chi
       {children}
     </>
   );
-}));
+});
 
-export default User;
+export default withStyles(styles)(User);

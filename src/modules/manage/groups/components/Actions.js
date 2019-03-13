@@ -2,9 +2,10 @@ import React, { memo } from 'react';
 
 import { ActionMenu } from '../../../app/components';
 
-export default memo(({ id }) => (
-  <ActionMenu id={id} actions={[
-    { to: `${id}/groups/add`, label: 'Add Child Group' },
-    { to: `${id}/archive`, label: 'Archive' },
-  ]} />
-));
+export const actions = ({ id, remove }) => [
+  { label: 'Add Child Group', to: `/manage/groups/${id}/groups/add` },
+  { label: 'Upload Photo', to: `/manage/groups/${id}/photos/upload` },
+  { label: 'Archive', action: () => remove({ id }) },
+];
+
+export default memo(props => <ActionMenu actions={actions(props)} {...props} />);

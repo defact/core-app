@@ -19,13 +19,13 @@ const styles = theme => ({
   },
 });
 
-const Change = memo(({ classes, me, change, isChanging, error }) => {
+const Change = memo(({ classes, me, change, started, error }) => {
   const { handleSubmit, Dialog } = useSubmit(change);
   
   return (
     <Layout>
       <Helmet title={'Change Password'} />
-      <Header Icon={Security} isSubmitting={isChanging}>Change Password</Header>
+      <Header Icon={Security} isSubmitting={started}>Change Password</Header>
       
       {me.forceChangePassword && <Message message='Please change your password' type='warning' />}
 
@@ -34,7 +34,7 @@ const Change = memo(({ classes, me, change, isChanging, error }) => {
           <form className={classes.form} onSubmit={handleSubmit}>
             <Password autoFocus />
 
-            <Submit disabled={pristine || isChanging}>Change Password</Submit>
+            <Submit disabled={pristine || started}>Change Password</Submit>
           </form>
         )}
       />

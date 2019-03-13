@@ -1,5 +1,5 @@
 import { createLogic } from 'redux-logic';
-import { fetch, add, save } from '../actions/profiles';
+import { fetch, add, save, remove } from '../actions/profiles';
 
 const onFetch = createLogic({
   type: fetch.start,
@@ -53,4 +53,20 @@ const onAdd = createLogic({
   }
 });
 
-export default [ onFetch, onSave, onAdd ];
+const onRemove = createLogic({
+  type: remove.start,
+  latest: true,
+
+  processOptions: {
+    dispatchReturn: true,
+    successType: remove.success,
+    failType: remove.failed
+  },
+
+  process({ api, normalize, schemas, action }) {
+    return api().delete(`profiles/${action.payload.id}`)
+    .then(data => normalize(data.profile, schemas.profile));
+  }
+});
+
+export default [ onFetch, onSave, onAdd, onRemove ];

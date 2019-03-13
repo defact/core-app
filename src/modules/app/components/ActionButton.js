@@ -18,7 +18,7 @@ const styles = theme => ({
 
 export default withStyles(styles)(memo(({ to, label, Icon, classes }) => (
   <Link to={to} className={classes.link}>
-    <Button variant='contained' color='secondary' size='small'>
+    <Button variant='contained' color='primary' size='small'>
       <Icon className={classnames(classes.leftIcon, classes.iconSmall)} />
       {label}
     </Button>

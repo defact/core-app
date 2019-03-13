@@ -1,5 +1,5 @@
 import { createLogic } from 'redux-logic';
-import { fetch, add, save, lock } from '../actions/users';
+import { fetch, add, save, lock, remove, reset } from '../actions/users';
 
 const onFetch = createLogic({
   type: fetch.start,
@@ -53,7 +53,6 @@ const onAdd = createLogic({
   }
 });
 
-
 const onLock = createLogic({
   type: lock.start,
   latest: true,
@@ -70,4 +69,35 @@ const onLock = createLogic({
   }
 });
 
-export default [ onFetch, onSave, onAdd, onLock ];
+const onRemove = createLogic({
+  type: remove.start,
+  latest: true,
+
+  processOptions: {
+    dispatchReturn: true,
+    successType: remove.success,
+    failType: remove.failed
+  },
+
+  process({ api, normalize, schemas, action }) {
+    return api().delete(`users/${action.payload.id}`)
+    .then(data => normalize(data.user, schemas.user));
+  }
+});
+
+const onResetPassword = createLogic({
+  type: reset.start,
+  latest: true,
+
+  processOptions: {
+    dispatchReturn: true,
+    successType: reset.success,
+    failType: reset.failed
+  },
+
+  process({ api, action }) {
+    return api().delete(`users/${action.payload.id}/password`);
+  }
+});
+
+export default [ onFetch, onSave, onAdd, onLock, onRemove, onResetPassword ];

@@ -1,12 +1,13 @@
 import { createSelector } from 'reselect';
 
-const membersSelector = state => state.app.entities.members;
-const usersSelector = state => state.app.entities.users;
-const profilesSelector = state => state.app.entities.profiles;
 const stateSelector = state => state.me.me;
+const dataSelector = state => state.me.me.data;
+
+const usersSelector = state => state.manage.users.users.data;
+const profilesSelector = state => state.manage.profiles.profiles.data;
 
 export const meSelector = createSelector(
-  membersSelector,
+  dataSelector,
   usersSelector,
   profilesSelector,
   stateSelector,

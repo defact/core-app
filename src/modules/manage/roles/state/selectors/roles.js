@@ -28,8 +28,8 @@ const constructRoles = (roles, entities) => (
   .sort(compare('name'))
 );
 
-const dataSelector = state => state.app.entities.roles
 const stateSelector = state => state.manage.roles.roles;
+const dataSelector = state => state.manage.roles.roles.data;
 
 export const roleSelector = createSelector(
   dataSelector, stateSelector, (state, props) => props.rid, (roles = [], state, id) => {

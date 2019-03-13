@@ -3,6 +3,7 @@ export { default as Header } from './Header';
 export { default as Sidebar } from './Sidebar';
 export { default as Error } from './Error';
 export { default as Alert } from './Alert';
+export { default as Question } from './Question';
 export { default as Flash } from './Flash';
 export { default as Breadcrumbs } from './Breadcrumbs';
 export { default as TabBar } from './TabBar';

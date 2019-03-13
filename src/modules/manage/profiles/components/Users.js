@@ -41,7 +41,7 @@ const Profiles = memo(({ profile, users, fetch, classes }) => {
         <List className={classes.root}>
           {users.length === 0 && <NoEntry primary='No users' />}
           {users.map(user => 
-            <Entry key={user.id} to={`../../../users/${user.id}/profiles`} primary={user.email} />)}
+            <Entry key={user.id} to={`../../../users/${user.id}/members`} primary={user.email} />)}
         </List>
       </div>
     </Paper>

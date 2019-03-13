@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux'; 
 import { signOut } from '../actions/signout';
 
-import { start, error } from '../../../../state/reducers';
+import { started, completed, error } from '../../../../state/reducers';
 
 export default combineReducers({ 
-  isSigningOut: start(signOut), 
+  started: started(signOut), 
+  completed: completed(signOut),
   error: error(signOut) 
 });

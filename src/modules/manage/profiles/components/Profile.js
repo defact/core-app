@@ -29,7 +29,7 @@ const Profile = withStyles(styles)(memo(({ pid, name, disabled, save, classes, c
       <Breadcrumbs parts={[
         { label: 'Members', to: '..' },
         { label: name },
-      ]} action={<Actions id={pid} />} />
+      ]} action={<Actions id={pid} {...props} />} />
 
       <Paper className={classes.paper}>
         <div ref={containerRef} className={classes.card}>

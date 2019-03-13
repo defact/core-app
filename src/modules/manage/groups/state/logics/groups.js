@@ -54,4 +54,20 @@ const onAdd = createLogic({
   }
 });
 
-export default [ onFetch, onSave, onAdd ];
+const onRemove = createLogic({
+  type: remove.start,
+  latest: true,
+
+  processOptions: {
+    dispatchReturn: true,
+    successType: remove.success,
+    failType: remove.failed
+  },
+
+  process({ api, normalize, schemas, action }) {
+    return api().delete(`groups/${action.payload.id}`)
+    .then(data => normalize(data.group, schemas.group));
+  }
+});
+
+export default [ onFetch, onSave, onAdd, onRemove ];

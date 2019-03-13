@@ -54,23 +54,23 @@ const Verified = ({ classes, isVerified }) => (
   </span>
 );
 
-const User = memo(({ id, email, isLocked, isVerified, disabled, lock, classes }) => {
-  const handleLock = () => !disabled && lock({ id });
+const User = memo(({ id, email, lock, classes, ...props }) => {
+  const handleLock = () => !props.disabled && lock({ id });
 
   return (
-    <Card className={classnames(isLocked && classes.locked)}>
+    <Card className={classnames(props.isLocked && classes.locked)}>
       <CardHeader
         avatar={<Icon id={id} classes={classes} />}
-        action={<Actions id={id} />}
+        action={<Actions id={id} {...props} />}
         title={
           <Link to={`${id}`} className={classes.link}>
             {email}
-            <Verified classes={classes} isVerified={isVerified} />
+            <Verified classes={classes} isVerified={props.isVerified} />
           </Link>}
       />
 
       <CardActions disableActionSpacing>
-        <LockUser handleLock={handleLock} isLocked={isLocked} disabled={disabled} />
+        <LockUser handleLock={handleLock} {...props} />
       </CardActions>
     </Card>
   );

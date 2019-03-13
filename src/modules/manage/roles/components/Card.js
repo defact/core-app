@@ -24,8 +24,8 @@ const styles = theme => ({
   },
 });
 
-const Archive = ({ isArchived, disabled, handleArchive }) => (
-  <IconButton onClick={handleArchive} disabled>
+const Archive = ({ isArchived, handleArchive, disabled }) => (
+  <IconButton onClick={handleArchive} disabled={disabled}>
     <Tooltip title={isArchived ? 'restore role' : 'archive role'}>
       {isArchived ? <RestoreFromTrash /> : <Delete />}
     </Tooltip>
@@ -40,19 +40,18 @@ const Icon = ({ id, classes }) => (
   </Link>
 );
 
-const Role = memo(({ id, name, isArchived = false, disabled, save, archive, classes }) => {
-  // const handleArchive = () => archive({ id });
-  const handleArchive = () => console.log(id);
+const Role = memo(({ id, name, classes, props }) => {
+  const handleArchive = () => !props.disabled && props.remove({ id });
 
   return (
-    <Card className={classnames(isArchived && classes.archived)}>
+    <Card className={classnames(props.isArchived && classes.archived)}>
       <CardHeader
         avatar={<Icon id={id} classes={classes} />}
         title={<Link to={`${id}`} className={classes.link}>{name}</Link>}
       />
 
       <CardActions disableActionSpacing>
-        <Archive handleArchive={handleArchive} isArchived={isArchived} />
+        <Archive handleArchive={handleArchive} {...props} />
       </CardActions>
     </Card>
   );

@@ -24,7 +24,7 @@ const Add = withStyles(styles)(memo(({ error, isSaving, add, classes }) => {
   return (
     <>
       <Breadcrumbs parts={[
-        { label: 'Profiles', to: '..' },
+        { label: 'Members', to: '..' },
         { label: 'Register' },
       ]} />
 

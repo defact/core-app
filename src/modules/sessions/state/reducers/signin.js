@@ -3,7 +3,7 @@ import { handleActions } from 'redux-actions';
 import { signIn } from '../actions/signin';
 import { signOut } from '../actions/signout';
 
-import { start, error } from '../../../../state/reducers';
+import { started, completed, error } from '../../../../state/reducers';
 
 const token = handleActions({
   [signIn.success]: (state, action) => action.payload.token,
@@ -11,7 +11,8 @@ const token = handleActions({
 }, null);
 
 export default combineReducers({ 
-  isSigningIn: start(signIn), 
+  started: started(signIn), 
+  completed: completed(signIn),
   token, 
   error: error(signIn) 
 });

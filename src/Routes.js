@@ -11,8 +11,8 @@ const Register = lazy(() => import('./modules/register/Routes'));
 const Manage = lazy(() => import('./modules/manage/Routes'));
 const Contact = lazy(() => import('./modules/contact/Routes'));
 
-const Routes = () => (
-  <Broken>
+const Routes = ({ errorKey }) => (
+  <Broken key={errorKey}>
     <Suspense fallback={<LinearProgress color='secondary' />}>
       <LocationProvider>
         <Location>

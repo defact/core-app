@@ -1,5 +1,5 @@
 import { createLogic } from 'redux-logic';
-import { fetch, add, save } from '../actions/roles';
+import { fetch, add, save, remove } from '../actions/roles';
 
 const onFetch = createLogic({
   type: fetch.start,
@@ -54,4 +54,20 @@ const onAdd = createLogic({
   }
 });
 
-export default [ onFetch, onSave, onAdd ];
+const onRemove = createLogic({
+  type: remove.start,
+  latest: true,
+
+  processOptions: {
+    dispatchReturn: true,
+    successType: remove.success,
+    failType: remove.failed
+  },
+
+  process({ api, normalize, schemas, action }) {
+    return api().delete(`roles/${action.payload.id}`)
+    .then(data => normalize(data.role, schemas.role));
+  }
+});
+
+export default [ onFetch, onSave, onAdd, onRemove ];

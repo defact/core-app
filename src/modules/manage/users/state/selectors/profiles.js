@@ -1,7 +1,7 @@
 import compact from 'lodash.compact';
 import { createSelector } from 'reselect';
 
-const dataSelector = state => state.app.entities.profiles;
+const dataSelector = state => state.manage.profiles.profiles.data;
 const idsSelector = state => state.manage.users.profiles.ids;
   
 export const userProfilesSelector = createSelector(
