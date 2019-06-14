@@ -18,7 +18,7 @@ const styles = theme => ({
   },
 });
 
-const Add = withStyles(styles)(memo(({ error, isSaving, add, classes }) => {
+const Add = withStyles(styles)(memo(({ error, started, add, classes }) => {
   const { handleSubmit, Dialog } = useSubmit(add);
 
   return (
@@ -45,7 +45,7 @@ const Add = withStyles(styles)(memo(({ error, isSaving, add, classes }) => {
                     type='submit'
                     variant='contained'
                     color='secondary'
-                    disabled={pristine || isSaving}
+                    disabled={pristine || started}
                     >
                     Add Group
                   </Button>                

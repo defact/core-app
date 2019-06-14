@@ -1,3 +1,4 @@
+import qs from 'query-string';
 import { createLogic } from 'redux-logic';
 import { navigate } from '@reach/router';
 import { signIn } from '../actions/signin';
@@ -18,6 +19,8 @@ const onSignOn = createLogic({
   latest: true,
 
   process({ api, action }, dispatch, done) {
+    const returnTo = qs.parse(location.search).return || '/';
+
     return api().post('sessions', 
       ({ ...action.payload, strategy: action.payload.strategy || 'password' }))
 
@@ -26,7 +29,7 @@ const onSignOn = createLogic({
     .then(data => store(data, 'token'))
 
     .then(data => dispatch(signIn.success(data)))
-    .then(() => navigate('/'))
+    .then(() => navigate(returnTo))
     .then(done)
 
     .catch(err => {

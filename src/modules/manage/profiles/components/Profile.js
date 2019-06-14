@@ -55,8 +55,10 @@ const Profile = withStyles(styles)(memo(({ pid, name, disabled, save, classes, c
       </Paper>
 
       <TabBar selected={props['*']} tabs={[
-        { label: 'User', to: 'access' },
+        { label: 'Users', to: 'users' },
         { label: 'Photos', to: 'photos' },
+        { label: 'Contacts', to: 'contacts' },
+        { label: 'Notes', to: 'notes' },
       ]} />
 
       {children}

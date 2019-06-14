@@ -1,4 +1,4 @@
-import React, { memo, useEffect, createRef } from 'react';
+import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from '@reach/router';
 import Paper from '@material-ui/core/Paper';
@@ -27,7 +27,7 @@ const Entry = memo(({ to, primary }) => (
   </ListItem>
 ));
 
-const Profiles = memo(({ profile, users, fetch, classes }) => {
+const Users = memo(({ profile, users, fetch, classes }) => {
   const { id } = profile;
   
   useEffect(() => {
@@ -48,4 +48,4 @@ const Profiles = memo(({ profile, users, fetch, classes }) => {
   );
 });
 
-export default withStyles(styles)(Profiles);
+export default withStyles(styles)(Users);

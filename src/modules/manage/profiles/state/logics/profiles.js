@@ -40,9 +40,9 @@ const onAdd = createLogic({
   latest: true,
 
   process({ api, normalize, schemas, action }, dispatch, done) {
-    const { email, onSuccess, onFailure } = action.payload;
+    const { name, email, onSuccess, onFailure } = action.payload;
 
-    return api().post('profiles', { email })
+    return api().post('memberships', { name, email })
     .then(data => dispatch(add.success(normalize(data.profile, schemas.profile))))
     .then(onSuccess)
     .then(done)

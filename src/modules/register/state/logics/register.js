@@ -1,20 +1,20 @@
 import { createLogic } from 'redux-logic';
-import { REGISTER, registerSuccess, registerFailed } from '../actions/register';
+import { register } from '../actions/register';
 import { signIn } from '../../../sessions/state/actions/signin';
 
 const onRegister = createLogic({
-  type: REGISTER,
+  type: register.start,
   latest: true,
 
   process({ api, action }, dispatch, done) {
     return api().post('memberships', action.payload)
     .then(data => {
-      dispatch(registerSuccess(data));
-      dispatch(signIn(action.payload));
+      dispatch(register.success(data));
+      dispatch(signIn.start(action.payload));
     })
     .then(done)
     .catch(err => {
-      dispatch(registerFailed(err));
+      dispatch(register.failed(err));
     });
   }
 });

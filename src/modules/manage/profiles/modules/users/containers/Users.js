@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Users } from '../components';
 import { fetch } from '../state/actions/users';
 
-import { profileSelector } from '../state/selectors/profiles';
+import { profileSelector } from '../../../state/selectors/profiles';
 import { profileUsersSelector } from '../state/selectors/users';
 
 const mapStateToProps = (state, props) => ({

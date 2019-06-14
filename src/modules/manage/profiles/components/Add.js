@@ -18,7 +18,7 @@ const styles = theme => ({
   },
 });
 
-const Add = withStyles(styles)(memo(({ error, isSaving, add, classes }) => {
+const Add = withStyles(styles)(memo(({ error, started, add, classes }) => {
   const { handleSubmit, Dialog } = useSubmit(add);
 
   return (
@@ -38,6 +38,7 @@ const Add = withStyles(styles)(memo(({ error, isSaving, add, classes }) => {
               <Grid container spacing={24}>
                 <Grid item xs={12} sm={6}>
                   <Input name='name' label='Name' autoFocus />
+                  <Input name='email' label='Email Address' />
                 </Grid>
 
                 <Grid container item xs={12} justify='flex-end'>
@@ -45,7 +46,7 @@ const Add = withStyles(styles)(memo(({ error, isSaving, add, classes }) => {
                     type='submit'
                     variant='contained'
                     color='secondary'
-                    disabled={pristine || isSaving}
+                    disabled={pristine || started}
                     >
                     Register Member
                   </Button>                

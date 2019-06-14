@@ -128,7 +128,7 @@ const NoUserMenu = memo(() => (
   </div>
 ));
 
-const Header = memo(({ me, resend, classes }) => (
+const Header = memo(({ me, fetch, signOut, resend, classes }) => (
   <div>
     <Verify me={me} resend={resend} classes={classes} />
 
@@ -137,7 +137,7 @@ const Header = memo(({ me, resend, classes }) => (
         <Logo me={me} classes={classes}>Defacto</Logo>
 
         {me.isFetching && <CircularProgress className={classes.progress} size={20} thickness={3} />}
-        {!me.isFetching && me.name && <UserMenu me={me} classes={classes} />}
+        {!me.isFetching && me.name && <UserMenu me={me} fetch={fetch} signOut={signOut} classes={classes} />}
         {!me.isFetching && !me.name && <NoUserMenu />}
       </Toolbar>
     </AppBar>

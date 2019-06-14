@@ -11,10 +11,13 @@ const authenticate = Component => {
 
   return connect(mapStateToProps)(({ me, ...props }) => {
     const { id, isFetching } = me;
-    
+    const { location: { pathname }} = props;
+
     useEffect(() => {
-      if (!id && !isFetching) return redirectTo('/signin');
-    }, [ id, isFetching ]);
+      if (!id && !isFetching) {
+        return redirectTo(`/signin?return=${pathname}`);
+      }
+    }, [ id, isFetching, pathname ]);
 
     return <Component {...props} me={me} />
   });

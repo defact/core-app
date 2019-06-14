@@ -40,7 +40,7 @@ const Icon = ({ id, classes }) => (
   </Link>
 );
 
-const Role = memo(({ id, name, classes, props }) => {
+const Role = memo(({ id, name, classes, ...props }) => {
   const handleArchive = () => !props.disabled && props.remove({ id });
 
   return (

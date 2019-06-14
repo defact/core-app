@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useRef, useState } from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -10,6 +10,12 @@ import { Field } from 'react-final-form';
 
 export default memo(({ name='password', label='Password', ...rest }) => {
   const [ showPassword, setShowPassword ] = useState(false);
+  const inputRef = useRef(null);
+
+  const handleTogglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+    inputRef.current.focus();
+  };
 
   return (
     <Field name={name} {...rest}>
@@ -19,6 +25,7 @@ export default memo(({ name='password', label='Password', ...rest }) => {
           <Input {...rest}
             id={name}
             name={name}
+            inputRef={inputRef}
             type={showPassword ? 'text' : 'password'}
             inputProps={restInput}
             onChange={onChange}
@@ -29,7 +36,7 @@ export default memo(({ name='password', label='Password', ...rest }) => {
               <InputAdornment position='end'>
                 <IconButton
                   aria-label='Toggle password visibility'
-                  onClick={() => setShowPassword(!showPassword)}
+                  onClick={handleTogglePasswordVisibility}
                 >
                   {showPassword ? <Visibility /> : <VisibilityOff />}
                 </IconButton>
