@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { fetch } from '../state/actions/roles';
-import { fetch as entities } from '../state/actions/entities';
-import { fetch as permissions } from '../state/actions/permissions';
+import { fetch as entities } from '../modules/claims/state/actions/entities';
+import { fetch as permissions } from '../modules/claims/state/actions/permissions';
 
 const Roles = ({ fetch, permissions, entities, children }) => {
   useEffect(() => {

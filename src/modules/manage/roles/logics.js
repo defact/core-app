@@ -1,5 +1,4 @@
 import roles from './state/logics/roles';
-import permissions from './state/logics/permissions';
-import entities from './state/logics/entities';
+import claims from './modules/claims/logics';
 
-export default [ ...roles, permissions, entities ];
+export default [ ...roles, ...claims ];

@@ -10,3 +10,5 @@ export const profileUsersSelector = createSelector(
     return ids ? compact(ids.map(id => users[id])) : []
   }
 );
+
+export const usersSelector = state => state.manage.users.users;

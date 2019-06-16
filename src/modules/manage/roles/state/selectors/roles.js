@@ -1,6 +1,6 @@
 import compact from 'lodash.compact';
 import { createSelector } from 'reselect';
-import { entitiesSelector } from './entities';
+import { entitiesSelector } from '../../modules/claims/state/selectors/entities';
 
 const compare = property => (a, b) => {
   const propA = a[property].toUpperCase();

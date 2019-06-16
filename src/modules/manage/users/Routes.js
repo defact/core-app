@@ -1,7 +1,9 @@
 import React from 'react';
 import { Router, Redirect } from '@reach/router';
 
-import { Users, List, Add, User, Roles, Profiles } from './containers';
+import { Users, List, Add, User } from './containers';
+import Profiles from './modules/profiles/Routes';
+import Roles from './modules/roles/Routes';
 
 const Routes = () => (
   <Router primary={false}>
@@ -9,8 +11,8 @@ const Routes = () => (
       <List path='/' />
       <Add path='register' />
       <User path=':uid'>
-        <Roles path='roles' />
-        <Profiles path='members' />
+        <Roles path='roles/*' />
+        <Profiles path='members/*' />
       </User>
       <Redirect from=':uid' to='/manage/users/:uid/roles' noThrow />
     </Users>

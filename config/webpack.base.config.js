@@ -72,6 +72,11 @@ module.exports = () => {
           path: path.resolve(__dirname, '..', 'dist'),
           publicPath: '/',
         },
+        resolve: {
+          alias: {
+            'react-virtualized/AutoSizer': 'react-virtualized/dist/commonjs/AutoSizer',
+          },
+        }
     }
   ])
 };

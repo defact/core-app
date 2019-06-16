@@ -1,14 +1,14 @@
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { Users } from '../components';
 import { fetch } from '../state/actions/users';
 
-import { profileSelector } from '../../../state/selectors/profiles';
-import { profileUsersSelector } from '../state/selectors/users';
+const Users = ({ pid, fetch, children }) => {
+  useEffect(() => {
+    if (pid) fetch({ id: pid });
+  }, [pid]);
 
-const mapStateToProps = (state, props) => ({
-  profile: profileSelector(state, props),
-  users: profileUsersSelector(state, props),
-});
+  return children;
+};
 
-export default connect(mapStateToProps, { fetch: fetch.start })(Users);
+export default connect(null, { fetch: fetch.start })(Users);

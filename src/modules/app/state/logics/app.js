@@ -11,7 +11,7 @@ const REDIRECTS = {
 const onResponse = createLogic({
   type: '*',
 
-  transform({ action, dispatch }, allow) {
+  process({ action }, dispatch, done) {
     if (action.payload && 
         action.payload.statusCode && 
         action.payload.statusCode === 401 &&
@@ -20,7 +20,7 @@ const onResponse = createLogic({
       navigate(REDIRECTS[action.payload.message]);
     }
 
-    allow(action);
+    done();
   }
 });
 
