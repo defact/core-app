@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
+import { unstable_useMediaQuery as useMediaQuery } from '@material-ui/core/useMediaQuery';
 import Button from '@material-ui/core/Button';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles, withTheme } from '@material-ui/core/styles';
 
 const styles = theme => ({
   submit: {
@@ -8,17 +9,21 @@ const styles = theme => ({
   },
 });
 
-const Submit = memo(({ classes, children, disabled, color='secondary', fullWidth=true }) => (
-  <Button
-    type='submit'
-    fullWidth={fullWidth}
-    variant='contained'
-    color={color}
-    className={classes.submit}
-    disabled={disabled}
-    >
-    {children}
-  </Button>
-));
+const Submit = memo(({ children, disabled, color='secondary', fullWidth=false, theme, classes }) => {
+  if (fullWidth === false) fullWidth = useMediaQuery(theme.breakpoints.down('xs'));
+  
+  return (
+    <Button
+      type='submit'
+      fullWidth={fullWidth}
+      variant='contained'
+      color={color}
+      className={classes.submit}
+      disabled={disabled}
+      >
+      {children}
+    </Button>
+  );
+});
 
-export default withStyles(styles)(Submit);
+export default withTheme()(withStyles(styles)(Submit));

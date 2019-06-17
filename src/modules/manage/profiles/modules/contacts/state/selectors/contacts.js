@@ -1,4 +1,5 @@
 import compact from 'lodash.compact';
+import find from 'lodash.find';
 import { createSelector } from 'reselect';
 
 const dataSelector = state => state.manage.profiles.contacts.contacts.data;
@@ -12,11 +13,8 @@ export const profileContactsSelector = createSelector(
 );  
 
 export const profileContactSelector = createSelector(
-  dataSelector, idsSelector, (_, props) => props.pid, (_, props) => props.cid, (contacts = [], ids, pid, cid) => {
-    ids = ids[pid];
-    if (ids === undefined) return;
-    cid = ids[cid];
-    return cid && contacts[cid];
+  dataSelector, (_, props) => props.cid, (contacts = [], cid) => {
+    return cid && find(contacts, c => c.id === parseInt(cid, 10));
   }
 );
 

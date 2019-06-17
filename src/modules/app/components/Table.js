@@ -16,7 +16,7 @@ export default ({ data, columns }) => {
       {({ width }) => (
         <Table 
           width={width}
-          rowHeight={64}
+          rowHeight={62}
           data={data} 
           columns={columns} 
           isCellHovered={isHovered} 

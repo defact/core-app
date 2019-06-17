@@ -1,12 +1,11 @@
-import React, { memo, useState } from 'react';
+import React, { memo } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
 import { Form, Field } from 'react-final-form';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import { Select } from '../../../../../app/components/form';
-import { useSubmit } from '../../../../../app/hooks';
+import { Select, Submit } from '../../../../../app/components/form';
+import { useSubmitWithDialog } from '../../../../../app/hooks';
 
 import Forms from './contacts/Form';
 
@@ -19,8 +18,8 @@ const styles = theme => ({
   },
 });
 
-const Add = withStyles(styles)(memo(({ profile, error, isSaving, add, classifiers, classes }) => {
-  const { handleSubmit, Dialog } = useSubmit(data => add({ id: profile.id, ...data }));
+const Add = withStyles(styles)(memo(({ profile, error, started, add, classifiers, classes }) => {
+  const { handleSubmit, Dialog } = useSubmitWithDialog(data => add({ id: profile.id, ...data }));
 
   return (
     <Paper className={classes.paper}>
@@ -46,14 +45,9 @@ const Add = withStyles(styles)(memo(({ profile, error, isSaving, add, classifier
               </Grid>
 
               <Grid container item xs={12} justify='flex-end'>
-                <Button
-                  type='submit'
-                  variant='contained'
-                  color='secondary'
-                  disabled={pristine || isSaving}
-                  >
+                <Submit disabled={pristine || started}>
                   Add Contact
-                </Button>                
+                </Submit>                
               </Grid>
             </Grid>
           </form>

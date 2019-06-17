@@ -13,13 +13,11 @@ const store = createStore();
 store.dispatch(fetch.start());
 
 const App = () => {
-  const [ errorKey, setErrorKey ] = useState(0);
-
   return (
     <Provider store={store}>
       <Theme>
-        <Main reset={() => setErrorKey(key => key + 1)}>
-          <Routes path='/' errorKey={errorKey} />
+        <Main>
+          <Routes path='/' />
         </Main>
       </Theme>
     </Provider>

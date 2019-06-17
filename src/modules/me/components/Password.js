@@ -6,7 +6,7 @@ import { Security } from '@material-ui/icons';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import { Password, Header, Submit, Message } from '../../app/components/form';
-import { useSubmit } from '../../app/hooks';
+import { useSubmitWithDialog } from '../../app/hooks';
 import { Form as Layout } from '../../app/layouts';
 
 import validate from '../state/validate/password';
@@ -20,7 +20,7 @@ const styles = theme => ({
 });
 
 const Change = memo(({ classes, me, change, started, error }) => {
-  const { handleSubmit, Dialog } = useSubmit(change);
+  const { handleSubmit, Dialog } = useSubmitWithDialog(change);
   
   return (
     <Layout>
@@ -34,7 +34,7 @@ const Change = memo(({ classes, me, change, started, error }) => {
           <form className={classes.form} onSubmit={handleSubmit}>
             <Password autoFocus />
 
-            <Submit disabled={pristine || started}>Change Password</Submit>
+            <Submit disabled={pristine || started} fullWidth={true}>Change Password</Submit>
           </form>
         )}
       />

@@ -1,8 +1,8 @@
 import { createLogic } from 'redux-logic';
-import { SEND, sendSuccess, sendFailed } from '../actions/contact';
+import { send } from '../actions/contact';
 
 const onSend = createLogic({
-  type: SEND,
+  type: send.start,
   latest: true,
 
   process({ api, action }, dispatch, done) {
@@ -10,12 +10,12 @@ const onSend = createLogic({
 
     return api().post('messages', { from, message, subject: 'Message from defact.io' })
     
-    .then(data => dispatch(sendSuccess(data)))
+    .then(data => dispatch(send.success(data)))
     .then(onSuccess)
     .then(done)
 
     .catch(err => {
-      dispatch(sendFailed(err));
+      dispatch(send.failed(err));
       onFailure(err);
     });
   }

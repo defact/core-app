@@ -30,7 +30,7 @@ const SignIn = memo(({ classes, signIn, error, email, remember, started }) => (
           <Password autoFocus={remember} />
           <Checkbox name='remember' label='Remember me?' />
 
-          <Submit disabled={pristine || started}>Sign In</Submit>
+          <Submit disabled={pristine || started} fullWidth={true}>Sign In</Submit>
         </form>
       )}
     />

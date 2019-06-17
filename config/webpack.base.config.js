@@ -5,6 +5,7 @@ const merge = require('webpack-merge');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const APP_DIR = path.resolve(__dirname, '../src');
 
@@ -35,6 +36,13 @@ module.exports = () => {
               }
             },
             {
+              test: /\.mdx?$/,
+              use: [
+                'babel-loader',
+                '@mdx-js/loader'
+              ]
+            },
+            {
               test: /\.css$/,
               use: [
                 'style-loader',
@@ -59,6 +67,7 @@ module.exports = () => {
           ]
         },
         plugins: [
+          // new BundleAnalyzerPlugin(),
           new HtmlWebpackPlugin({
             template: './src/static/index.html',
             filename: './index.html'

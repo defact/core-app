@@ -1,13 +1,12 @@
 import React, { memo } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
 import { Form } from 'react-final-form';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import { Input } from '../../../app/components/form';
+import { Input, Submit } from '../../../app/components/form';
 import { Breadcrumbs } from '../../../app/components';
-import { useSubmit } from '../../../app/hooks';
+import { useSubmitWithDialog } from '../../../app/hooks';
 
 import validate from '../state/validate/group';
 
@@ -19,7 +18,7 @@ const styles = theme => ({
 });
 
 const Add = withStyles(styles)(memo(({ error, started, add, classes }) => {
-  const { handleSubmit, Dialog } = useSubmit(add);
+  const { handleSubmit, Dialog } = useSubmitWithDialog(add);
 
   return (
     <>
@@ -41,14 +40,9 @@ const Add = withStyles(styles)(memo(({ error, started, add, classes }) => {
                 </Grid>
 
                 <Grid container item xs={12} justify='flex-end'>
-                  <Button
-                    type='submit'
-                    variant='contained'
-                    color='secondary'
-                    disabled={pristine || started}
-                    >
+                  <Submit disabled={pristine || started}>
                     Add Group
-                  </Button>                
+                  </Submit>                
                 </Grid>
               </Grid>
             </form>

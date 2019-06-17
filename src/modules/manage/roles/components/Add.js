@@ -1,15 +1,14 @@
 import React, { memo } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
 import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import { FieldArray } from 'react-final-form-arrays';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import { Input, Select } from '../../../app/components/form';
+import { Input, Select, Submit } from '../../../app/components/form';
 import { Breadcrumbs } from '../../../app/components';
-import { useSubmit } from '../../../app/hooks';
+import { useSubmitWithDialog } from '../../../app/hooks';
 
 import validate from '../state/validate/role';
 
@@ -20,8 +19,8 @@ const styles = theme => ({
   },
 });
 
-const Add = withStyles(styles)(memo(({ claims, error, isSaving, entities, permissions, add, classes }) => {
-  const { handleSubmit, Dialog } = useSubmit(add);
+const Add = withStyles(styles)(memo(({ claims, error, started, entities, permissions, add, classes }) => {
+  const { handleSubmit, Dialog } = useSubmitWithDialog(add);
 
   return (
     <>
@@ -58,14 +57,9 @@ const Add = withStyles(styles)(memo(({ claims, error, isSaving, entities, permis
                 </Grid>
 
                 <Grid container item xs={12} justify='flex-end'>
-                  <Button
-                    type='submit'
-                    variant='contained'
-                    color='secondary'
-                    disabled={pristine || isSaving}
-                    >
+                  <Submit disabled={pristine || started}>
                     Add Role
-                  </Button>                
+                  </Submit>                
                 </Grid>
               </Grid>
             </form>

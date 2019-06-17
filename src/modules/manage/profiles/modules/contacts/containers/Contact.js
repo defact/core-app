@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 
 import { Contact } from '../components';
-import { add } from '../state/actions/contacts';
+import { save } from '../state/actions/contacts';
+import { info } from '../../../../../app/state/actions/flash';
 
 import { profileSelector } from '../../../state/selectors/profiles';
 import { profileContactSelector } from '../state/selectors/contacts';
@@ -13,4 +14,4 @@ const mapStateToProps = (state, props) => ({
   classifiers: classifiersSelector(state),
 });
 
-export default connect(mapStateToProps, { add: add.start })(Contact);
+export default connect(mapStateToProps, { save: save.start, info })(Contact);

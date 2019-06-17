@@ -1,12 +1,11 @@
-import React, { memo, useState } from 'react';
+import React, { memo } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
 import { Form, Field } from 'react-final-form';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import { Select } from '../../../../../app/components/form';
-import { useSubmit } from '../../../../../app/hooks';
+import { Select, Message, Submit } from '../../../../../app/components/form';
+import { useSubmitWithRedirect } from '../../../../../app/hooks';
 
 import Forms from './contacts/Form';
 
@@ -19,8 +18,13 @@ const styles = theme => ({
   },
 });
 
-const Contact = withStyles(styles)(memo(({ profile, contact, error, isSaving, add, classifiers, classes }) => {
-  const { handleSubmit, Dialog } = useSubmit(data => add({ id: profile.id, ...data }));
+const Contact = withStyles(styles)(memo(({ profile, contact, started, error, save, info, classifiers, classes }) => {
+  const onSubmit = data => save({ ...data, profile });
+  const redirectTo = `/manage/members/${profile.id}/contacts`;
+  const onSuccess = () => info(`The ${contact.classifier} has been updated`);
+  const handleSubmit = useSubmitWithRedirect(onSubmit, { redirectTo, onSuccess });
+
+  if (contact === undefined) return null;
 
   return (
     <Paper className={classes.paper}>
@@ -33,7 +37,7 @@ const Contact = withStyles(styles)(memo(({ profile, contact, error, isSaving, ad
             
             <Grid container spacing={24}>
               <Grid item xs={12} sm={3}>
-                <Select name='classifier' label='Contact Type' data={classifiers} />
+                <Select name='classifier' label='Contact Type' data={classifiers} disabled={true} />
               </Grid>
 
               <Grid item xs={12} sm={9}>
@@ -46,20 +50,16 @@ const Contact = withStyles(styles)(memo(({ profile, contact, error, isSaving, ad
               </Grid>
 
               <Grid container item xs={12} justify='flex-end'>
-                <Button
-                  type='submit'
-                  variant='contained'
-                  color='secondary'
-                  disabled={pristine || isSaving}
-                  >
+                <Submit disabled={pristine || started}>
                   Save Contact
-                </Button>                
+                </Submit>                
               </Grid>
             </Grid>
           </form>
         )}
-      />    
-      <Dialog error={error} message='The contact has been saved' />
+      />
+
+      {error && <Message {...error} />}
     </Paper>
   );
 }));

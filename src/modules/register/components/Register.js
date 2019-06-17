@@ -28,19 +28,19 @@ const styles = theme => ({
   },
 });
 
-const Register = memo(({ classes, handleRegister, error, isRegistering }) => (
+const Register = memo(({ classes, register, error, started }) => (
   <Layout>
     <Helmet title={'Register'} />
-    <Header Icon={Face} isSubmitting={false}>Register</Header>
+    <Header Icon={Face} isSubmitting={started}>Register</Header>
     
-    <Form onSubmit={handleRegister} validate={validate}
+    <Form onSubmit={register} validate={validate}
       render={({ handleSubmit, pristine }) => (
         <form className={classes.form} onSubmit={handleSubmit}>
           <Input name='name' label='Name' autoFocus/>
           <Input name='email' label='Email Address' />
           <Password />
 
-          <Submit disabled={pristine || isRegistering}>Register</Submit>
+          <Submit disabled={pristine || started} fullWidth={true}>Register</Submit>
         </form>
       )}
     />

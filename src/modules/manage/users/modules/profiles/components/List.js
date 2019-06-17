@@ -27,7 +27,7 @@ const Entry = memo(({ to, primary }) => (
   </ListItem>
 ));
 
-const Profiles = memo(({ profiles, data, fetch, classes }) => {
+const Profiles = memo(({ profiles, data, classes }) => {
   return (
     <Paper className={classes.paper}>
       <div className={classes.card}>
