@@ -2,5 +2,12 @@ import { connect } from 'react-redux';
 
 import { Add } from '../components';
 import { add } from '../state/actions/users';
+import { info } from '../../../app/state/actions/flash';
 
-export default connect(null, { add: add.start })(Add);
+import { userSelector } from '../state/selectors/users';
+
+const mapStateToProps = (state, props) => ({ 
+  ...userSelector(state, props),
+});
+
+export default connect(mapStateToProps, { add: add.start, info })(Add);

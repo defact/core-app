@@ -1,8 +1,9 @@
 import React, { memo } from 'react';
 import classnames from 'classnames';
+import { unstable_useMediaQuery as useMediaQuery } from '@material-ui/core/useMediaQuery';
 import { Info, Block, Warning } from '@material-ui/icons';
 import Typography from '@material-ui/core/Typography';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { withStyles, withTheme } from '@material-ui/core/styles';
 import { red, blue, yellow } from '@material-ui/core/colors';
 
 const ICONS = {
@@ -29,15 +30,20 @@ const styles = theme => ({
     paddingLeft: theme.spacing.unit, 
     verticalAlign: 'top'
   },
+  centre: {
+    textAlign: 'center',
+  },
 });
 
-const Message = memo(({ classes, message, type='error' }) => {
+const Message = memo(({ classes, message, type='error', theme }) => {
   const Icon = ICONS[type];
+  const shouldCentre = useMediaQuery(theme.breakpoints.down('xs'));
+
   return (
     <Typography 
       variant='subtitle1' 
       component='p' 
-      className={classnames(classes.message, classes[type])}
+      className={classnames(classes.message, classes[type], shouldCentre && classes.centre)}
     >
       <Icon />
       <span className={classes.text}>{message}</span>
@@ -45,4 +51,4 @@ const Message = memo(({ classes, message, type='error' }) => {
   )
 });
 
-export default withStyles(styles)(Message);
+export default withTheme()(withStyles(styles)(Message));

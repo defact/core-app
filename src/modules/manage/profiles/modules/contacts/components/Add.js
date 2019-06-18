@@ -4,8 +4,8 @@ import Grid from '@material-ui/core/Grid';
 import { Form, Field } from 'react-final-form';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import { Select, Submit } from '../../../../../app/components/form';
-import { useSubmitWithDialog } from '../../../../../app/hooks';
+import { Select, Submit, Message } from '../../../../../app/components/form';
+import { useSubmitWithRedirect } from '../../../../../app/hooks';
 
 import Forms from './contacts/Form';
 
@@ -18,8 +18,11 @@ const styles = theme => ({
   },
 });
 
-const Add = withStyles(styles)(memo(({ profile, error, started, add, classifiers, classes }) => {
-  const { handleSubmit, Dialog } = useSubmitWithDialog(data => add({ id: profile.id, ...data }));
+const Add = withStyles(styles)(memo(({ profile, error, started, add, info, classifiers, classes }) => {
+  const onSubmit = data => add({ id: profile.id, ...data });
+  const onSuccess = () => info(`The contact has been added`);
+  const redirectTo = `/manage/members/${profile.id}/contacts`;
+  const handleSubmit = useSubmitWithRedirect(onSubmit, { redirectTo, onSuccess });
 
   return (
     <Paper className={classes.paper}>
@@ -53,7 +56,7 @@ const Add = withStyles(styles)(memo(({ profile, error, started, add, classifiers
           </form>
         )}
       />    
-      <Dialog error={error} message='The contact has been added' />
+      {error && <Message {...error} />}
     </Paper>
   );
 }));

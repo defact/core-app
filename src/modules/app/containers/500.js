@@ -19,9 +19,10 @@ export default class Broken extends Component {
     if (this.state.error) {
       return (
         <>
-          <Error title='Error'>Application Error</Error>
-          <Typography variant='subtitle1'>{this.state.error.toString()}</Typography>
-          <Typography variant='body2'>{this.state.info.componentStack}</Typography>
+          <Error title='Application Error'>
+            <Typography variant='subtitle1'>{this.state.error.toString()}</Typography>
+            <Typography variant='body2'>{this.state.info.componentStack}</Typography>
+          </Error>
         </>
       );
     }

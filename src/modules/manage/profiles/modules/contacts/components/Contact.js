@@ -20,8 +20,8 @@ const styles = theme => ({
 
 const Contact = withStyles(styles)(memo(({ profile, contact, started, error, save, info, classifiers, classes }) => {
   const onSubmit = data => save({ ...data, profile });
-  const redirectTo = `/manage/members/${profile.id}/contacts`;
   const onSuccess = () => info(`The ${contact.classifier} has been updated`);
+  const redirectTo = `/manage/members/${profile.id}/contacts`;
   const handleSubmit = useSubmitWithRedirect(onSubmit, { redirectTo, onSuccess });
 
   if (contact === undefined) return null;

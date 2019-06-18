@@ -15,13 +15,13 @@ const stateSelector = state => state.manage.users.users;
 const dataSelector = state => state.manage.users.users.data;
 
 export const userSelector = createSelector(
-  dataSelector, stateSelector, (state, props) => props.uid, (users = [], state, id) => {
+  dataSelector, stateSelector, (_, props) => props.uid, (users = [], state, id) => {
     return ({ ...state, ...users[id] })
   }
 );
 
 export const userWithRolesSelector = createSelector(
-  dataSelector, rolesSelector, stateSelector, (state, props) => props.uid, 
+  dataSelector, rolesSelector, stateSelector, (_, props) => props.uid, 
   (users = [], roles, state, id) => 
     ({ ...state, ...constructUser(roles.roles, users[id]) })
 );

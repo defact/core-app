@@ -6,7 +6,7 @@ import { Security } from '@material-ui/icons';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 import { Password, Header, Submit, Message } from '../../app/components/form';
-import { useSubmitWithDialog } from '../../app/hooks';
+import { useSubmitWithRedirect } from '../../app/hooks';
 import { Form as Layout } from '../../app/layouts';
 
 import validate from '../state/validate/password';
@@ -19,8 +19,9 @@ const styles = theme => ({
   },
 });
 
-const Change = memo(({ classes, me, change, started, error }) => {
-  const { handleSubmit, Dialog } = useSubmitWithDialog(change);
+const Change = memo(({ classes, me, change, info, started, error }) => {
+  const onSuccess = () => info('Your password has been changed');
+  const handleSubmit = useSubmitWithRedirect(change, { redirectTo: '/me', onSuccess });
   
   return (
     <Layout>
@@ -39,7 +40,7 @@ const Change = memo(({ classes, me, change, started, error }) => {
         )}
       />
 
-      <Dialog error={error} message='Your password has been successfully changed' />
+      {error && <Message {...error} />}
     </Layout>
   );
 });

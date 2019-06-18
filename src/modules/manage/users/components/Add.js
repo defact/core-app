@@ -4,9 +4,9 @@ import Grid from '@material-ui/core/Grid';
 import { Form } from 'react-final-form';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import { Input, Submit } from '../../../app/components/form';
+import { Input, Message, Submit } from '../../../app/components/form';
 import { Breadcrumbs } from '../../../app/components';
-import { useSubmitWithDialog } from '../../../app/hooks';
+import { useSubmitWithRedirect } from '../../../app/hooks';
 
 import validate from '../state/validate/user';
 
@@ -17,8 +17,9 @@ const styles = theme => ({
   },
 });
 
-const Add = withStyles(styles)(memo(({ error, started, add, classes }) => {
-  const { handleSubmit, Dialog } = useSubmitWithDialog(add);
+const Add = withStyles(styles)(memo(({ error, started, add, info, classes }) => {
+  const onSuccess = () => info('The user has been registered');
+  const handleSubmit = useSubmitWithRedirect(add, { redirectTo: '/manage/users', onSuccess });
 
   return (
     <>
@@ -35,7 +36,7 @@ const Add = withStyles(styles)(memo(({ error, started, add, classes }) => {
             <form onSubmit={handleSubmit} autoComplete='off'>
               
               <Grid container spacing={24}>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12}>
                   <Input name='email' label='Email Address' autoFocus />
                 </Grid>
 
@@ -48,7 +49,7 @@ const Add = withStyles(styles)(memo(({ error, started, add, classes }) => {
             </form>
           )}
         />    
-        <Dialog error={error} message='The user has been registered' />
+        {error && <Message {...error} />}
       </Paper>
     </>
   );

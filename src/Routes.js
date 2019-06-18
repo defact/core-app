@@ -10,6 +10,7 @@ const Me = lazy(() => import('./modules/me/Routes'));
 const Register = lazy(() => import('./modules/register/Routes'));
 const Manage = lazy(() => import('./modules/manage/Routes'));
 const Contact = lazy(() => import('./modules/contact/Routes'));
+const Help = lazy(() => import('./modules/help/Routes'));
 
 const Routes = () => (
   <Broken>
@@ -24,6 +25,7 @@ const Routes = () => (
               <Me path='me/*' />
               <Manage path='manage/*' />
               <Contact path='contact' />
+              <Help path='help' />
 
               <Denied path='denied' />
               <NotFound default />

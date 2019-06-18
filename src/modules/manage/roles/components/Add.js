@@ -6,9 +6,9 @@ import arrayMutators from 'final-form-arrays';
 import { FieldArray } from 'react-final-form-arrays';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import { Input, Select, Submit } from '../../../app/components/form';
+import { Input, Select, Message, Submit } from '../../../app/components/form';
 import { Breadcrumbs } from '../../../app/components';
-import { useSubmitWithDialog } from '../../../app/hooks';
+import { useSubmitWithRedirect } from '../../../app/hooks';
 
 import validate from '../state/validate/role';
 
@@ -19,8 +19,9 @@ const styles = theme => ({
   },
 });
 
-const Add = withStyles(styles)(memo(({ claims, error, started, entities, permissions, add, classes }) => {
-  const { handleSubmit, Dialog } = useSubmitWithDialog(add);
+const Add = withStyles(styles)(memo(({ claims, error, started, entities, permissions, add, info, classes }) => {
+  const onSuccess = () => info('The role has been added');
+  const handleSubmit = useSubmitWithRedirect(add, { redirectTo: '/manage/roles', onSuccess });
 
   return (
     <>
@@ -65,7 +66,7 @@ const Add = withStyles(styles)(memo(({ claims, error, started, entities, permiss
             </form>
           )}
         />    
-        <Dialog error={error} message='The role has been added' />
+        {error && <Message {...error} />}
       </Paper>
     </>
   );

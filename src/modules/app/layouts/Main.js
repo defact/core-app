@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core';
 
 import { Header, Footer, Alert, Flash } from '../components';
 import { close } from '../state/actions/alert';
+import { dismiss } from '../state/actions/flash';
 import { fetch } from '../../me/state/actions/me';
 import { resend } from '../../me/state/actions/verification';
 import { signOut } from '../../sessions/state/actions/signout';
@@ -24,8 +25,8 @@ const styles = theme => ({
 const Main = withStyles(styles)(({ classes, children, alert, flash, ...props }) => (
   <div className={classes.container}>
     <Helmet titleTemplate={'Defacto | %s'} title={'Home'} />
-    <Flash {...flash} />
-    <Alert {...alert} />
+    <Flash {...flash} dismiss={props.dismiss} />
+    <Alert {...alert} close={props.close} />
     <Header {...props} />
     <main className={classes.main}>{children}</main>
     <Footer />
@@ -42,7 +43,8 @@ const mapActions = ({
   fetch: fetch.start, 
   resend: resend.start,
   signOut: signOut.start, 
-  close 
+  dismiss,
+  close,
 });
 
 export default connect(mapStateToProps, mapActions)(Main);

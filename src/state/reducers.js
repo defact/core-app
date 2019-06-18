@@ -53,3 +53,8 @@ export const data = (entity) => {
     return state;
   }
 };
+
+export const sort = (asc, desc) => handleActions({
+  [asc]: (state, action) => ({ property: action.payload, direction: 'asc' }),
+  [desc]: (state, action) => ({ property: action.payload, direction: 'desc' }),
+}, {});

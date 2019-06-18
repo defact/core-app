@@ -5,12 +5,12 @@ const useSubmit = (onSubmit, options = {}) => {
     const onSuccess = () => {
       const { onSuccess, redirectTo } = options;
 
+      form.reset();
+
       if (redirectTo) navigate(redirectTo);
       if (onSuccess) onSuccess();
-
-      form.reset();
     };
-    const onFailure = onSuccess;
+    const onFailure = () => form.reset();
 
     onSubmit({ ...props, options, onSuccess, onFailure });
   };

@@ -52,13 +52,13 @@ const styles = theme => ({
   },
 });
 
-const Flash = ({ message, type='info', isActive, classes }) => {
+const Flash = ({ message, type='info', isActive, dismiss, classes }) => {
   const active = message !== '' && isActive;
   const Icon = ICONS[type];
 
   return (
     <Slide direction='down' in={active} timeout={500} mountOnEnter unmountOnExit>
-      <div className={classnames(classes.root, classes[type])}>
+      <div className={classnames(classes.root, classes[type])} onClick={dismiss}>
         <div className={classes.message}>
           <Icon />
           <Typography variant='body1' className={classes.text} color='inherit'>{message}</Typography>

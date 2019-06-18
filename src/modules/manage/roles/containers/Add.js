@@ -2,6 +2,8 @@ import { connect } from 'react-redux';
 
 import { Add } from '../components';
 import { add } from '../state/actions/roles';
+import { info } from '../../../app/state/actions/flash';
+
 import { roleWithClaimsSelector } from '../state/selectors/roles';
 import { entitiesSelector } from '../modules/claims/state/selectors/entities';
 import { permissionsSelector } from '../modules/claims/state/selectors/permissions';
@@ -12,4 +14,4 @@ const mapStateToProps = (state, props) => ({
   permissions: permissionsSelector(state),
 });
 
-export default connect(mapStateToProps, { add: add.start })(Add);
+export default connect(mapStateToProps, { add: add.start, info })(Add);
