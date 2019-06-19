@@ -1,5 +1,6 @@
 import merge from 'lodash.mergewith';
 import isArray from 'lodash.isarray';
+
 import { handleActions } from 'redux-actions';
 
 const noop = () => void(0);
@@ -17,12 +18,12 @@ export const completed = (...actions) => handleActions(actions.map(action => ({
 })).reduce((memo, next) => ({ ...memo, ...next }), {}), false);
 
 export const id = (set, clear = noop) => handleActions({
-  [set.success]: (state, action) => action.payload.result,
+  [set.success]: (_, action) => action.payload.result,
   [clear]: () => null    
 }, null);
 
 export const ids = (set, append = { success: noop }, remove = { success: noop }, clear = noop) => handleActions({
-  [set.success]: (state, action) => action.payload.result,
+  [set.success]: (_, action) => action.payload.result,
   [append.success]: (state, action) => [ ...state, action.payload.result ],
   [remove.success]: (state, action) => state.filter(id => id !== action.payload.result),
   [clear]: () => []
@@ -38,7 +39,7 @@ export const idsByKey = (set, append = { success: noop }, remove = { success: no
 export const error = (...actions) => handleActions(actions.map(action => ({
   [action.start]: () => false,
   [action.success]: () => false,
-  [action.failed]: (state, action) => ({ message: action.payload.message }),
+  [action.failed]: (_, action) => ({ message: action.payload.message }),
 })).reduce((memo, next) => ({ ...memo, ...next }), {}), false);
 
 export const data = (entity) => {
@@ -54,7 +55,15 @@ export const data = (entity) => {
   }
 };
 
-export const sort = (asc, desc) => handleActions({
-  [asc]: (state, action) => ({ property: action.payload, direction: 'asc' }),
-  [desc]: (state, action) => ({ property: action.payload, direction: 'desc' }),
+export const sorted = (sort, initialSort = { ascending: true }) => handleActions({
+  [sort.asc]: (_, action) => ({ property: action.payload, ascending: true }),
+  [sort.desc]: (_, action) => ({ property: action.payload, ascending: false }),
+}, initialSort);
+
+export const filtered = (filter) => handleActions({
+  [filter]: (_, action) => action.payload,
+}, null);
+
+export const paged = (page) => handleActions({
+  [page]: (_, action) => ({ skip: action.payload.skip, limit: action.payload.limit }),
 }, {});

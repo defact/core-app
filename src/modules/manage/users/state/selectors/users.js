@@ -1,7 +1,11 @@
 import compact from 'lodash.compact';
 import { createSelector } from 'reselect';
 
+import { process } from '../../../../../state/selectors';
+
 import { rolesSelector } from '../../../roles/state/selectors/roles';
+
+const filterAndSort = process({ email: 'string', isFixed: 'boolean' });
 
 const constructUser = (roles = [], user = { roles: [] }) => {
   return { ...user, roles: roles.map(role => {
@@ -13,6 +17,9 @@ const constructUser = (roles = [], user = { roles: [] }) => {
 
 const stateSelector = state => state.manage.users.users;
 const dataSelector = state => state.manage.users.users.data;
+const filterSelector = state => state.manage.users.users.filter;
+const pageSelector = state => state.manage.users.users.page;
+const sortSelector = state => state.manage.users.users.sort;
 
 export const userSelector = createSelector(
   dataSelector, stateSelector, (_, props) => props.uid, (users = [], state, id) => {
@@ -27,6 +34,7 @@ export const userWithRolesSelector = createSelector(
 );
 
 export const usersSelector = createSelector(
-  dataSelector, stateSelector, (users = [], state) => 
-    ({ ...state, users: compact(state.ids.map(id => users[id])) })
+  dataSelector, filterSelector, pageSelector, sortSelector, stateSelector, 
+  (users = [], filter, page, sort, state) => 
+    ({ ...state, sort, users: filterAndSort(compact(state.ids.map(id => users[id])), filter, page, sort) })
 );
