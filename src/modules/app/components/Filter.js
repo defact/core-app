@@ -14,10 +14,10 @@ const styles = theme => ({
   },
 });
 
-const Sort = ({ filter, classes }) => {
+const Filter = ({ filter, property, classes }) => {
   return (
     <Input 
-      onChange={e => filter('email', e.target.value)}
+      onChange={e => filter(property, e.target.value)}
       margin='dense'
       className={classes.input}
       startAdornment={
@@ -29,4 +29,4 @@ const Sort = ({ filter, classes }) => {
   );
 };
 
-export default withStyles(styles)(Sort);
+export default withStyles(styles)(Filter);

@@ -1,12 +1,13 @@
 import React from 'react';
 import { Router } from '@reach/router';
 
-import { SignIn, Verify } from './containers';
+import { SignIn, Verify, Reset } from './containers';
 
 const Routes = () => (
   <Router primary={false}>
-    <Verify path=':code' />
     <SignIn default />
+    <Reset path='reset' />
+    <Verify path=':code' />
   </Router>
 );
 

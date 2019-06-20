@@ -17,6 +17,9 @@ const styles = theme => ({
   },
   paper: {
     marginTop: theme.spacing.unit * 6,
+    [theme.breakpoints.down('xs')]: {
+      marginTop: theme.spacing.unit * 4,
+    },
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',

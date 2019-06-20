@@ -1,11 +1,10 @@
-import React, { memo, useState } from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemText from'@material-ui/core/ListItemText';
 import ListItemIcon from'@material-ui/core/ListItemIcon';
-import Divider from '@material-ui/core/Divider';
 import { Menu as MenuIcon, ArrowUpward, ArrowDownward } from '@material-ui/icons';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { usePopupState, bindTrigger, bindMenu } from 'material-ui-popup-state/hooks'

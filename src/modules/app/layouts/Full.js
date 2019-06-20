@@ -6,9 +6,11 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
     overflow: 'hidden',
-    // paddingBottom: 200,
     width: 'auto',
     margin: theme.spacing.unit * 5,
+    [theme.breakpoints.down('xs')]: {
+      marginTop: theme.spacing.unit * 3,
+    },
     padding: theme.spacing.unit
   },
 });

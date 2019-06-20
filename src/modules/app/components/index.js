@@ -10,4 +10,6 @@ export { default as TabBar } from './TabBar';
 export { default as ActionButton } from './ActionButton';
 export { default as ActionMenu } from './ActionMenu';
 export { default as MenuLink } from './MenuLink';
+export { default as Sort } from './Sort';
+export { default as Filter } from './Filter';
 export { default as Table } from './Table';

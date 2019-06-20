@@ -1,6 +1,8 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
+import { Link as To } from '@reach/router';
+import Link from '@material-ui/core/Link';
 import { Fingerprint } from '@material-ui/icons';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Form } from 'react-final-form';
@@ -16,6 +18,21 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 2,
     marginBottom: theme.spacing.unit,
   },
+  link: {
+    marginTop: theme.spacing.unit * 2,
+    paddingLeft: theme.spacing.unit, 
+    lineHeight: 1.5,
+    textAlign: 'center',
+    verticalAlign: 'top'
+  },
+});
+
+const Reset = memo(({ classes }) => {
+  return (
+    <Link className={classes.link} component={To} to='reset' variant='body1' color='secondary'>
+      Forgotten password?
+    </Link>
+  );
 });
 
 const SignIn = memo(({ classes, signIn, error, email, remember, started }) => (
@@ -36,6 +53,7 @@ const SignIn = memo(({ classes, signIn, error, email, remember, started }) => (
     />
 
     {error && <Message {...error} />}
+    <Reset classes={classes} />
   </Layout>
 ));
 
