@@ -25,7 +25,7 @@ const Routes = () => (
               <Me path='me/*' />
               <Manage path='manage/*' />
               <Contact path='contact' />
-              <Help path='help' />
+              <Help path='help/*' />
 
               <Denied path='denied' />
               <NotFound default />

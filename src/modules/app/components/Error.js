@@ -22,7 +22,7 @@ const styles = theme => ({
   }
 });
 
-const Error = memo(({ classes, title, children }) => (
+const Error = memo(({ classes, title, name = 'home', children }) => (
   <Layout>
     <div className={classes.topBar}>
       <Grid container spacing={24}>
@@ -32,16 +32,14 @@ const Error = memo(({ classes, title, children }) => (
           </Typography>
         </Grid>
         <Grid item xs={4} className={classes.right}>
-          <Link to='/help' className={classes.link}>
+          <Link to={`/help/${name}`} className={classes.link}>
             <Button variant='contained' color='primary'>
               Get help
             </Button>
           </Link>
         </Grid>
         <Grid item xs={12}>
-          <Typography variant='body2'>
-            {children}
-          </Typography>
+          {children}
         </Grid>
       </Grid>
     </div>

@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { lazy } from 'react';
 
-import { Error } from '../../app/components';
+import { Error, Content } from '../../app/components';
 
-export default props => (
-  <Error title='Help'>Help</Error>  
-);
+export default ({ name }) => {
+  const Mdx = lazy(() => import(`./content/${name}.mdx`));
+
+  return (
+    <Error title='Help' name='help'>
+      <Content Mdx={Mdx} />
+    </Error>
+  );
+};

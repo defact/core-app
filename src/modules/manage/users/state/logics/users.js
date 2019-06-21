@@ -1,5 +1,6 @@
 import { createLogic } from 'redux-logic';
 import { fetch, add, save, lock, remove, reset } from '../actions/users';
+import { info } from '../../../../app/state/actions/flash';
 
 const onFetch = createLogic({
   type: fetch.start,
@@ -89,14 +90,12 @@ const onResetPassword = createLogic({
   type: reset.start,
   latest: true,
 
-  processOptions: {
-    dispatchReturn: true,
-    successType: reset.success,
-    failType: reset.failed
-  },
-
-  process({ api, action }) {
-    return api().delete(`users/${action.payload.id}/password`);
+  process({ api, action }, dispatch, done) {
+    return api().delete(`users/${action.payload.id}/password`)
+    .then(() => dispatch(info('The password has been reset')))
+    .then(() => reset.success())
+    .then(done)
+    .catch(err => dispatch(reset.failed(err)));
   }
 });
 

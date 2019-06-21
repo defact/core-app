@@ -5,7 +5,7 @@ import { Help } from './containers';
 
 const Routes = () => (
   <Router primary={false}>
-    <Help default />
+    <Help path='/:name' />
   </Router>
 );
 
