@@ -17,7 +17,7 @@ const api = () => {
 
   const request = axios.create({
     baseURL: '/api',
-    timeout: 3000,
+    timeout: 10000,
     headers: { Authorization: `Bearer ${token}` },
     transformResponse: [response => {
       if (response.length === 0) return;

@@ -16,7 +16,7 @@ const Control = withTheme()(({ filter, sort, asc, desc, theme }) => {
   return (
     <Grid container spacing={24}>
       <Grid item xs={12} sm={8}>
-        <Filter filter={filter} property='email' />
+        <Filter filter={filter} property='email' label='Search users' />
       </Grid>
       <Grid item container xs={12} sm={4} justify={justify}>
         <Sort id='users' sort={sort} asc={asc} desc={desc} properties={SORT_PROPERTIES} />

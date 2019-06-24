@@ -7,7 +7,7 @@ import { Field } from 'react-final-form';
 
 export default memo(({ name, label, type='text', ...rest }) => (
   <Field name={name} {...rest}>
-    {({ input: { name, onChange, value, ...restInput }, meta, ...rest }) => (
+    {({ input: { name, value, onChange, ...restInput }, meta, ...rest }) => (
       <FormControl margin='dense' fullWidth error={meta.touched && meta.error && true}>
         <InputLabel htmlFor={name}>{label}</InputLabel>
         <Input {...rest}

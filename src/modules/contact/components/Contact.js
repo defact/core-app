@@ -23,8 +23,6 @@ const Contact = memo(({ classes, me, send, started, error }) => {
   const { handleSubmit, Dialog } = useSubmitWithDialog(send);
   const { email: from } = me;
   
-  console.log(error);
-
   return (
     <Layout>
       <Helmet title={'Contact Us'} />

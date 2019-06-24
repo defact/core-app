@@ -14,9 +14,10 @@ const styles = theme => ({
   },
 });
 
-const Filter = ({ filter, property, classes }) => {
+const Filter = ({ filter, property, label, classes }) => {
   return (
     <Input 
+      placeholder={label}
       onChange={e => filter(property, e.target.value)}
       margin='dense'
       className={classes.input}

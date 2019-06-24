@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { Link } from '@reach/router';
 import { withStyles } from '@material-ui/core';
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -86,7 +86,7 @@ const Sidebar = memo(({ classes, isOpen, handleClose }) => {
   const sp = e => e.stopPropagation();
 
   return (
-    <SwipeableDrawer open={isOpen} onClose={handleClose} onOpen={() => {}}>
+    <Drawer open={isOpen} onClose={handleClose}>
       <div
         tabIndex={0}
         role='button'
@@ -120,7 +120,7 @@ const Sidebar = memo(({ classes, isOpen, handleClose }) => {
           <Menu menu={other} />
         </div>    
       </div>
-    </SwipeableDrawer>
+    </Drawer>
   );
 });
 

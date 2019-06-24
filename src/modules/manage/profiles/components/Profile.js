@@ -59,6 +59,7 @@ const Profile = withStyles(styles)(memo(({ pid, name, disabled, save, classes, c
         { label: 'Photos', to: 'photos' },
         { label: 'Contacts', to: 'contacts' },
         { label: 'Notes', to: 'notes' },
+        { label: 'Add Contact', to: 'contacts/add' },
       ]} />
 
       {children}

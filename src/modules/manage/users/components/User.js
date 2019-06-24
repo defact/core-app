@@ -42,7 +42,7 @@ const User = memo(({ uid, email, save, classes, children, ...props }) => {
             render={({ form }) => (
               <form onSubmit={handleSubmit} autoComplete='off'>
                 <Grid container spacing={24}>
-                <Grid item xs={12} sm={6}>
+                  <Grid item xs={12} sm={6}>
                     <Input name='email' label='Email Address' autoFocus disabled={props.disabled} />
                     <AutoSave setFieldData={form.mutators.setFieldData} 
                       save={handleSubmit} container={containerRef} />
