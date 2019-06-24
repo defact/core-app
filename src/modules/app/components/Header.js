@@ -23,6 +23,11 @@ const styles = theme => ({
   toolbar: {
     marginLeft: (theme.spacing.unit * 2) + 4,
     marginRight: theme.spacing.unit * 2,
+    [theme.breakpoints.down('xs')]: {
+      marginLeft: 4,
+      marginRight: 0,
+      paddingRight: theme.spacing.unit,
+    },
   },
   message: {
     padding: theme.spacing.unit,
@@ -42,6 +47,11 @@ const styles = theme => ({
     [theme.breakpoints.up('sm')]: {
       display: 'inline',
     }
+  },
+  nouser: {
+    [theme.breakpoints.down('xs')]: {
+      marginRight: theme.spacing.unit,
+    },
   },
   progress: {
     margin: theme.spacing.unit * 2,
@@ -117,8 +127,8 @@ const UserMenu = memo(({ classes, me, fetch, signOut }) => {
   );
 });
 
-const NoUserMenu = memo(() => (
-  <div>
+const NoUserMenu = memo(({ classes }) => (
+  <div className={classes.nouser}>
     <Button color='inherit' component={Link} to='/register'>
       Register
     </Button>
@@ -136,9 +146,9 @@ const Header = memo(({ me, fetch, signOut, resend, classes }) => (
       <Toolbar className={classes.toolbar}>
         <Logo me={me} classes={classes}>Defacto</Logo>
 
-        {me.isFetching && <CircularProgress className={classes.progress} size={20} thickness={3} />}
-        {!me.isFetching && me.name && <UserMenu me={me} fetch={fetch} signOut={signOut} classes={classes} />}
-        {!me.isFetching && !me.name && <NoUserMenu />}
+        {me.started && <CircularProgress className={classes.progress} size={20} thickness={3} />}
+        {!me.started && me.name && <UserMenu me={me} fetch={fetch} signOut={signOut} classes={classes} />}
+        {!me.started && !me.name && <NoUserMenu classes={classes} />}
       </Toolbar>
     </AppBar>
   </div>

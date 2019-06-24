@@ -5,7 +5,7 @@ import { process } from '../../../../../state/selectors';
 
 import { rolesSelector } from '../../../roles/state/selectors/roles';
 
-const filterAndSort = process({ email: 'string', isFixed: 'boolean' });
+const filterAndSort = process({ email: 'string' });
 
 const constructUser = (roles = [], user = { roles: [] }) => {
   return { ...user, roles: roles.map(role => {

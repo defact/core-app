@@ -10,6 +10,9 @@ const styles = theme => ({
     margin: theme.spacing.unit * 5,
     [theme.breakpoints.down('xs')]: {
       marginTop: theme.spacing.unit * 3,
+      marginBottom: theme.spacing.unit * 3,
+      marginLeft: theme.spacing.unit * 2,
+      marginRight: theme.spacing.unit * 2,
     },
     padding: theme.spacing.unit
   },
