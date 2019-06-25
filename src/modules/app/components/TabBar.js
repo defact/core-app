@@ -9,8 +9,6 @@ const TabBar = memo(({ selected, tabs }) => {
 
   const handleChange = (e, t) => setTab(t);
 
-  console.log(selected);
-
   return (
     <Paper>
       <Tabs value={tab} onChange={handleChange}>

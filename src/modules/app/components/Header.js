@@ -144,7 +144,7 @@ const Header = memo(({ me, fetch, signOut, resend, classes }) => (
 
     <AppBar position='static' className={classes.grow}> 
       <Toolbar className={classes.toolbar}>
-        <Logo me={me} classes={classes}>Defacto</Logo>
+        <Logo me={me} classes={classes}>Mentor</Logo>
 
         {me.started && <CircularProgress className={classes.progress} size={20} thickness={3} />}
         {!me.started && me.name && <UserMenu me={me} fetch={fetch} signOut={signOut} classes={classes} />}
