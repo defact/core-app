@@ -6,7 +6,7 @@ import { Profiles, List, Add, Profile } from './containers';
 import Users from './modules/users/Routes';
 import Contacts from './modules/contacts/Routes';
 import Photos from './modules/photos/Routes';
-// import Notes from './modules/notes/Routes';
+import Notes from './modules/notes/Routes';
 
 const Routes = () => (
   <Router primary={false}>
@@ -17,6 +17,7 @@ const Routes = () => (
         <Users path='users/*' />
         <Contacts path='contacts/*' />
         <Photos path='photos/*' />
+        <Notes path='notes/*' />
       </Profile>
       <Redirect from=':pid' to='/manage/members/:pid/users' noThrow />
     </Profiles>

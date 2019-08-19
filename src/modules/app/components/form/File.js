@@ -38,7 +38,7 @@ export default memo(({ name, form, accept = 'image/png, image/jpeg, image/gif' }
           <input {...rest} id={name} type='file' style={styles.input}
             accept={accept}
             onChange={e => handleChangeFile(e, form)} />
-          <label for={name}>
+          <label htmlFor={name}>
             <img src={image} style={styles.select} />
           </label>
         </div>
