@@ -7,7 +7,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 import { Input, AutoSave } from '../../../app/components/form';
 import { TabBar, Breadcrumbs } from '../../../app/components';
-import Actions from './Actions';
+import Actions, { actions } from './Actions';
 
 import validate from '../state/validate/profile';
 
@@ -54,13 +54,12 @@ const Profile = withStyles(styles)(memo(({ pid, name, disabled, save, classes, c
         </div>  
       </Paper>
 
-      <TabBar selected={props['*']} tabs={[
+      <TabBar id='profile' tabs={[
         { label: 'Users', to: 'users' },
         { label: 'Photos', to: 'photos' },
         { label: 'Contacts', to: 'contacts' },
         { label: 'Notes', to: 'notes' },
-        { label: 'Add Contact', to: 'contacts/add' },
-      ]} />
+      ]} actions={actions({ id: pid, ...props })} />
 
       {children}
     </>
