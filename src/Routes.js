@@ -9,6 +9,7 @@ const Sessions = lazy(() => import('./modules/sessions/Routes'));
 const Me = lazy(() => import('./modules/me/Routes'));
 const Register = lazy(() => import('./modules/register/Routes'));
 const Manage = lazy(() => import('./modules/manage/Routes'));
+const Care = lazy(() => import('./modules/care/Routes'));
 const Contact = lazy(() => import('./modules/contact/Routes'));
 const Help = lazy(() => import('./modules/help/Routes'));
 
@@ -24,6 +25,7 @@ const Routes = () => (
               <Register path='register' />
               <Me path='me/*' />
               <Manage path='manage/*' />
+              <Care path='care/*' />
               <Contact path='contact' />
               <Help path='help/*' />
 

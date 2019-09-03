@@ -77,7 +77,7 @@ const Item = memo(({ to, label, disabled, action }) => {
     : <MenuLink to={to}>{label}</MenuLink>;
 });
 
-export default withStyles(styles)(memo(({ id, disabled, actions, showSelectedLink=false, classes }) => {
+export default withStyles(styles)(memo(({ id, disabled, actions = [], showSelectedLink=false, classes }) => {
   const popup = usePopupState({ variant: 'popover', popupId: id });
 
   return (

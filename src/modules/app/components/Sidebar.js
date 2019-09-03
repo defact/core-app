@@ -19,7 +19,10 @@ import {
   Security, 
   HelpOutline, 
   Search,
-  Face } from '@material-ui/icons';
+  Face,
+  RecentActors, 
+  LocalHotel, 
+  LocalHospital } from '@material-ui/icons';
 
 const styles = theme => ({
   list: {
@@ -48,10 +51,16 @@ const styles = theme => ({
 });
 
 const manage = [
-  { text: 'Members', to: '/manage/members', Icon: Face },
+  { text: 'Staff', to: '/manage/members', Icon: Face },
   { text: 'Groups', to: '/manage/groups', Icon: SupervisedUserCircle },
   { text: 'Roles', to: '/manage/roles', Icon: Security },
   { text: 'Users', to: '/manage/users', Icon: AccountCircle },
+];
+
+const care = [
+  { text: 'Patients', to: '/care/patients', Icon: LocalHospital },
+  { text: 'Notes', to: '/care/notes', Icon: RecentActors },
+  { text: 'Rooms', to: '/care/rooms', Icon: LocalHotel },
 ];
 
 const other = [
@@ -114,6 +123,8 @@ const Sidebar = memo(({ classes, isOpen, handleClose }) => {
             </Grid>
           </div>
 
+          <Divider />
+          <Menu menu={care} />
           <Divider />
           <Menu menu={manage} />
           <Divider />

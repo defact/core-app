@@ -12,7 +12,7 @@ const onFetch = createLogic({
   },
 
   process({ api, normalize, schemas }) {
-    return api().get('profiles')
+    return api().get('profiles', { classifier: 'staff' })
     .then(data => normalize(data.profiles, [ schemas.profile ]));
   }
 });
@@ -42,7 +42,7 @@ const onAdd = createLogic({
   process({ api, normalize, schemas, action }, dispatch, done) {
     const { name, email, onSuccess, onFailure } = action.payload;
 
-    return api().post('memberships', { name, email })
+    return api().post('memberships', { name, email, classifier: 'staff' })
     .then(data => dispatch(add.success(normalize(data.profile, schemas.profile))))
     .then(onSuccess)
     .then(done)

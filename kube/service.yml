@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: app
+  namespace: default
+  labels:
+    app: app
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: www.mentorapp.io
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: http
+      name: http
+  selector:
+    app: app
